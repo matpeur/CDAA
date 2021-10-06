@@ -10,12 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     contact.cpp \
+    interaction.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    todo.cpp
 
 HEADERS += \
     contact.h \
-    mainwindow.h
+    interaction.h \
+    mainwindow.h \
+    todo.h
 
 FORMS += \
     mainwindow.ui
