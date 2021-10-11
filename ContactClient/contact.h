@@ -6,9 +6,8 @@
 #include "interaction.h"
 #include <string>
 #include <list>
-class Contact : public QObject
+class Contact
 {
-    Q_OBJECT
 public:
     explicit Contact(QObject *parent = nullptr);
     void addinterraction(Interaction i);

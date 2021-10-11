@@ -3,23 +3,32 @@
 
 #include<string>
 #include <ctime>
+#include <todo.h>
+#include <contact.h>
 
 class Interaction
 {
 
 public:
-    Interaction(std::string contenu);
+    Interaction();
+    Interaction(Contact c, std::string contenu);
 
     std::string getContenu() const;
-    void setContenu(const std::string contenu);
-    time_t getDate() const;
+    tm getDate() const;
     std::string getDateToString() const;
+    Contact* getContact() const;
 
 
 
 private:
-    time_t date;
+    tm * date;
     std::string contenu;
+    std::list<toDo> tags;
+    Contact* C;
+
+    void setDate(tm* const date);
+    void setContenu(const std::string contenu);
+    void setContact(Contact* const C);
 
 };
 
