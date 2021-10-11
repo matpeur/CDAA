@@ -21,7 +21,7 @@ void Contact::removeinterracion(Interaction i)
 
        if(it == i)
        {
-           found ==true;
+           found =true;
            it=Listesinterractions.erase(it);
        }
        else

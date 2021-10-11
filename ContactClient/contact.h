@@ -9,7 +9,7 @@
 class Contact
 {
 public:
-    explicit Contact(QObject *parent = nullptr);
+    explicit Contact();
     void addinterraction(Interaction i);
     void removeinterracion(Interaction i);
     friend  std :: ostream & operator << (std :: ostream & os, const Contact Conct );
@@ -32,7 +32,7 @@ private:
       std::string telephone;
       std::string Photo;
     //  date d;
-      list<Interaction>  Listesinterractions;
+      std::list<Interaction>  Listesinterractions;
 
 signals:
 };
