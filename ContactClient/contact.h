@@ -4,34 +4,34 @@
 
 #include <QObject>
 #include "interaction.h"
-#include <String>
+#include <string>
 #include <list>
 class Contact : public QObject
 {
     Q_OBJECT
 public:
     explicit Contact(QObject *parent = nullptr);
-    void addinterraction(interaction i);
+    void addinterraction(Interaction i);
     void removeinterracion(Interaction i);
-    friend  std :: ostream & operator < < (std :: ostream & os, const Contact Conct );
-    void setNom(String n) ;
-    void setPreNom(String n) ;
-    void setentrprise(String e) ;
-    void settelephoen(String tel);
-    void setPhoto(String photo) ;
+    friend  std :: ostream & operator << (std :: ostream & os, const Contact Conct );
+    void setNom(std::string n) ;
+    void setPreNom(std::string n) ;
+    void setentrprise(std::string e) ;
+    void settelephoen(std::string tel);
+    void setPhoto(std::string photo) ;
     void setDate(date t) ;
-    String getNom() ;
-    String getPrenom();
-    String getEntreprise();
-    String gettelephone() ;
-    String getPhoto() ;
+    std::string getNom() ;
+    std::string getPrenom();
+    std::string getEntreprise();
+    std::string gettelephone() ;
+    std::string getPhoto() ;
    // date getDate();
 private:
-      String nom;
-      String prenom;
-      String entreprise;
-      String telephone;
-      String Photo;
+      std::string nom;
+      std::string prenom;
+      std::string entreprise;
+      std::string telephone;
+      std::string Photo;
     //  date d;
       list<Interaction>  Listesinterractions;
 
