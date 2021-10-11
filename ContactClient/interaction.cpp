@@ -24,7 +24,7 @@ void Interaction::setContenu(std::string const cont)
         //on traite le @todo
         buffer = buffer.substr(indice);
         indice = buffer.find("\n");
-        toDo t(buffer.substr(0,indice));
+        toDo t(this ,buffer.substr(0,indice));
         addToDo(t);
         buffer = buffer.substr(indice);
     }

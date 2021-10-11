@@ -7,6 +7,7 @@ class Date
 {
 public:
     Date();
+    Date(std::string);
     std::string getDateToString() const;
 private :
 
