@@ -11,11 +11,10 @@ class Interaction
 
 public:
     Interaction();
-    Interaction(Contact c, std::string contenu);
+    Interaction(Contact*, std::string);
 
     std::string getContenu() const;
     tm getDate() const;
-    std::string getDateToString() const;
     Contact* getContact() const;
 
 
@@ -24,11 +23,13 @@ private:
     tm * date;
     std::string contenu;
     std::list<toDo> tags;
-    Contact* C;
+    Contact* contact;
 
-    void setDate(tm* const date);
-    void setContenu(const std::string contenu);
-    void setContact(Contact* const C);
+    void setDate(tm* const);
+    void setContenu(const std::string);
+    void setContact(Contact* const);
+    void addToDo(toDo const);
+    void removeToDo(toDo const);
 
 };
 

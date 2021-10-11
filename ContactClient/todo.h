@@ -1,15 +1,21 @@
 #ifndef TODO_H
 #define TODO_H
 
-#include <QObject>
+#include <string>
 
-class toDo : public QObject
+class toDo
 {
-    Q_OBJECT
-public:
-    explicit toDo(QObject *parent = nullptr);
 
-signals:
+public:
+    toDo(std::string);
+
+    std::string getContenu() const;
+
+
+private :
+    std::string contenu;
+    tm* date;
+
 
 };
 
