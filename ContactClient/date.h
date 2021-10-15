@@ -7,9 +7,11 @@ public:
     Date();
     Date(std::string);
     std::string getDateToString() const;
+    tm * getDate() const;
 private :
-    time_t tn  ;
     tm * tdate  ;
+    void setDate(tm *);
+    void setDate(std::string const);
 };
 
 #endif // DATE_H

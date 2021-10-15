@@ -11,7 +11,10 @@ class toDo
 public:
     toDo(Interaction*, std::string);
 
+
     std::string getContenu() const;
+    Date getDate() const;
+    Interaction * getOwner() const;
 
 
 private :
