@@ -1,6 +1,7 @@
 #ifndef DATE_H
 #define DATE_H
 #include <string>
+#include <time.h>
 class Date
 {
 public:
@@ -8,6 +9,9 @@ public:
     Date(std::string);
     std::string getDateToString() const;
     tm * getDate() const;
+    bool operator<(Date);
+    bool operator>(Date);
+    bool operator==(Date);
 private :
     tm * tdate  ;
     void setDate(tm *);

@@ -1,8 +1,7 @@
 #include "date.h"
-#include <iostream>
-#include <string>
-#include <time.h>
+
 using namespace std;
+
 Date::Date()
 {
     time_t tn = time(0) ;
@@ -48,3 +47,8 @@ void Date::setDate(const std::string dateS)
 
     setDate(Odate);
 }
+
+bool Date::operator>(Date d){return this->tdate>d.getDate();}
+bool Date::operator<(Date d){return this->tdate<d.getDate();}
+bool Date::operator==(Date d){return this->tdate==d.getDate();}
+

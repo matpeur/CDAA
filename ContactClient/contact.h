@@ -4,6 +4,7 @@
 #include <QObject>
 #include <ctime>
 #include "interaction.h"
+#include "gestioninteraction.h"
 #include <string>
 #include <list>
 #include <iostream>
@@ -11,8 +12,8 @@ using namespace std;
 class Contact
 {
 public:
-    explicit Contact();
-    void addinterraction(Interaction i);
+    explicit Contact(Interface * I);
+    void addinteraction(Interaction i);
     void removeinterracion(Interaction i);
     friend  ostream & operator << (std :: ostream & os, const Contact Conct );
     void setNom(string n) ;
@@ -20,7 +21,7 @@ public:
     void setentrprise(string e) ;
     void settelephoen(string tel);
     void setPhoto(string photo) ;
-    void setDate(date t) ;
+    void setDate(Date t) ;
     string getNom() ;
     string getPrenom();
     string getEntreprise();
@@ -33,9 +34,9 @@ private:
       string entreprise;
       string telephone;
       string Photo;
-      date d;
-      list<Interaction>  Listesinterractions;
-      String dernieredate;
+      Date d;
+      GestionInteraction gI;
+      string dernieredate;
 signals:
 };
 #endif // CONTACT_H

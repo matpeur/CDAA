@@ -1,15 +1,15 @@
 #include "contact.h"
 #include <iostream>
 using namespace std;
-Contact::Contact()
+Contact::Contact(Interface * I)
 {
-
+    GestionInteraction gestion(I);
+    gI = gestion;
 }
-void Contact::addinterraction(const Interaction &i);
+void Contact::addinteraction(Interaction i)
 {
-
  Listesinterractions.push_back(i);
- this->dernieredate=ths->d->tm;
+ this->dernieredate=this->d->tm;
 }
 
 void Contact::removeinterracion(Interaction i)

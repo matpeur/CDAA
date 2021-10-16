@@ -9,13 +9,14 @@ class toDo
 {
 
 public:
-    toDo(Interaction*, std::string);
 
+    toDo(Interaction *, std::string);
+    toDo();
 
     std::string getContenu() const;
     Date getDate() const;
     Interaction * getOwner() const;
-
+    bool operator==(toDo);
 
 private :
     Interaction * owner;

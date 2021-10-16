@@ -25,5 +25,5 @@ std::string toDo::getContenu() const{return contenu;}
 Date toDo::getDate() const{return date;}
 Interaction * toDo::getOwner() const{return owner;}
 
-
+bool toDo::operator==(toDo td){return this->contenu==td.getContenu()&&this->date==td.getDate();}
 
