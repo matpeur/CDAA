@@ -5,13 +5,14 @@
 #include <ctime>
 #include "todo.h"
 #include "contact.h"
+#include "gestiontodo.h"
 
 class Interaction
 {
 
 public:
     Interaction();
-    Interaction(Contact*, std::string);
+    Interaction(Interface *,Contact*, std::string);
 
     std::string getContenu() const;
     tm getDate() const;
@@ -22,8 +23,9 @@ public:
 private:
     tm * date;
     std::string contenu;
-    std::list<toDo> tags;
+
     Contact* contact;
+    GestionToDo gTD;
 
     void setDate(tm* const);
     void setContenu(const std::string);

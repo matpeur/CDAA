@@ -10,7 +10,7 @@ class toDo
 
 public:
 
-    toDo(Interaction *, std::string);
+    toDo(const Interaction *, std::string);
     toDo();
 
     std::string getContenu() const;

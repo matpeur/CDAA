@@ -4,7 +4,7 @@ Interaction::Interaction()
 {
 
 }
-Interaction::Interaction(Contact * c, std::string contenue)
+Interaction::Interaction(Interface* I,Contact * c, std::string contenue)
 {
     this->setContact(c);
     this->setContenu(contenue);

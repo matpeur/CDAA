@@ -17,6 +17,8 @@ class Interface : public QObject
 public:
     explicit Interface(QObject *parent = nullptr);
     void deleteTodo(toDo *);
+    void deleteInteraction(Interaction *);
+    void deleteContact(Contact *);
 
 signals:
 
