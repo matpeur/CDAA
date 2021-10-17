@@ -8,8 +8,8 @@ class GestionInteraction
 {
 public:
     GestionInteraction();
-    void addInteraction(Interaction);
-    void removeInteraction(Interaction);
+    void addInteraction(Interaction &);
+    void removeInteraction(Interaction &);
     void removeAllInteraction();
 
     std::list<Interaction> getInteractionList() const;

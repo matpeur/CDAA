@@ -18,9 +18,9 @@ public:
     Date getDate() const;
     Contact* getContact() const;
     void setContact(Contact* const);
-    void setInterface(Interface* const);
-    bool operator==(Interaction);
-
+    void setInterface(Interface * );
+    bool operator==(Interaction  );
+    static Interface creerInteraction(Interface *);
 
 private:
     Date date;
@@ -30,10 +30,10 @@ private:
     GestionToDo gTD;
 
     void setDate(Date *);
-    void setContenu(const std::string);
+    void setContenu(std::string &);
 
-    void addToDo(toDo const);
-    void removeToDo(toDo const);
+    void addToDo(toDo &);
+    void removeToDo(toDo &);
 
 };
 

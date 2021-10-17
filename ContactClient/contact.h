@@ -12,8 +12,8 @@ class Contact
 public:
     Contact();
     Contact(string,string,string,string,string);
-    void addInteraction(Interaction i);
-    void removeInteraction(Interaction i);
+    void addInteraction(Interaction & i);
+    void removeInteraction(Interaction & i);
     friend  ostream & operator<< (std :: ostream & os, const Contact Conct );
     void setNom(string n) ;
     void setPrenom(string n) ;

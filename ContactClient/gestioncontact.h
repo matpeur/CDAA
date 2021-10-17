@@ -15,7 +15,7 @@ public:
     unsigned int getSize() const;
 
 private :
-    list<Contact> lcontact;
+    std::list<Contact> lcontact;
     Interface* I;
     Date derniereSuppression;
 };

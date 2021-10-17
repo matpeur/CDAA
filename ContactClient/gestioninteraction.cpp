@@ -5,12 +5,12 @@ GestionInteraction::GestionInteraction()
 
 }
 
-void GestionInteraction::addInteraction(Interaction Inter)
+void GestionInteraction::addInteraction(Interaction & Inter)
 {
     linteraction.push_back(Inter);
 }
 
-void GestionInteraction::removeInteraction(Interaction Inter)
+void GestionInteraction::removeInteraction(Interaction & Inter)
 {
 
     for (auto &it : linteraction  )

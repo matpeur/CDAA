@@ -12,12 +12,12 @@ Contact::Contact(string nom,string prenom,string entreprise,string tel,string ch
     Date d;
     setDate(d);
 }
-void Contact::addInteraction(Interaction i)
+void Contact::addInteraction(Interaction & i)
 {
     gI.addInteraction(i);
 }
 
-void Contact::removeInteraction(Interaction i)
+void Contact::removeInteraction(Interaction & i)
 {
     gI.removeInteraction(i);
 }

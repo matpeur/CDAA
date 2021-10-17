@@ -1,7 +1,7 @@
 #include "todo.h"
 
 toDo::toDo(){}
-toDo::toDo(std::string contenu)
+toDo::toDo(std::string & contenu)
 {
     unsigned long long const indice  = contenu.find("@date");
     if (indice != std::string::npos)
@@ -28,7 +28,7 @@ Interaction * toDo::getOwner() const{return owner;}
 
 bool toDo::operator==(toDo td){return this->contenu==td.getContenu()&&this->date==td.getDate();}
 
-static toDo creerToDo(Interaction *O, std::string contenu)
+static toDo creerToDo(Interaction * O, std::string & contenu)
 {
     toDo td(contenu);
     td.setOwner(O);
