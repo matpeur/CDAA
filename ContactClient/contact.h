@@ -1,8 +1,6 @@
 
 #ifndef CONTACT_H
 #define CONTACT_H
-#include <QObject>
-#include <ctime>
 #include "interaction.h"
 #include "gestioninteraction.h"
 #include <string>
@@ -12,21 +10,28 @@ using namespace std;
 class Contact
 {
 public:
-    explicit Contact(Interface * I);
-    void addinteraction(Interaction i);
-    void removeinterracion(Interaction i);
-    friend  ostream & operator << (std :: ostream & os, const Contact Conct );
+    Contact();
+    Contact(string,string,string,string,string);
+    void addInteraction(Interaction i);
+    void removeInteraction(Interaction i);
+    friend  ostream & operator<< (std :: ostream & os, const Contact Conct );
     void setNom(string n) ;
-    void setPreNom(string n) ;
-    void setentrprise(string e) ;
-    void settelephoen(string tel);
+    void setPrenom(string n) ;
+    void setEntrprise(string e) ;
+    void setTelephone(string tel);
     void setPhoto(string photo) ;
     void setDate(Date t) ;
+    void setInterface(Interface *);
     string getNom() ;
     string getPrenom();
     string getEntreprise();
-    string gettelephone() ;
+    string getTelephone() ;
     string getPhoto() ;
+    Date getDate();
+    bool operator==(Contact);
+
+    static Contact creerContact(Interface *, string,string,string,string,string);
+
 
 private:
       string nom;
@@ -36,8 +41,6 @@ private:
       string Photo;
       Date d;
       GestionInteraction gI;
-      string dernieredate;
-signals:
 };
 #endif // CONTACT_H
 

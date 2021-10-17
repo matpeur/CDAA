@@ -12,24 +12,26 @@ class Interaction
 
 public:
     Interaction();
-    Interaction(Interface *,Contact*, std::string);
+    Interaction(std::string);
 
     std::string getContenu() const;
-    tm getDate() const;
+    Date getDate() const;
     Contact* getContact() const;
-
+    void setContact(Contact* const);
+    void setInterface(Interface* const);
+    bool operator==(Interaction);
 
 
 private:
-    tm * date;
+    Date date;
     std::string contenu;
 
-    Contact* contact;
+    Contact * contact;
     GestionToDo gTD;
 
-    void setDate(tm* const);
+    void setDate(Date *);
     void setContenu(const std::string);
-    void setContact(Contact* const);
+
     void addToDo(toDo const);
     void removeToDo(toDo const);
 

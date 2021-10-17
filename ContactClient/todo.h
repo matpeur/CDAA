@@ -10,21 +10,27 @@ class toDo
 
 public:
 
-    toDo(const Interaction *, std::string);
+    toDo(std::string);
     toDo();
 
     std::string getContenu() const;
     Date getDate() const;
     Interaction * getOwner() const;
+
+    void setOwner(Interaction *);
+
+    static toDo creerToDo(Interface*,std::string);
+
     bool operator==(toDo);
 
 private :
     Interaction * owner;
     std::string contenu;
     Date date;
+
     void setContenu(std::string const);
     void setDate(Date* const);
-    void setOwner(Interaction *const);
+
 
 
 };

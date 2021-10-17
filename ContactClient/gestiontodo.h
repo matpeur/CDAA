@@ -6,16 +6,20 @@
 class GestionToDo
 {
 public:
-    GestionToDo(Interface *);
     GestionToDo();
 
     void addToDo(toDo);
     void removeToDo(toDo);
     void removeAllToDo();
 
-    toDo * getToDo(unsigned int) const;
+    void setInterface(Interface *);
+
+    std::list<toDo> getToDoList() const;
     unsigned int getSize() const;
+
+    static toDo creerGestionToDo(Interface*);
 private :
+
     std::list<toDo> ltodo;
     Interface * I;
 

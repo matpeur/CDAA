@@ -7,18 +7,20 @@
 class GestionInteraction
 {
 public:
-    GestionInteraction(Interface*);
     GestionInteraction();
     void addInteraction(Interaction);
-    void deleteInteraction(Interaction);
-    void deleteallInteraction();
+    void removeInteraction(Interaction);
+    void removeAllInteraction();
 
-    Interaction * getInteraction(unsigned int) const;
+    std::list<Interaction> getInteractionList() const;
     unsigned int getSize() const;
+    void setInterface(Interface *);
+
+    static GestionInteraction creerGestionInteraction(Interface *);
 
 private :
     Interface * I;
-    std::list<Interaction> lI;
+    std::list<Interaction> linteraction;
 };
 
 #endif // GESTIONINTERACTION_H

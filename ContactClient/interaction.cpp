@@ -4,18 +4,16 @@ Interaction::Interaction()
 {
 
 }
-Interaction::Interaction(Interface* I,Contact * c, std::string contenue)
+Interaction::Interaction(std::string contenu)
 {
-    this->setContact(c);
-    this->setContenu(contenue);
-    time_t tn = time(0);
-    setDate(new tm( *localtime (&tn)));
+    this->setContenu(contenu);
 }
 
 //accesseurs
 void Interaction::setContenu(std::string const cont)
 {
     this->contenu = "";
+    gTD.removeAllTodo();
     std::string buffer = cont;
     while (cont.size()!=0)
     {
@@ -24,38 +22,33 @@ void Interaction::setContenu(std::string const cont)
         //on traite le @todo
         buffer = buffer.substr(indice);
         indice = buffer.find("\n");
-        toDo t(this, buffer.substr(0,indice));
+        std::string s = buffer.substr(0,indice);
+        toDo t = toDo::creerToDo(this, s);
         addToDo(t);
         buffer = buffer.substr(indice);
     }
+    setDate(new Date());
 }
 
 std::string Interaction::getContenu() const{return this->contenu;}
-void Interaction::setDate(tm* const d ){this->date = d;}
-tm Interaction::getDate() const {return *this->date;}
+void Interaction::setDate(Date * d ){this->date = *d; delete d;}
+Date Interaction::getDate() const {return this->date;}
 void Interaction::setContact(Contact* const C){this->contact = C;}
 Contact* Interaction::getContact() const{return this->contact;}
-
-
-
-
-
-void Interaction::addToDo(toDo const td){tags.push_back(td);}
-void Interaction::removeToDo(toDo td)
+void Interaction::setInterface(Interface * const I)
 {
-    auto it=tags.begin();
-    bool found=false;
-    while(it != tags.end() && (found==false))
-    {
+    this->gTD = GestionToDo::creerGestionToDo(I);
+}
 
-       if(it == td)
-       {
-           found =true;
-           it=tags.erase(it);
-       }
-       else
-       {
-           ++it;
-       }
-    }
+void Interaction::addToDo(toDo const td){gTD.addTodo(td);}
+void Interaction::removeToDo(toDo td){ gTD.removeTodo(td);}
+
+bool Interaction::operator==(Interaction test){return this->getContact()== test.getContact() && this->getContenu()== test.getContenu() && this->getDate() == test.getDate();}
+
+static Interaction creerInteraction(Interface* inter,Contact * c, std::string contenu)
+{
+    Interaction i(contenu);
+    i.setContact(c);
+    i.setInterface(inter);
+    return i;
 }

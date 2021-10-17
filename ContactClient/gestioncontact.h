@@ -7,12 +7,17 @@ class GestionContact
 {
 public:
     GestionContact();
-    void ajoutContact(Contact);
+    ~GestionContact();
+    void addContact(Contact);
+    void removeContact(Contact);
     Interface * getInterface();
+    std::list<Contact> getContactList() const;
+    unsigned int getSize() const;
 
 private :
     list<Contact> lcontact;
     Interface* I;
+    Date derniereSuppression;
 };
 
 #endif // GESTIONCONTACT_H
