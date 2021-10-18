@@ -1,6 +1,7 @@
 #ifndef GESTIONTODO_H
 #define GESTIONTODO_H
 #include "todo.h"
+#include <list>
 #include "interface.h"
 
 class GestionToDo
@@ -17,7 +18,7 @@ public:
     std::list<toDo> getToDoList() const;
     unsigned int getSize() const;
 
-    static toDo creerGestionToDo(Interface *);
+    static GestionToDo creerGestionToDo(Interface *);
 private :
 
     std::list<toDo> ltodo;

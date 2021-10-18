@@ -34,3 +34,4 @@ static toDo creerToDo(Interaction * O, std::string & contenu)
     td.setOwner(O);
     return td;
 }
+

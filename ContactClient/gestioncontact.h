@@ -8,6 +8,7 @@ class GestionContact
 public:
     GestionContact();
     ~GestionContact();
+
     void addContact(Contact);
     void removeContact(Contact);
     Interface * getInterface();
@@ -18,6 +19,7 @@ private :
     std::list<Contact> lcontact;
     Interface* I;
     Date derniereSuppression;
+
 };
 
 #endif // GESTIONCONTACT_H

@@ -4,6 +4,7 @@ Interaction::Interaction()
 {
 
 }
+
 Interaction::Interaction(std::string contenu)
 {
     this->setContenu(contenu);
@@ -35,6 +36,7 @@ void Interaction::setDate(Date * d ){this->date = *d; delete d;}
 Date Interaction::getDate() const {return this->date;}
 void Interaction::setContact(Contact* const C){this->contact = C;}
 Contact* Interaction::getContact() const{return this->contact;}
+
 void Interaction::setInterface(Interface * I)
 {
     this->gTD = GestionToDo::creerGestionToDo(I);
@@ -52,3 +54,4 @@ static Interaction creerInteraction(Interface* inter,Contact * c, std::string & 
     i.setInterface(inter);
     return i;
 }
+

@@ -2,12 +2,10 @@
 #define INTERFACE_H
 
 #include <QObject>
-#include "todo.h"
-#include "gestiontodo.h"
-#include "interaction.h"
-#include "gestioninteraction.h"
-#include "contact.h"
-#include "gestioncontact.h"
+class toDo;
+class Interaction;
+class Contact;
+
 
 
 
@@ -15,12 +13,15 @@ class Interface : public QObject
 {
     Q_OBJECT
 public:
+
     explicit Interface(QObject *parent = nullptr);
+
     void deleteTodo(toDo *);
     void deleteInteraction(Interaction *);
     void deleteContact(Contact *);
 
 signals:
+
 
 };
 

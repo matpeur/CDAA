@@ -42,3 +42,4 @@ static GestionInteraction creerGestionInteraction(Interface * interface)
     i.setInterface(interface);
     return i;
 }
+

@@ -1,16 +1,17 @@
 
 #ifndef CONTACT_H
 #define CONTACT_H
+#include <string>
+#include <iostream>
 #include "interaction.h"
 #include "gestioninteraction.h"
-#include <string>
-#include <list>
-#include <iostream>
+
 using namespace std;
 class Contact
 {
 public:
     Contact();
+
     Contact(string,string,string,string,string);
     void addInteraction(Interaction & i);
     void removeInteraction(Interaction & i);
@@ -41,6 +42,7 @@ private:
       string Photo;
       Date d;
       GestionInteraction gI;
+
 };
 #endif // CONTACT_H
 

@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 Contact::Contact(){}
+
 Contact::Contact(string nom,string prenom,string entreprise,string tel,string cheminPhoto)
 {
     setNom(nom);
@@ -44,6 +45,7 @@ friend Contact::ostream & operator<< (ostream & os, const Contact C )
  return os ;
 }
 */
+
 bool Contact::operator==(Contact test)
 {
     return this->getNom() == test.getNom() && this->getPrenom() == test.getPrenom()
@@ -56,4 +58,6 @@ static Contact creerContact(Interface * interface, string nom, string prenom, st
     Contact C(nom, prenom, entreprise, tel, cheminPhoto);
     C.setInterface(interface);
     return C;
+
 }
+

@@ -3,7 +3,8 @@
 
 #include <string>
 #include "date.h"
-#include "interaction.h"
+class Interaction;
+class Interface;
 
 class toDo
 {
@@ -19,11 +20,12 @@ public:
 
     void setOwner(Interaction *);
 
-    static toDo creerToDo(Interface*,std::string &);
+    static toDo creerToDo(Interaction*,std::string &);
 
     bool operator==(toDo );
 
 private :
+
     Interaction * owner;
     std::string contenu;
     Date date;

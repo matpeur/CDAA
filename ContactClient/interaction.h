@@ -4,14 +4,17 @@
 #include<string>
 #include <ctime>
 #include "todo.h"
-#include "contact.h"
 #include "gestiontodo.h"
+class Contact;
+class Interface;
+
 
 class Interaction
 {
 
 public:
     Interaction();
+
     Interaction(std::string);
 
     std::string getContenu() const;

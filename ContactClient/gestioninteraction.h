@@ -8,6 +8,7 @@ class GestionInteraction
 {
 public:
     GestionInteraction();
+
     void addInteraction(Interaction &);
     void removeInteraction(Interaction &);
     void removeAllInteraction();
@@ -21,6 +22,7 @@ public:
 private :
     Interface * I;
     std::list<Interaction> linteraction;
+
 };
 
 #endif // GESTIONINTERACTION_H
