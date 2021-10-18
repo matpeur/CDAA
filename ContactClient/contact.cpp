@@ -29,7 +29,11 @@ void   Contact:: setEntrprise(std::string e){this ->entreprise=e;}
 void   Contact:: setTelephone(std::string tel){this ->telephone=tel;}
 void   Contact:: setPhoto(std::string photo){this->Photo=photo;}
 void   Contact:: setDate(Date t){this->d=t;}
-void   Contact:: setInterface(Interface * I){gI = GestionInteraction::creerGestionInteraction(I);}
+void   Contact:: setInterface(Interface * I)
+{
+    GestionInteraction Inter(I);
+    gI = Inter;
+}
 string Contact:: getNom(){return this->nom;}
 string Contact::getPrenom(){ return this->prenom;}
 string Contact:: getEntreprise(){return this->entreprise;}

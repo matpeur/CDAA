@@ -8,6 +8,7 @@ class GestionInteraction
 {
 public:
     GestionInteraction();
+    GestionInteraction(Interface *);
 
     void addInteraction(Interaction &);
     void removeInteraction(Interaction &);
@@ -17,7 +18,7 @@ public:
     unsigned int getSize() const;
     void setInterface(Interface *);
 
-    static GestionInteraction creerGestionInteraction(Interface *);
+    //static GestionInteraction creerGestionInteraction(Interface *);
 
 private :
     Interface * I;

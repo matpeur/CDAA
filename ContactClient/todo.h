@@ -11,7 +11,7 @@ class toDo
 
 public:
 
-    toDo(std::string &);
+    toDo(Interaction*,std::string &);
     toDo();
 
     std::string getContenu() const;
@@ -20,7 +20,7 @@ public:
 
     void setOwner(Interaction *);
 
-    static toDo creerToDo(Interaction*,std::string &);
+    //static toDo creerToDo(std::string &);
 
     bool operator==(toDo );
 

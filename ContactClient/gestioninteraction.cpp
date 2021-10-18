@@ -1,8 +1,9 @@
 #include "gestioninteraction.h"
+GestionInteraction::GestionInteraction(){}
 
-GestionInteraction::GestionInteraction()
+GestionInteraction::GestionInteraction(Interface * interface)
 {
-
+    setInterface(interface);
 }
 
 void GestionInteraction::addInteraction(Interaction & Inter)
@@ -35,11 +36,11 @@ void GestionInteraction::removeAllInteraction()
 std::list<Interaction> GestionInteraction::getInteractionList() const {return linteraction;}
 unsigned int GestionInteraction::getSize() const{return linteraction.size();}
 void GestionInteraction::setInterface(Interface * I){this->I=I;}
-
-static GestionInteraction creerGestionInteraction(Interface * interface)
+/*
+static GestionInteraction creerGestionInteraction()
 {
     GestionInteraction i;
     i.setInterface(interface);
     return i;
 }
-
+*/

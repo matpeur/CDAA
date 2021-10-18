@@ -6,6 +6,7 @@
 #include "interaction.h"
 #include "gestioninteraction.h"
 
+
 using namespace std;
 class Contact
 {

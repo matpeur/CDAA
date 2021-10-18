@@ -15,7 +15,7 @@ class Interaction
 public:
     Interaction();
 
-    Interaction(std::string);
+    Interaction(Interface *, Contact *,std::string);
 
     std::string getContenu() const;
     Date getDate() const;
@@ -23,7 +23,7 @@ public:
     void setContact(Contact* const);
     void setInterface(Interface * );
     bool operator==(Interaction  );
-    static Interface creerInteraction(Interface *);
+    //static Interface creerInteraction();
 
 private:
     Date date;

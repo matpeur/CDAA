@@ -8,6 +8,7 @@ class GestionToDo
 {
 public:
     GestionToDo();
+    GestionToDo(Interface *);
 
     void addToDo(toDo &);
     void removeToDo(toDo &);
@@ -18,7 +19,7 @@ public:
     std::list<toDo> getToDoList() const;
     unsigned int getSize() const;
 
-    static GestionToDo creerGestionToDo(Interface *);
+    //static GestionToDo creerGestionToDo(Interface *);
 private :
 
     std::list<toDo> ltodo;

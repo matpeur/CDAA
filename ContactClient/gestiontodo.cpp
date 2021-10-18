@@ -1,8 +1,8 @@
 #include "gestiontodo.h"
-
-GestionToDo::GestionToDo()
+GestionToDo::GestionToDo(){}
+GestionToDo::GestionToDo(Interface * interface)
 {
-
+    setInterface(interface);
 }
 
 void GestionToDo::addToDo(toDo & td)
@@ -39,11 +39,12 @@ std::list<toDo> GestionToDo::getToDoList() const
 
 unsigned int GestionToDo::getSize() const{return ltodo.size();}
 void GestionToDo::setInterface(Interface * I){this->I=I;}
-
-static GestionToDo creerGestionToDo(Interface * interface)
+/*
+static GestionToDo creerGestionToDo()
 {
     GestionToDo td;
     td.setInterface(interface);
     return td;
 }
+*/
 

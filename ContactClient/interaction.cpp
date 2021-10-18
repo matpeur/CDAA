@@ -5,8 +5,10 @@ Interaction::Interaction()
 
 }
 
-Interaction::Interaction(std::string contenu)
+Interaction::Interaction(Interface* inter,Contact * c,std::string contenu)
 {
+    setContact(c);
+    setInterface(inter);
     this->setContenu(contenu);
 }
 
@@ -18,13 +20,13 @@ void Interaction::setContenu(std::string  & cont)
     std::string buffer = cont;
     while (cont.size()!=0)
     {
-        int indice = buffer.find("@todo");
+        unsigned long indice = buffer.find("@todo");
         contenu+=buffer.substr(0, indice); //on recupère le contenu sans tag @todo
         //on traite le @todo
         buffer = buffer.substr(indice);
         indice = buffer.find("\n");
         std::string s = buffer.substr(0,indice);
-        toDo t = toDo::creerToDo(this, s);
+        toDo t (this, s);
         addToDo(t);
         buffer = buffer.substr(indice);
     }
@@ -39,15 +41,16 @@ Contact* Interaction::getContact() const{return this->contact;}
 
 void Interaction::setInterface(Interface * I)
 {
-    this->gTD = GestionToDo::creerGestionToDo(I);
+    GestionToDo td(I);
+    gTD = td;
 }
 
 void Interaction::addToDo(toDo & td){gTD.addToDo(td);}
 void Interaction::removeToDo(toDo & td){ gTD.removeToDo(td);}
 
 bool Interaction::operator==(Interaction test){return this->getContact()== test.getContact() && this->getContenu()== test.getContenu() && this->getDate() == test.getDate();}
-
-static Interaction creerInteraction(Interface* inter,Contact * c, std::string & contenu)
+/*
+static Interaction creerInteraction( std::string & contenu)
 {
     Interaction i(contenu);
     i.setContact(c);
@@ -55,3 +58,4 @@ static Interaction creerInteraction(Interface* inter,Contact * c, std::string & 
     return i;
 }
 
+*/
