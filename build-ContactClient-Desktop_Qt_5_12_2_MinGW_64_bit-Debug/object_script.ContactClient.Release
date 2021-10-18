@@ -1,0 +1,12 @@
+release/contact.o
+release/date.o
+release/gestioncontact.o
+release/gestioninteraction.o
+release/gestiontodo.o
+release/interaction.o
+release/interface.o
+release/main.o
+release/mainwindow.o
+release/todo.o
+release/moc_interface.o
+release/moc_mainwindow.o
