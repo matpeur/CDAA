@@ -29,6 +29,7 @@ void GestionContact::removeContact(Contact Inter)
     }
     Date * d = new Date;
     derniereSuppression = * d;
+    delete d;
 }
 
 std::list<Contact> GestionContact::getContactList() const {return lcontact;}

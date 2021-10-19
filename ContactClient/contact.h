@@ -5,6 +5,7 @@
 #include <iostream>
 #include "interaction.h"
 #include "gestioninteraction.h"
+class Interface;
 
 
 using namespace std;
@@ -13,7 +14,7 @@ class Contact
 public:
     Contact();
 
-    Contact(string,string,string,string,string);
+    Contact(Interface *,string,string,string,string,string);
     void addInteraction(Interaction & i);
     void removeInteraction(Interaction & i);
     friend  ostream & operator<< (std :: ostream & os, const Contact Conct );
@@ -24,15 +25,14 @@ public:
     void setPhoto(string photo) ;
     void setDate(Date t) ;
     void setInterface(Interface *);
-    string getNom() ;
-    string getPrenom();
-    string getEntreprise();
-    string getTelephone() ;
-    string getPhoto() ;
-    Date getDate();
+    string getNom() const;
+    string getPrenom() const;
+    string getEntreprise() const;
+    string getTelephone() const;
+    string getPhoto() const;
+    Date getDate() const;
+    GestionInteraction getGestionInteraction() const;
     bool operator==(Contact);
-
-    static Contact creerContact(Interface *, string,string,string,string,string);
 
 
 private:

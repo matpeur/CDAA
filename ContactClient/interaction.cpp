@@ -34,6 +34,7 @@ void Interaction::setContenu(std::string  & cont)
 }
 
 std::string Interaction::getContenu() const{return this->contenu;}
+GestionToDo Interaction::getGestionToDo() const {return gTD;}
 void Interaction::setDate(Date * d ){this->date = *d; delete d;}
 Date Interaction::getDate() const {return this->date;}
 void Interaction::setContact(Contact* const C){this->contact = C;}
@@ -49,13 +50,15 @@ void Interaction::addToDo(toDo & td){gTD.addToDo(td);}
 void Interaction::removeToDo(toDo & td){ gTD.removeToDo(td);}
 
 bool Interaction::operator==(Interaction test){return this->getContact()== test.getContact() && this->getContenu()== test.getContenu() && this->getDate() == test.getDate();}
-/*
-static Interaction creerInteraction( std::string & contenu)
+
+
+std::ostream& operator<<(std::ostream & os, const Interaction I )
 {
-    Interaction i(contenu);
-    i.setContact(c);
-    i.setInterface(inter);
-    return i;
+
+  os << "Le "<< I.getDate().getDateToString() <<" : "<<std::endl<<I.getContenu();
+  std::list<toDo> liste = I.getGestionToDo().getToDoList();
+  for (auto it : liste)
+      os << it << std::endl;
+  return os ;
 }
 
-*/

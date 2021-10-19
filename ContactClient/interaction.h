@@ -2,7 +2,7 @@
 #define INTERACTION_H
 
 #include<string>
-#include <ctime>
+#include <ostream>
 #include "todo.h"
 #include "gestiontodo.h"
 class Contact;
@@ -20,10 +20,12 @@ public:
     std::string getContenu() const;
     Date getDate() const;
     Contact* getContact() const;
+    GestionToDo getGestionToDo() const;
     void setContact(Contact* const);
     void setInterface(Interface * );
     bool operator==(Interaction  );
-    //static Interface creerInteraction();
+
+    friend std::ostream& operator<<(std::ostream &, const Interaction);
 
 private:
     Date date;

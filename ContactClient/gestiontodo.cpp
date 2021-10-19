@@ -39,12 +39,5 @@ std::list<toDo> GestionToDo::getToDoList() const
 
 unsigned int GestionToDo::getSize() const{return ltodo.size();}
 void GestionToDo::setInterface(Interface * I){this->I=I;}
-/*
-static GestionToDo creerGestionToDo()
-{
-    GestionToDo td;
-    td.setInterface(interface);
-    return td;
-}
-*/
+
 

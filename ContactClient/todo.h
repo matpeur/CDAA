@@ -2,6 +2,7 @@
 #define TODO_H
 
 #include <string>
+#include <ostream>
 #include "date.h"
 class Interaction;
 class Interface;
@@ -20,9 +21,8 @@ public:
 
     void setOwner(Interaction *);
 
-    //static toDo creerToDo(std::string &);
-
     bool operator==(toDo );
+    friend std::ostream operator<<(std::ostream, const toDo);
 
 private :
 

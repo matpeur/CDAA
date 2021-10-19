@@ -3,13 +3,14 @@
 using namespace std;
 Contact::Contact(){}
 
-Contact::Contact(string nom,string prenom,string entreprise,string tel,string cheminPhoto)
+Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto)
 {
     setNom(nom);
     setPrenom(prenom);
     setEntrprise(entreprise);
     setTelephone(tel);
     setPhoto(cheminPhoto);
+    setInterface(interface);
     Date d;
     setDate(d);
 }
@@ -34,21 +35,22 @@ void   Contact:: setInterface(Interface * I)
     GestionInteraction Inter(I);
     gI = Inter;
 }
-string Contact:: getNom(){return this->nom;}
-string Contact::getPrenom(){ return this->prenom;}
-string Contact:: getEntreprise(){return this->entreprise;}
-string Contact::getTelephone(){ return this->telephone;}
-string Contact::getPhoto(){ return this->Photo;}
-Date Contact::getDate(){return d;}
+string Contact:: getNom() const {return this->nom;}
+string Contact::getPrenom() const { return this->prenom;}
+string Contact:: getEntreprise() const {return this->entreprise;}
+string Contact::getTelephone() const { return this->telephone;}
+string Contact::getPhoto() const { return this->Photo;}
+Date Contact::getDate() const{return d;}
+GestionInteraction Contact::getGestionInteraction() const{return gI;}
 
-/*
-friend Contact::ostream & operator<< (ostream & os, const Contact C )
+
+std::ostream& operator<<(std::ostream & os, const Contact C )
 {
 
-  os << C.getPrenom()<<", "<<C.getNom()<<", "<<C.getEntreprise()<<", "<<C.getPhoto()<<", "<<C.getDate()<<", "<<C.getTelephone()<<", "<<;
- return os ;
+  os << C.getPrenom()<<", "<<C.getNom()<<", "<<C.getEntreprise()<<", "<<C.getPhoto()<<", "<<C.getDate().getDateToString()<<", "<<C.getTelephone()<<", ";
+  return os ;
 }
-*/
+
 
 bool Contact::operator==(Contact test)
 {
@@ -56,12 +58,3 @@ bool Contact::operator==(Contact test)
            && this-> getEntreprise() == test.getEntreprise() && this->getTelephone() == test.getTelephone()
            && this->getDate() == test.getDate() && this->getPhoto() == test.getPhoto();
 }
-
-static Contact creerContact(Interface * interface, string nom, string prenom, string entreprise, string tel, string cheminPhoto)
-{
-    Contact C(nom, prenom, entreprise, tel, cheminPhoto);
-    C.setInterface(interface);
-    return C;
-
-}
-
