@@ -22,7 +22,8 @@ public:
     void setOwner(Interaction *);
 
     bool operator==(toDo );
-    friend std::ostream operator<<(std::ostream, const toDo);
+
+    std::string toString();
 
 private :
 

@@ -40,4 +40,13 @@ std::list<toDo> GestionToDo::getToDoList() const
 unsigned int GestionToDo::getSize() const{return ltodo.size();}
 void GestionToDo::setInterface(Interface * I){this->I=I;}
 
+std::string GestionToDo::toString()
+{
+    std::string result = "";
+    for (auto it : ltodo)
+        result += it.toString()+"\n";
+    return result;
+
+}
+
 

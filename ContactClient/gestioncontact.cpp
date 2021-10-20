@@ -11,9 +11,10 @@ GestionContact::~GestionContact()
     delete I;
 }
 
-void GestionContact::addContact(Contact Inter)
+void GestionContact::addContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto)
 {
-    lcontact.push_back(Inter);
+    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto);
+    lcontact.push_back(c);
 }
 
 void GestionContact::removeContact(Contact Inter)

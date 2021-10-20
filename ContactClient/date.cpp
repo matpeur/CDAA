@@ -1,4 +1,5 @@
 #include "date.h"
+#include <iostream>
 
 using namespace std;
 
@@ -16,7 +17,12 @@ Date::Date(std::string date)
 std::string Date::getDateToString() const
 {
     string result = "";
-    result+=to_string(tdate->tm_mday);+"/"+to_string(tdate->tm_mon+1)+"/"+to_string(tdate->tm_year+1900);
+    int jour = tdate->tm_mday;
+    int mois = tdate->tm_mon+1;
+    int an = tdate->tm_year+1900;
+    result+=to_string(jour)+"/";
+    result+=to_string(mois)+"/";
+    result+=to_string(an);
     return result;
 }
 
@@ -26,9 +32,13 @@ void Date::setDate(tm * d){tdate = d;}
 
 void Date::setDate(const std::string dateS)
 {
-    int jour = stoi(dateS.substr(2));
-    int mois = stoi(dateS.substr(3,2));
-    int annee = stoi(dateS.substr(5,4));
+    unsigned long long indice1 = dateS.find('/');
+    unsigned long long indice2 = dateS.find('/', indice1+1);
+    if(indice1>dateS.size()||indice2>dateS.size())
+       throw "Format date érroné";
+    int jour = std::stoi(dateS.substr(indice1-2,2));
+    int mois = std::stoi(dateS.substr(indice1+1,2));
+    int annee = std::stoi(dateS.substr(indice2+1,4));
 
     if(jour<=0 || jour>31)
         throw "Format jour errone";
@@ -44,8 +54,10 @@ void Date::setDate(const std::string dateS)
     Odate -> tm_year = annee - 1900;
     Odate -> tm_mon = mois -1;
     Odate -> tm_mday = jour;
-
+    mktime( Odate);
+    std::cout<<Odate ->tm_mday<<std::endl;
     setDate(Odate);
+    std::cout<<this->getDate()->tm_mday<<std::endl;
 }
 
 bool Date::operator>(Date d){return this->tdate>d.getDate();}

@@ -1,4 +1,6 @@
 #include "interaction.h"
+#include <iostream>
+
 //constructeurs
 Interaction::Interaction()
 {
@@ -18,19 +20,41 @@ void Interaction::setContenu(std::string  & cont)
     this->contenu = "";
     gTD.removeAllToDo();
     std::string buffer = cont;
-    while (cont.size()!=0)
+
+    while (buffer.size()!=0)
     {
         unsigned long indice = buffer.find("@todo");
-        contenu+=buffer.substr(0, indice); //on recupère le contenu sans tag @todo
-        //on traite le @todo
-        buffer = buffer.substr(indice);
-        indice = buffer.find("\n");
-        std::string s = buffer.substr(0,indice);
-        toDo t (this, s);
-        addToDo(t);
-        buffer = buffer.substr(indice);
+        if(indice<buffer.size())
+        {
+            contenu+=buffer.substr(0, indice); //on recupère le contenu sans tag @todo
+            //on traite le @todo
+            buffer = buffer.substr(indice);
+            indice = buffer.find("\n");
+            std::string s;
+            if(indice<buffer.size())
+            {
+                s = buffer.substr(0,indice);
+                buffer = buffer.substr(indice);
+            }
+            else
+            {
+                s=buffer;
+                buffer ="";
+            }
+            toDo t (this, s);
+
+            addToDo(t);
+            std::cout<<t.toString()<<std::endl;
+            std::cout<<getGestionToDo().toString()<<std::endl;
+        }
+        else
+        {
+            contenu = buffer;
+            buffer = "";
+        }
+        std::cout<<getGestionToDo().toString()<<std::endl;
     }
-    setDate(new Date());
+    this->setDate(new Date());
 }
 
 std::string Interaction::getContenu() const{return this->contenu;}
@@ -54,11 +78,8 @@ bool Interaction::operator==(Interaction test){return this->getContact()== test.
 
 std::ostream& operator<<(std::ostream & os, const Interaction I )
 {
-
-  os << "Le "<< I.getDate().getDateToString() <<" : "<<std::endl<<I.getContenu();
-  std::list<toDo> liste = I.getGestionToDo().getToDoList();
-  for (auto it : liste)
-      os << it << std::endl;
+  GestionToDo liste = I.getGestionToDo();
+  os << I.getDate().getDateToString() <<" : "<<std::endl<<I.getContenu()<<liste.toString();
   return os ;
 }
 

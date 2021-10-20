@@ -787,7 +787,17 @@ debug/main.o: ../ContactClient/main.cpp ../ContactClient/mainwindow.h \
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/qeventloop.h \
 		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.12.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.12.2/mingw73_64/include/QtGui/qinputmethod.h
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qinputmethod.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtCore/QDebug \
+		../ContactClient/gestioncontact.h \
+		../ContactClient/contact.h \
+		../ContactClient/interaction.h \
+		../ContactClient/todo.h \
+		../ContactClient/date.h \
+		../ContactClient/gestiontodo.h \
+		../ContactClient/interface.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtCore/QObject \
+		../ContactClient/gestioninteraction.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\ContactClient\main.cpp
 
 debug/mainwindow.o: ../ContactClient/mainwindow.cpp ../ContactClient/mainwindow.h \

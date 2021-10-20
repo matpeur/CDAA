@@ -19,7 +19,9 @@ public:
     std::list<toDo> getToDoList() const;
     unsigned int getSize() const;
 
-    //static GestionToDo creerGestionToDo(Interface *);
+    std::string toString();
+
+
 private :
 
     std::list<toDo> ltodo;

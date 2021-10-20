@@ -9,7 +9,7 @@ public:
     GestionContact();
     ~GestionContact();
 
-    void addContact(Contact);
+    void addContact(std::string,std::string,std::string,std::string,std::string);
     void removeContact(Contact);
     Interface * getInterface();
     std::list<Contact> getContactList() const;

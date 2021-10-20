@@ -6,9 +6,10 @@ GestionInteraction::GestionInteraction(Interface * interface)
     setInterface(interface);
 }
 
-void GestionInteraction::addInteraction(Interaction & Inter)
+void GestionInteraction::addInteraction(Contact * C, std::string contenu)
 {
-    linteraction.push_back(Inter);
+    Interaction i(I, C, contenu);
+    linteraction.push_back(i);
 }
 
 void GestionInteraction::removeInteraction(Interaction & Inter)

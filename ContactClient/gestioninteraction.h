@@ -10,15 +10,13 @@ public:
     GestionInteraction();
     GestionInteraction(Interface *);
 
-    void addInteraction(Interaction &);
+    void addInteraction(Contact *, std::string Contenu);
     void removeInteraction(Interaction &);
     void removeAllInteraction();
 
     std::list<Interaction> getInteractionList() const;
     unsigned int getSize() const;
     void setInterface(Interface *);
-
-    //static GestionInteraction creerGestionInteraction(Interface *);
 
 private :
     Interface * I;

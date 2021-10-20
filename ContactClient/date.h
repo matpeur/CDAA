@@ -13,7 +13,7 @@ public:
     bool operator>(Date);
     bool operator==(Date);
 private :
-    tm * tdate  ;
+    tm * tdate;
     void setDate(tm *);
     void setDate(std::string const);
 };

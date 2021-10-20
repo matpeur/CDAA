@@ -15,7 +15,7 @@ public:
     Contact();
 
     Contact(Interface *,string,string,string,string,string);
-    void addInteraction(Interaction & i);
+    void addInteraction(std::string);
     void removeInteraction(Interaction & i);
     friend  ostream & operator<< (std :: ostream & os, const Contact Conct );
     void setNom(string n) ;
