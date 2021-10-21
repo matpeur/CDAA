@@ -24,6 +24,7 @@ public:
     void setContact(Contact* const);
     void setInterface(Interface * );
     bool operator==(Interaction  );
+    void addToDo(toDo &);
 
     friend std::ostream& operator<<(std::ostream &, const Interaction);
 
@@ -37,7 +38,7 @@ private:
     void setDate(Date *);
     void setContenu(std::string &);
 
-    void addToDo(toDo &);
+
     void removeToDo(toDo &);
 
 };
