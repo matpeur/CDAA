@@ -28,7 +28,7 @@ public:
     void setInterface(Interface * );
     bool operator==(Interaction  );
     void addToDo(toDo &);
-    void removeToDo(toDo &)
+    void removeToDo(toDo &);
     friend std::ostream& operator<<(std::ostream &, const Interaction);
 
 private:
