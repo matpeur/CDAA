@@ -31,4 +31,3 @@ private :
 };
 
 #endif // DATE_H
-
