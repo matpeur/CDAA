@@ -13,7 +13,11 @@ Date::Date(std::string date)
 {
     setDate(date);
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation de la methode getDateTostring()
+ */
 std::string Date::getDateToString() const
 {
     string result = "";
@@ -25,7 +29,11 @@ std::string Date::getDateToString() const
     result+=to_string(an);
     return result;
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation des accesseurs
+ */
 tm * Date::getDate() const{return tdate;}
 
 void Date::setDate(tm * d){tdate = d;}
@@ -59,7 +67,11 @@ void Date::setDate(const std::string dateS)
     setDate(Odate);
     std::cout<<this->getDate()->tm_mday<<std::endl;
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation de la surcharge des operateurs de comparaison == ><
+ */
 bool Date::operator>(Date d){return this->tdate>d.getDate();}
 bool Date::operator<(Date d){return this->tdate<d.getDate();}
 bool Date::operator==(Date d){return this->tdate==d.getDate();}

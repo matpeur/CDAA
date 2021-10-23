@@ -2,7 +2,12 @@
 #define GESTIONINTERACTION_H
 #include "interface.h"
 #include "interaction.h"
-
+/**
+ *@class Contact
+ *@brief Classe Contact
+ *nom,personne,mail,photo,entreprise en string
+ *todo creer,ajouter et supprimer un conract et gerer ses interractions
+*/
 
 class GestionInteraction
 {

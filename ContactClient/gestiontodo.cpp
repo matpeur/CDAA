@@ -1,14 +1,26 @@
 #include "gestiontodo.h"
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation des constructeurs*/
 GestionToDo::GestionToDo(){}
 GestionToDo::GestionToDo(Interface * interface)
 {
     setInterface(interface);
 }
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation de la methode addTodo */
 
 void GestionToDo::addToDo(toDo & td)
 {
     ltodo.push_back(td);
 }
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation de la methode removetodo */
 
 void GestionToDo::removeToDo(toDo & td)
 {
@@ -22,7 +34,10 @@ void GestionToDo::removeToDo(toDo & td)
         }
     }
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation de la methode removealltodo*/
 void GestionToDo::removeAllToDo()
 {
     for (auto it : ltodo)
@@ -31,7 +46,10 @@ void GestionToDo::removeAllToDo()
     }
     ltodo.clear();
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation des accesseurs*/
 std::list<toDo> GestionToDo::getToDoList() const
 {
     return ltodo;
@@ -40,6 +58,10 @@ std::list<toDo> GestionToDo::getToDoList() const
 unsigned int GestionToDo::getSize() const{return ltodo.size();}
 void GestionToDo::setInterface(Interface * I){this->I=I;}
 
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation de la methode toString() */
 std::string GestionToDo::toString()
 {
     std::string result = "";

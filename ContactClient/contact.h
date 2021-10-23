@@ -6,7 +6,12 @@
 #include "interaction.h"
 #include "gestioninteraction.h"
 class Interface;
-
+/**
+ *@class Contact
+ *@brief Classe Contact
+ *nom,personne,mail,photo,entreprise en string
+ *todo creer,ajouter et supprimer un conract et gerer ses interractions
+*/
 
 using namespace std;
 class Contact
@@ -46,3 +51,4 @@ private:
 
 };
 #endif // CONTACT_H
+

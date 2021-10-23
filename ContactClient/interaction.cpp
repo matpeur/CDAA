@@ -1,6 +1,9 @@
 #include "interaction.h"
 #include <iostream>
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation des constructeurs*/
 //constructeurs
 Interaction::Interaction()
 {
@@ -12,7 +15,12 @@ Interaction::Interaction(Interface* inter,Contact * c,std::string contenu)
     setContact(c);
     setInterface(inter);
     this->setContenu(contenu);
-}
+
+ }
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation des accesseurs*/
 
 //accesseurs
 void Interaction::setContenu(std::string  & cont)
@@ -41,7 +49,7 @@ void Interaction::setContenu(std::string  & cont)
                 s=buffer;
                 buffer ="";
             }
-            toDo t (this, s);
+             toDo t (this, s);
 
             addToDo(t);
             std::cout<<t.toString()<<std::endl;
@@ -59,8 +67,8 @@ void Interaction::setContenu(std::string  & cont)
 
 std::string Interaction::getContenu() const{return this->contenu;}
 GestionToDo Interaction::getGestionToDo() const {return gTD;}
-void Interaction::setDate(Date * d ){this->date = *d; delete d;}
-Date Interaction::getDate() const {return this->date;}
+void Interaction::setDate(Date * d ){ datestring=(*d).getDateToString();}
+std::string Interaction::getDate() const {return this->datestring;}
 void Interaction::setContact(Contact* const C){this->contact = C;}
 Contact* Interaction::getContact() const{return this->contact;}
 
@@ -70,16 +78,24 @@ void Interaction::setInterface(Interface * I)
     gTD = td;
 }
 
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation des methodes addToo et removeTodo*/
 void Interaction::addToDo(toDo & td){gTD.addToDo(td);}
 void Interaction::removeToDo(toDo & td){ gTD.removeToDo(td);}
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation des surcharges des operateurs == et <<*/
 bool Interaction::operator==(Interaction test){return this->getContact()== test.getContact() && this->getContenu()== test.getContenu() && this->getDate() == test.getDate();}
 
 
 std::ostream& operator<<(std::ostream & os, const Interaction I )
 {
   GestionToDo liste = I.getGestionToDo();
-  os << I.getDate().getDateToString() <<" : "<<std::endl<<I.getContenu()<<liste.toString();
+  os << I.getDate()<<" : "<<std::endl<<I.getContenu()<<liste.toString();
   return os ;
 }
+
 

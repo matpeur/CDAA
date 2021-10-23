@@ -2,7 +2,11 @@
 #include <iostream>
 using namespace std;
 Contact::Contact(){}
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation du constructeur à parametre
+ */
 Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto)
 {
     setInterface(interface);
@@ -14,16 +18,29 @@ Contact::Contact(Interface * interface, string nom, string prenom,string entrepr
     Date d;
     setDate(d);
 }
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation de la methode addInterraction
+ */
 void Contact::addInteraction(std::string contenu)
 {
     gI.addInteraction(this, contenu);
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation de la methode removeInterraction
+ */
 void Contact::removeInteraction(Interaction & i)
 {
     gI.removeInteraction(i);
 }
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation des accesseurs
+ */
 void   Contact:: setNom(std::string n)
 {
     this->addInteraction("Changement de nom : De "+ nom + " à "+n);
@@ -63,7 +80,11 @@ string Contact::getPhoto() const { return this->Photo;}
 Date Contact::getDate() const{return d;}
 GestionInteraction Contact::getGestionInteraction() const{return gI;}
 
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation de la methode de surcharge de l'operateur <<
+ */
 std::ostream& operator<<(std::ostream & os, const Contact C )
 {
 
@@ -71,7 +92,11 @@ std::ostream& operator<<(std::ostream & os, const Contact C )
   return os ;
 }
 
-
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2011
+ * @brief implémentation de la methode de surchage de l'egalité =
+ */
 bool Contact::operator==(Contact test)
 {
     return this->getNom() == test.getNom() && this->getPrenom() == test.getPrenom()

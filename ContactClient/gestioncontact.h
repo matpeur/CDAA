@@ -2,7 +2,11 @@
 #define GESTIONCONTACT_H
 #include "contact.h"
 #include "interface.h"
-
+/**
+ *@class Contact
+ @brief permet de gerer(ajouter,supprimer des
+  contacts) une liste de contacts
+ */
 class GestionContact
 {
 public:
