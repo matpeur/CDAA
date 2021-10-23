@@ -50,4 +50,3 @@ void GestionContact::removeContact(Contact Inter)
 
 std::list<Contact> GestionContact::getContactList() const {return lcontact;}
 unsigned int GestionContact::getSize() const {return lcontact.size();}
-
