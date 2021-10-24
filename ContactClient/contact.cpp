@@ -16,20 +16,30 @@ Contact::Contact(Interface * interface, string nom, string prenom,string entrepr
     setTelephone(tel);
     setPhoto(cheminPhoto);
     Date d;
-    setDate(d);
+    setDate(d.getDateToString());
 }
 /**
  * @author BELLEGUELLE TRAORE
- * @date octobre 2011
+ * @date octobre 2021
  * @brief implémentation de la methode addInterraction
  */
-void Contact::addInteraction(std::string contenu)
+void Contact::createInteraction(std::string contenu)
 {
-    gI.addInteraction(this, contenu);
+    gI.createInteraction(this, contenu);
+}
+/**
+  *@author BELLEGUEULLE TRAORE
+  *@date octobre 2021
+ * @brief Ajoute une interaction déjà créer dans la liste de gestion Interaction
+ * @param inter un interaction déjà créé à ajouter dans la liste
+ */
+void Contact::addInteraction(Interaction inter)
+{
+    gI.addInteraction(inter);
 }
 /**
  * @author BELLEGUELLE TRAORE
- * @date octobre 2011
+ * @date octobre 2021
  * @brief implémentation de la methode removeInterraction
  */
 void Contact::removeInteraction(Interaction & i)
@@ -43,30 +53,30 @@ void Contact::removeInteraction(Interaction & i)
  */
 void   Contact:: setNom(std::string n)
 {
-    this->addInteraction("Changement de nom : De "+ nom + " à "+n);
+    this->createInteraction("Changement de nom : De "+ nom + " à "+n);
     this -> nom=n;
 }
 void   Contact::setPrenom(std::string n)
 {
-    this->addInteraction("Changement de prénom : De "+ prenom + " à "+n);
+    this->createInteraction("Changement de prénom : De "+ prenom + " à "+n);
     this -> prenom=n;
 }
 void   Contact:: setEntrprise(std::string e)
 {
-    this->addInteraction("Changement de nom d'entreprise : De "+ entreprise + " à "+e);
+    this->createInteraction("Changement de nom d'entreprise : De "+ entreprise + " à "+e);
     this ->entreprise=e;
 }
 void   Contact:: setTelephone(std::string tel)
 {
-    this->addInteraction("Changement de numéro de téléphone : De "+ telephone + " à "+ tel);
+    this->createInteraction("Changement de numéro de téléphone : De "+ telephone + " à "+ tel);
     this ->telephone=tel;
 }
 void   Contact:: setPhoto(std::string photo)
 {
-    this->addInteraction("Changement du chemin de la photo : De "+ Photo + " à "+ photo);
+    this->createInteraction("Changement du chemin de la photo : De "+ Photo + " à "+ photo);
     this->Photo=photo;
 }
-void   Contact:: setDate(Date t){this->d=t;}
+void   Contact:: setDate(std::string t){this->dateCreation=t;}
 void   Contact:: setInterface(Interface * I)
 {
     GestionInteraction Inter(I);
@@ -77,7 +87,7 @@ string Contact::getPrenom() const { return this->prenom;}
 string Contact:: getEntreprise() const {return this->entreprise;}
 string Contact::getTelephone() const { return this->telephone;}
 string Contact::getPhoto() const { return this->Photo;}
-Date Contact::getDate() const{return d;}
+string Contact::getDate() const{return dateCreation;}
 GestionInteraction Contact::getGestionInteraction() const{return gI;}
 
 /**
@@ -88,7 +98,7 @@ GestionInteraction Contact::getGestionInteraction() const{return gI;}
 std::ostream& operator<<(std::ostream & os, const Contact C )
 {
 
-  os << C.getPrenom()<<", "<<C.getNom()<<", "<<C.getEntreprise()<<", "<<C.getPhoto()<<", "<<C.getDate().getDateToString()<<", "<<C.getTelephone()<<", ";
+  os << C.getPrenom()<<", "<<C.getNom()<<", "<<C.getEntreprise()<<", "<<C.getPhoto()<<", "<<C.getDate()<<", "<<C.getTelephone()<<", ";
   return os ;
 }
 

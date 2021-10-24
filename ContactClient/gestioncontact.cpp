@@ -10,21 +10,27 @@ GestionContact::GestionContact()
 }
 /**
  * @author BELLEGUELLE TRAORE
- * @date octobre 2011
+ * @date octobre 2021
  * @brief implémentation du destructeur
  */
 GestionContact::~GestionContact()
 {
-
     delete I;
 }
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation de la methode addContact */
-void GestionContact::addContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto)
+void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto)
 {
     Contact c(I, nom, prenom, entreprise, tel, cheminPhoto);
+    lcontact.push_back(c);
+}
+/**
+  *
+  */
+void GestionContact::addContact(Contact c)
+{
     lcontact.push_back(c);
 }
 /**

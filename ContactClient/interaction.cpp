@@ -52,15 +52,12 @@ void Interaction::setContenu(std::string  & cont)
              toDo t (this, s);
 
             addToDo(t);
-            std::cout<<t.toString()<<std::endl;
-            std::cout<<getGestionToDo().toString()<<std::endl;
         }
         else
         {
             contenu = buffer;
             buffer = "";
         }
-        std::cout<<getGestionToDo().toString()<<std::endl;
     }
     this->setDate(new Date());
 }

@@ -32,14 +32,13 @@ public:
     friend std::ostream& operator<<(std::ostream &, const Interaction);
 
 private:
-    //Date date;
     std::string contenu;
     std::string datestring;
     Contact * contact;
     GestionToDo gTD;
     void setDate(Date *);
     void setContenu(std::string &);
-    void removeToDo(toDo &);
+
 
 };
 

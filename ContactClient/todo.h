@@ -28,15 +28,14 @@ public:
     void setOwner(Interaction *);
 
     bool operator==(toDo );
-    void setDate(Date* const);
+    void setDate(std::string const);
 
-   // std::string toString();
    std::string toString();
 private :
 
     Interaction * owner;
     std::string contenu;
-    Date date;
+    std::string date;
 
     void setContenu(std::string const);
 

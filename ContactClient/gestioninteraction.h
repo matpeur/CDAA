@@ -15,7 +15,8 @@ public:
     GestionInteraction();
     GestionInteraction(Interface *);
 
-    void addInteraction(Contact *, std::string Contenu);
+    void addInteraction(Interaction);
+    void createInteraction(Contact *, std::string Contenu);
     void removeInteraction(Interaction &);
     void removeAllInteraction();
 

@@ -20,7 +20,8 @@ public:
     Contact();
 
     Contact(Interface *,string,string,string,string,string);
-    void addInteraction(std::string);
+    void addInteraction(Interaction inter);
+    void createInteraction(std::string);
     void removeInteraction(Interaction & i);
     friend  ostream & operator<< (std :: ostream & os, const Contact Conct );
     void setNom(string n) ;
@@ -28,14 +29,14 @@ public:
     void setEntrprise(string e) ;
     void setTelephone(string tel);
     void setPhoto(string photo) ;
-    void setDate(Date t) ;
+    void setDate(string t) ;
     void setInterface(Interface *);
     string getNom() const;
     string getPrenom() const;
     string getEntreprise() const;
     string getTelephone() const;
     string getPhoto() const;
-    Date getDate() const;
+    string getDate() const;
     GestionInteraction getGestionInteraction() const;
     bool operator==(Contact);
 
@@ -46,7 +47,7 @@ private:
       string entreprise;
       string telephone;
       string Photo;
-      Date d;
+      string dateCreation;
       GestionInteraction gI;
 
 };

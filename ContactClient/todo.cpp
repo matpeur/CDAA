@@ -13,15 +13,14 @@ toDo::toDo(Interaction * O, std::string & contenu)
     {
         setContenu(contenu.substr(5,indice-5));
         Date d(contenu.substr(indice+5));
-        setDate(&d);
+        setDate(d.getDateToString());
     }
     else
     {
         setContenu(contenu.substr(5));
         Date d;
-        setDate(&d);
+        setDate(d.getDateToString());
     }
-   // std::cout<<toString()<<std::endl;
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -31,7 +30,7 @@ toDo::toDo(Interaction * O, std::string & contenu)
 void toDo::setContenu(std::string const c) {contenu = c;}
 //dans cette methode on stock directement la valeur en string de la nouvelle date
 //comme ça on ne risque pas de perte d'information(probleme qu'on a eu confronté)
-void toDo::setDate(Date* d) {date= *d;this->datestring=d->getDateToString();}
+void toDo::setDate(std::string d) {date= d;}
 void toDo::setOwner(Interaction * I) {owner = I;}
 
 std::string toDo::getContenu() const{return contenu;}
