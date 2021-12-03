@@ -23,12 +23,7 @@ void Basededonnee::Connexion()
       else
       {
           qDebug() << "Connexion BDD ok";
-          QSqlQuery query2;
-          query2.prepare("INSERT INTO todo(id,contenu)" "VALUES(:A,:B)");
-          query2.bindValue(":A",1);
-          query2.bindValue(":B","dfghj");
-          if(!query2.exec())
-              qDebug()<<"erruer";
+
        }
 }
 
@@ -61,7 +56,6 @@ void Basededonnee::AjoutContact(Contact C)
        {
            for(int i=0;i<C.getGestionInteraction().getInteractionList().size();i++)
             {  QSqlQuery query1;
-               C.getGestionInteraction().removeAllInteraction();
                query1.prepare("INSERT INTO interraction(id,contenu,dates)" "VALUES(:A,:B,:C)");
                query1.bindValue(":A",C.getId());
                query1.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i).getContenu()));
@@ -100,7 +94,7 @@ void Basededonnee::SupprimeContact(Contact C)
     if(b.open())
     {
      QSqlQuery query;
-     query.prepare("DELETE FROM conta WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and date=:G");
+     query.prepare("DELETE FROM contact WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and dates=:G");
      query.bindValue(":A",QString::fromStdString(C.getNom()));
      query.bindValue(":B",QString::fromStdString(C.getPrenom()));
      query.bindValue(":C",QString::fromStdString(C.getEntreprise()));
@@ -109,11 +103,33 @@ void Basededonnee::SupprimeContact(Contact C)
      query.bindValue(":F",QString::fromStdString(C.getPhoto()));
      query.bindValue(":G",QString::fromStdString(C.getDate()));
 
-     if(!query.exec())
-     {
-         qDebug()<<"erreur lors de la requete";
-
-
+     if(query.exec())
+     {   qDebug()<<"bien";
+         if(!C.getGestionInteraction().getInteractionList().empty())
+         {
+             for(int i=0;i<C.getGestionInteraction().getInteractionList().size();i++)
+              {
+                                QSqlQuery query1;
+                                query1.prepare("DELETE FROM interraction WHERE id=:A and contenu=:B and dates=:C");
+                                query1.bindValue(":A",C.getId());
+                                query1.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i).getContenu()));
+                                query1.bindValue(":C",QString::fromStdString(C.getDate()));
+                                if(query1.exec())
+                                 {
+                                   if(!C.getGestionInteraction().get(i).getGestionToDo().getToDoList().empty())
+                                   {
+                                      for (int j=0;j<C.getGestionInteraction().get(i).getGestionToDo().getSize();j++)
+                                      {
+                                       QSqlQuery query2;
+                                       query2.prepare("DELETE FROM todo WHERE id=:A and contenu=:B");
+                                       query2.bindValue(":A",C.getId());
+                                       query2.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i).getGestionToDo().get(j).getContenu()));
+                                       if(!query2.exec()){qDebug()<<"erreur";}else {C.setId(C.getId()+1);}//on incremente l'id
+                                      }
+                                   }
+                                  }
+             }
+         }
 
      }
    }
@@ -122,7 +138,10 @@ void Basededonnee::SupprimeContact(Contact C)
 
 
 
-}
+ }
+
+
+
 void Basededonnee::ModifiContact(Contact old, Contact C)
 {
 
@@ -154,3 +173,4 @@ void Basededonnee::ModifiContact(Contact old, Contact C)
 
     }
 }
+
