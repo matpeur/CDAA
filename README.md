@@ -1,2 +1,3 @@
-# CDAA
-Il faudra aussi ajouter un nouveau attribut mail dans la classe contact ,tu verra qu'a defaut de cet attribut j'ai du mettre getphoto dans les requetes .
+# CDAA 
+
+je me demande si on devrait pas creer dans la table todo en plus de l'id du contact un nouveau id qui lui permettra d'etreindexe par son interraction ...
