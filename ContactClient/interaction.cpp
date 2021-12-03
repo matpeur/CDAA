@@ -79,7 +79,7 @@ void Interaction::setInterface(Interface * I)
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation des methodes addToo et removeTodo*/
-void Interaction::addToDo(toDo & td){gTD.addToDo(td);}
+void Interaction::addToDo(toDo &td){gTD.addToDo(td);}
 void Interaction::removeToDo(toDo & td){ gTD.removeToDo(td);}
 /**
  * @author BELLEGUELLE TRAORE

@@ -19,9 +19,10 @@ public:
     void createInteraction(Contact *, std::string Contenu);
     void removeInteraction(Interaction &);
     void removeAllInteraction();
+    Interaction get(int);
 
     std::list<Interaction> getInteractionList() const;
-    unsigned int getSize() const;
+    int getSize() const;
     void setInterface(Interface *);
 
 private :

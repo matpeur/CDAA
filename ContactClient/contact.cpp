@@ -7,7 +7,7 @@ Contact::Contact(){}
  * @date octobre 2011
  * @brief implémentation du constructeur à parametre
  */
-Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto)
+Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto,string datecreation,string mail)
 {
     setInterface(interface);
     setNom(nom);
@@ -15,8 +15,11 @@ Contact::Contact(Interface * interface, string nom, string prenom,string entrepr
     setEntrprise(entreprise);
     setTelephone(tel);
     setPhoto(cheminPhoto);
+    setMail(mail);
+    setDate(dateCreation);
     Date d;
     setDate(d.getDateToString());
+    this->id=1;
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -51,6 +54,7 @@ void Contact::removeInteraction(Interaction & i)
  * @date octobre 2011
  * @brief implémentation des accesseurs
  */
+void Contact::setMail(string mail1){this->mail=mail1;}
 void   Contact:: setNom(std::string n)
 {
     this->createInteraction("Changement de nom : De "+ nom + " à "+n);
@@ -82,12 +86,15 @@ void   Contact:: setInterface(Interface * I)
     GestionInteraction Inter(I);
     gI = Inter;
 }
+void Contact::setId(int k){this->id=k;}
+int Contact::getId(){return this->id;}
 string Contact:: getNom() const {return this->nom;}
 string Contact::getPrenom() const { return this->prenom;}
 string Contact:: getEntreprise() const {return this->entreprise;}
 string Contact::getTelephone() const { return this->telephone;}
 string Contact::getPhoto() const { return this->Photo;}
 string Contact::getDate() const{return dateCreation;}
+string Contact::getMail() const{return this->mail;}
 GestionInteraction Contact::getGestionInteraction() const{return gI;}
 
 /**

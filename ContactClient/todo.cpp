@@ -29,7 +29,7 @@ toDo::toDo(Interaction * O, std::string & contenu)
 
 void toDo::setContenu(std::string const c) {contenu = c;}
 //dans cette methode on stock directement la valeur en string de la nouvelle date
-//comme ça on ne risque pas de perte d'information(probleme qu'on a eu confronté)
+//comme ça on ne risque pas de perte d'information(probleme qu'on a eu à confronté)
 void toDo::setDate(std::string d) {date= d;}
 void toDo::setOwner(Interaction * I) {owner = I;}
 

@@ -56,10 +56,28 @@ void GestionInteraction::removeAllInteraction()
     }
     linteraction.clear();
 }
+
+
+/**
+ * @author BELLEGUELLE TRAORE
+ * @date octobre 2021
+ * @brief implémentation de la methode get()*/
+
+Interaction GestionInteraction::get( int t)
+{
+      auto it=this->linteraction.begin();
+        for (int i=0;i<t;i++)
+        {
+             ++it;
+        }
+        return  *it ;
+
+
+}
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation des accesseurs*/
+int GestionInteraction::getSize() const{return linteraction.size();}
 std::list<Interaction> GestionInteraction::getInteractionList() const {return linteraction;}
-unsigned int GestionInteraction::getSize() const{return linteraction.size();}
 void GestionInteraction::setInterface(Interface * I){this->I=I;}

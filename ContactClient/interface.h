@@ -1,11 +1,10 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
-
 #include <QObject>
 class toDo;
 class Interaction;
 class Contact;
-
+#include "basededonnee.h"
 
 
 
@@ -19,7 +18,9 @@ public:
     void deleteTodo(toDo *);
     void deleteInteraction(Interaction *);
     void deleteContact(Contact *);
-
+    void ajouteContact(Contact*);
+    void modifieContact(Contact*,Contact*);
+    Basededonnee* db;
 signals:
 
 

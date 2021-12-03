@@ -13,7 +13,7 @@ GestionToDo::GestionToDo(Interface * interface)
  * @date octobre 2021
  * @brief implémentation de la methode addTodo */
 
-void GestionToDo::addToDo(toDo & td)
+void GestionToDo::addToDo(toDo  td)
 {
     ltodo.push_back(td);
 }
@@ -55,7 +55,7 @@ std::list<toDo> GestionToDo::getToDoList() const
     return ltodo;
 }
 
-unsigned int GestionToDo::getSize() const{return ltodo.size();}
+ int GestionToDo::getSize() const{return (int)ltodo.size();}
 void GestionToDo::setInterface(Interface * I){this->I=I;}
 
 /**
@@ -71,4 +71,14 @@ std::string GestionToDo::toString()
 
 }
 
+toDo GestionToDo::get( int t)
+{
+      auto it=this->ltodo.begin();
+        for (int i=0;i<t;i++)
+        {
+             ++it;
+        }
+        return  *it ;
 
+
+}

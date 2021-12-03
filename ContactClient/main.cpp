@@ -6,6 +6,7 @@
 #include "contact.h"
 #include "interaction.h"
 #include "todo.h"
+#include "basededonnee.h"
 
 
 
@@ -14,43 +15,30 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     //w.show();
-    /*
-    std::string m= "Martin";
-    GestionContact ContactClient;
-    ContactClient.addContact(m,"Pierre","FournierSARL","0756321487","photo.jpg");
-    std::list<Contact> liste = ContactClient.getContactList();
-    for (auto & it : liste)
-    {
-        it.addInteraction("Rendez-vous client RAS\n@todo rappeler pour le @date 17/12/2021\n@todo comfirmer sa commande\n@todo rappeler pour le @date 05/01/2022");
-        std::cout<<it<<std::endl;
-    }
-    for (auto & it : liste)
-    {
-        list<Interaction> lI = it.getGestionInteraction().getInteractionList();
-        for (auto & it2 : lI )
-            std::cout<<it2<<std::endl;
-    }
-    */
-
     Interface Inter;
     Contact c;
     Interaction I(&Inter, &c, "Test");
     std::string s = "@todo quelquechose@date 17/02/2022";
     toDo td1(&I,s);
-     std::cout<<td1.toString();
+     //std::cout<<td1.toString();
     Date d;
         td1.setDate(d.getDateToString());
-    std::cout<<td1.toString();
+    //std::cout<<td1.toString();
     I.addToDo(td1);
-    std::cout<<I<<std::endl;
-    GestionContact gestion;
-    gestion.createContact("Jean","Pierre","SAS","0214587823","photo.jpg");
+    Contact C(&Inter,"dfg","dfgh","dfgh","dfgh","df","sdfg","sdf");
+    C.createInteraction("fghjk");
+   //qDebug()<<(I.getGestionToDo().getSize());
+    Basededonnee b;
+    C.addInteraction(I);
 
-    std::list<Contact> liste = gestion.getContactList();
-   for (auto & it : liste)
-    {
-        it.createInteraction("Rendez-vous client RAS\n@todo rappeler pour le @date 17/12/2021\n@todo comfirmer sa commande\n@todo rappeler pour le @date 05/01/2022");
-        std::cout<<it<<std::endl;
-    }
-    return a.exec();
+  // qDebug()<<QString::fromStdString(td.getContenu());
+   //C.getGestionInteraction().get(0).addToDo(td);
+    qDebug()<<QString::fromStdString(C.getGestionInteraction().get(6).getGestionToDo().get(0).toString());
+   qDebug()<<C.getGestionInteraction().get(6).getGestionToDo().getSize();
+  b.AjoutContact(C);
+   return a.exec();
 }
+
+
+
+

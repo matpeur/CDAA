@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,7 +18,8 @@ SOURCES += \
     interface.cpp \
     main.cpp \
     mainwindow.cpp \
-    todo.cpp
+    todo.cpp \
+    basededonnee.cpp
 
 HEADERS += \
     contact.h \
@@ -29,7 +30,8 @@ HEADERS += \
     interaction.h \
     interface.h \
     mainwindow.h \
-    todo.h
+    todo.h \
+    basededonnee.h
 
 FORMS += \
     mainwindow.ui

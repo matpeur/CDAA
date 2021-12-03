@@ -14,16 +14,17 @@ public:
     GestionToDo();
     GestionToDo(Interface *);
 
-    void addToDo(toDo &);
+    void addToDo(toDo );
     void removeToDo(toDo &);
     void removeAllToDo();
 
     void setInterface(Interface *);
 
     std::list<toDo> getToDoList() const;
-    unsigned int getSize() const;
+    int getSize() const;
 
     std::string toString();
+    toDo get(int);
 
 
 private :

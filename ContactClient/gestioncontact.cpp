@@ -21,9 +21,9 @@ GestionContact::~GestionContact()
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation de la methode addContact */
-void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto)
+void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto,string mail,string date)
 {
-    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto);
+    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto,mail,date);
     lcontact.push_back(c);
 }
 /**
@@ -32,6 +32,7 @@ void GestionContact::createContact( string nom, string prenom,string entreprise,
 void GestionContact::addContact(Contact c)
 {
     lcontact.push_back(c);
+    std::cout<<"fghjkl";
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -53,6 +54,20 @@ void GestionContact::removeContact(Contact Inter)
     derniereSuppression = * d;
     delete d;
 }
+
+
+ Contact GestionContact::get( int t)
+{
+      auto it=lcontact.begin();
+        for (int i=0;i<t;i++)
+        {
+             ++it;
+        }
+        return  *it ;
+
+
+}
+
 
 std::list<Contact> GestionContact::getContactList() const {return lcontact;}
 unsigned int GestionContact::getSize() const {return lcontact.size();}
