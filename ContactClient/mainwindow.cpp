@@ -124,7 +124,7 @@ void MainWindow::on_actionNouveau_Contact_triggered()
     if(res == QDialog::Accepted)
     {
         //std::cout<<fc->getNom().toStdString()<<" "<<fc->getPrenom().toStdString()<<std::endl;
-        gc.createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString());
+        gc.createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString(),fc->getMail().toStdString());
         std::list<Contact> liste = gc.getContactList();
         for (auto & it : liste)
         {
@@ -136,7 +136,7 @@ void MainWindow::on_actionNouveau_Contact_triggered()
 void MainWindow::on_actionNouvelle_Interaction_triggered()
 {
     FenetreAjoutInter *fai = new FenetreAjoutInter(this, &gc);
-    int res = fai->exec();
+    fai->exec();
 }
 
 void MainWindow::ajoutDonneesContact()

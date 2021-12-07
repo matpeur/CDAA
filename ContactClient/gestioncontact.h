@@ -14,6 +14,7 @@ public:
     ~GestionContact();
 
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string,std::string);
+    void createContact(std::string,std::string,std::string,std::string,std::string,std::string);
     void addContact(Contact c);
     void removeContact(Contact);
     Interface * getInterface();

@@ -19,11 +19,21 @@ GestionContact::~GestionContact()
 }
 /**
  * @author BELLEGUELLE TRAORE
- * @date octobre 2021
+ * @date decembre 2021
  * @brief implémentation de la methode addContact */
 void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto,string mail,string date)
 {
     Contact c(I, nom, prenom, entreprise, tel, cheminPhoto,mail,date);
+    lcontact.push_back(c);
+}
+/**
+ * @author BELLEGUEULLE TRAORE
+ * @date octobre 2021
+ * @brief créer un contact à partir de ses attributs caractéristiques
+ */
+void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto, string mail)
+{
+    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto, mail);
     lcontact.push_back(c);
 }
 /**

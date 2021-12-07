@@ -7,7 +7,7 @@ Contact::Contact(){}
  * @date octobre 2011
  * @brief implémentation du constructeur à parametre
  */
-Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto,string datecreation,string mail)
+Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto,string dateCreation,string mail)
 {
     setInterface(interface);
     setNom(nom);
@@ -17,9 +17,24 @@ Contact::Contact(Interface * interface, string nom, string prenom,string entrepr
     setPhoto(cheminPhoto);
     setMail(mail);
     setDate(dateCreation);
+    this->id=1;
+}
+/**
+ * @author BELLEGUEULLE TRAORE
+ * @date octobre 2021
+ * @brief constructeur pour initialiser l'instance
+ */
+Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto, string mail)
+{
+    setInterface(interface);
+    setNom(nom);
+    setPrenom(prenom);
+    setEntrprise(entreprise);
+    setTelephone(tel);
+    setPhoto(cheminPhoto);
     Date d;
     setDate(d.getDateToString());
-    this->id=1;
+    setMail(mail);
 }
 /**
  * @author BELLEGUELLE TRAORE

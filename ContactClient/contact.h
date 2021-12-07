@@ -18,6 +18,7 @@ public:
     Contact();
 
     Contact(Interface *,string,string,string,string,string,string,string);
+    Contact(Interface *,string,string,string,string,string,string);
     void addInteraction(Interaction inter);
     void createInteraction(std::string);
     void removeInteraction(Interaction & i);
