@@ -1,3 +1,4 @@
+debug/basededonnee.o
 debug/date.o
 debug/gestioncontact.o
 debug/gestioninteraction.o
