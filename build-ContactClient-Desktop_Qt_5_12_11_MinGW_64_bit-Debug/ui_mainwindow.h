@@ -13,10 +13,12 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,6 +30,7 @@ public:
     QAction *actionNouvelle_Interaction;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
+    QTableView *tableView;
     QMenuBar *menubar;
     QMenu *menuAjouter;
     QStatusBar *statusbar;
@@ -45,10 +48,15 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        tableView = new QTableView(centralwidget);
+        tableView->setObjectName(QString::fromUtf8("tableView"));
+
+        horizontalLayout->addWidget(tableView);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 24));
+        menubar->setGeometry(QRect(0, 0, 800, 20));
         menuAjouter = new QMenu(menubar);
         menuAjouter->setObjectName(QString::fromUtf8("menuAjouter"));
         MainWindow->setMenuBar(menubar);

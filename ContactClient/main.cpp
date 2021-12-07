@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    //w.show();
+    w.show();
+    /*
     Interface Inter;
     Contact c;
     Interaction I(&Inter, &c, "Test");
@@ -36,6 +37,7 @@ int main(int argc, char *argv[])
     qDebug()<<QString::fromStdString(C.getGestionInteraction().get(6).getGestionToDo().get(0).toString());
    qDebug()<<C.getGestionInteraction().get(6).getGestionToDo().getSize();
   b.AjoutContact(C);
+  */
    return a.exec();
 }
 

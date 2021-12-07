@@ -99,6 +99,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(SelContact, SIGNAL(clicked()) , this,SLOT(selectionTypeContact()));
     connect(SelInteraction, SIGNAL(clicked()) , this,SLOT(selectionTypeInteraction()));
     connect(SelTodo, SIGNAL(clicked()) , this,SLOT(selectionTypeTodo()));
+    connect(ListeSelection, SIGNAL(clicked(QModelIndex)), this, SLOT(affiche(QModelIndex)));
 }
 
 MainWindow::~MainWindow()
@@ -123,7 +124,6 @@ void MainWindow::on_actionNouveau_Contact_triggered()
     int res = fc->exec();
     if(res == QDialog::Accepted)
     {
-        //std::cout<<fc->getNom().toStdString()<<" "<<fc->getPrenom().toStdString()<<std::endl;
         gc.createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString(),fc->getMail().toStdString());
         std::list<Contact> liste = gc.getContactList();
         for (auto & it : liste)
@@ -141,20 +141,21 @@ void MainWindow::on_actionNouvelle_Interaction_triggered()
 
 void MainWindow::ajoutDonneesContact()
 {
-
     int i=0;
     for(auto it : gc.getContactList())
     {
+        QStandardItem *item0 = new QStandardItem(QString::number(it.getId()));
+        model->setItem(i, 0, item0);
         QStandardItem *item = new QStandardItem(QString::fromStdString(it.getNom()));
-        model->setItem(i, 0, item);
+        model->setItem(i, 1, item);
         QStandardItem *item1 = new QStandardItem(QString::fromStdString(it.getPrenom()));
-        model->setItem(i,1,item1);
+        model->setItem(i,2,item1);
         QStandardItem *item2 = new QStandardItem(QString::fromStdString(it.getEntreprise()));
-        model->setItem(i,2,item2);
+        model->setItem(i,3,item2);
         QStandardItem *item3 = new QStandardItem(QString::fromStdString(it.getDate()));
-        model->setItem(i,3,item3);
+        model->setItem(i,4,item3);
         QStandardItem *item4 = new QStandardItem(QString::fromStdString(it.getGestionInteraction().getInteractionList().back().getDate()));
-        model->setItem(i,4,item4);
+        model->setItem(i,5,item4);
         i++;
     }
 
@@ -186,10 +187,12 @@ void MainWindow::tri(int index)
 }
 void MainWindow::modifModel(int index)
 {
+    titreCol->clear();
+    cBSelectionTri->clear();
     switch(index)
     {
-    case 1: model = new QStandardItemModel((int)gc.getSize(), 5);
-            titreCol->clear();
+    case 1: model = new QStandardItemModel((int)gc.getSize(), 6);
+            titreCol->append("Id");
             titreCol->append("Nom");
             titreCol->append("Prenom");
             titreCol->append("Entreprise");
@@ -199,15 +202,16 @@ void MainWindow::modifModel(int index)
             model->setHorizontalHeaderLabels(*titreCol);
             ajoutDonneesContact();
             break;
-    case 2: model = new QStandardItemModel((int)resultRechInter.size(), 3);
-            titreCol->clear();
+    case 2: model = new QStandardItemModel((int)resultRechInter.size(), 4);
+            titreCol->append("Id");
             titreCol->append("N°Contact");
             titreCol->append("Contenu");
             titreCol->append("Date");
             cBSelectionTri->addItems(*titreCol);
             model->setHorizontalHeaderLabels(*titreCol);
             break;
-    case 3: titreCol->clear();
+    case 3: model = new QStandardItemModel((int)resultRechTodo.size(), 4);
+            titreCol->append("Id");
             titreCol->append("N°Interaction");
             titreCol->append("Contenu");
             titreCol->append("Date");
@@ -216,6 +220,7 @@ void MainWindow::modifModel(int index)
             break;
     }
     ListeSelection->setModel(model);
+    ListeSelection->hideColumn(0);
     model->sort(cBSelectionTri->currentIndex());
 }
 
@@ -232,4 +237,10 @@ void MainWindow::selectionTypeInteraction()
 void MainWindow::selectionTypeTodo()
 {
     modifModel(3);
+}
+
+void MainWindow::affiche(QModelIndex MI)
+{
+    int row = MI.row();
+    Contact c = gc.get(conversion[row]);
 }

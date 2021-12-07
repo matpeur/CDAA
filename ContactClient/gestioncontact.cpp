@@ -29,7 +29,7 @@ void GestionContact::createContact( string nom, string prenom,string entreprise,
 /**
  * @author BELLEGUEULLE TRAORE
  * @date octobre 2021
- * @brief créer un contact à partir de ses attributs caractéristiques
+ * @brief créer un contact à partir de ses attributs caractÃ©ristiques
  */
 void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto, string mail)
 {

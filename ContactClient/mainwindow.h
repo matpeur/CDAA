@@ -51,6 +51,7 @@ private:
 
     void ajoutDonneesContact();
     void modifModel(int);
+    int conversion[];
 private slots:
 
     void on_actionNouveau_Contact_triggered();
@@ -60,6 +61,7 @@ private slots:
     void selectionTypeContact();
     void selectionTypeInteraction();
     void selectionTypeTodo();
+    void affiche(QModelIndex);
 
 };
 #endif // MAINWINDOW_H
