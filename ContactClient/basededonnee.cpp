@@ -4,6 +4,7 @@
 #include <QtSql/QSqlQuery>
 #include "contact.h"
 #include "interaction.h"
+#include "todo.h"
 Basededonnee::Basededonnee()
 {
    Connexion();
@@ -14,7 +15,7 @@ void Basededonnee::Connexion()
 {
 
     b = QSqlDatabase::addDatabase("QSQLITE");
-    b.setDatabaseName("/tmp/basee.sqlite");
+    b.setDatabaseName("/tmp/basee1");
 
       if(!b.open())
       {
@@ -54,7 +55,7 @@ void Basededonnee::AjoutContact(Contact C)
      {//ensuite on test si il à des interractions si oui on les ajoute dans  la table interraction
        if(!C.getGestionInteraction().getInteractionList().empty())
        {
-           for(int i=0;i<C.getGestionInteraction().getInteractionList().size();i++)
+           for(int i=0;i<C.getGestionInteraction().getSize();i++)
             {  QSqlQuery query1;
                query1.prepare("INSERT INTO interraction(id,contenu,dates)" "VALUES(:A,:B,:C)");
                query1.bindValue(":A",C.getId());
@@ -148,7 +149,7 @@ void Basededonnee::ModifiContact(Contact old, Contact C)
 
     QSqlQuery query ;
 
-    query.prepare( "UPDATE Conta  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,date=:g WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and date=:G" ) ;
+    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and date=:G" ) ;
     query.bindValue(":A",QString::fromStdString(C.getNom()));
     query.bindValue(":B",QString::fromStdString(C.getPrenom()));
     query.bindValue(":C",QString::fromStdString(C.getEntreprise()));
@@ -174,3 +175,179 @@ void Basededonnee::ModifiContact(Contact old, Contact C)
     }
 }
 
+
+void Basededonnee::getAllContact(std::list<Contact> lc)
+{
+   Contact C;
+
+  if(b.open())
+   {
+       QSqlQuery query;
+       query.prepare("SELECT * FROM contact where idd=:a ");
+       query.bindValue(":a",C.getId());
+     if(!query.exec())
+       {
+       qDebug()<<"erreur lors de la selection";
+      }
+     else {
+
+
+
+       while(query.next())
+       {
+           QString r=query.value(0).toString();
+           C.setNom(r.toStdString());
+           r=query.value(1).toString();
+           C.setPrenom(r.toStdString());
+           r=query.value(2).toString();
+           C.setEntrprise(r.toStdString());
+           r=query.value(3).toString();
+           C.setMail(r.toStdString());
+           r=query.value(4).toString();
+           C.setTelephone(r.toStdString());
+           r=query.value(5).toString();
+           C.setPhoto(r.toStdString());
+           r=query.value(6).toString();
+           C.setDate(r.toStdString());
+           C.setId(query.value(7).toInt());
+           lc.push_back(C);
+
+       }
+
+        /*for(auto &it:lc)
+        {
+          if(it.getGestionInteraction().getInteractionList().empty())
+          {
+
+            QSqlQuery query1;
+            query1.prepare("SELECT * FROM interraction where id=:a");
+            query1.bindValue(":a",it.getId());
+            if(!query1.exec())
+            {  qDebug()<<"erreur lors de la requete1 ";}
+            else{
+                        while(query1.next())
+                        {
+
+                            QString r=query1.value(1).toString();
+                            it.createInteraction(r.toStdString());
+
+                        }
+
+                        for(auto &itt:it.getGestionInteraction().getInteractionList())
+                        {
+                               if(!itt.getGestionToDo().getToDoList().empty())
+                               {
+
+                                   QSqlQuery query2;
+                                   query2.prepare("SELECT * FROM todo where id=:a");
+                                   query2.bindValue(":a",it.getId());
+                                  if(query2.exec())
+                                  {          toDo t;
+                                             t.setContenu(query2.value(1).toString().toStdString());
+                                             itt.getGestionToDo().addToDo(t);
+
+                                  }else { qDebug()<<"erreur lors de la requete ";}
+
+
+
+                               }
+
+
+
+                        }
+
+
+                  }
+
+          }
+
+      }*/
+
+
+    }
+
+  }
+
+
+}
+
+std::list<Contact> Basededonnee::cherchercontact(std::string date, std::string date2)
+{
+      Contact C;
+      std::list<Contact> lc;
+    if(b.open() )
+    {
+
+         QSqlQuery query;
+         query.prepare("SELECT * FROM contact WHERE   dates>=:a and dates<=:b");
+         query.bindValue(":a",QString::fromStdString(date));
+         query.bindValue(":b",QString::fromStdString(date2));
+         if(!query.exec())
+         {
+             qDebug()<<"erreur1";
+         }
+         else
+         {
+          while(query.next())
+          {
+             QString r=query.value(0).toString();
+             C.setNom(r.toStdString());
+             r=query.value(1).toString();
+             C.setPrenom(r.toStdString());
+             r=query.value(2).toString();
+             C.setEntrprise(r.toStdString());
+             r=query.value(3).toString();
+             C.setMail(r.toStdString());
+             r=query.value(4).toString();
+             C.setTelephone(r.toStdString());
+             r=query.value(5).toString();
+             C.setPhoto(r.toStdString());
+             r=query.value(6).toString();
+             C.setDate(r.toStdString());
+             C.setId(query.value(7).toInt());
+             lc.push_back(C);
+      }
+
+   }
+
+    }
+
+
+    return lc;
+
+}
+
+
+int Basededonnee::Nombredecontact()
+{  int r=0;
+
+    if(b.open())
+    {
+
+
+       QSqlQuery query("select count(*) FROM contact");
+       if(!query.exec())
+       {
+
+
+           qDebug()<<"erreur";
+
+
+       }else
+       {
+
+           r=query.value(0).toInt();
+           qDebug()<<"nb contact";
+           qDebug()<<r;
+
+
+       }
+
+
+    }
+
+
+
+
+  return r ;
+}
