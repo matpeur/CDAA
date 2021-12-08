@@ -3,10 +3,11 @@
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
 #include <QtSql/QSqlQuery>
-class gestioncontact;
+class GestionContact;
 class Contact;
-class todo;
-class interaction;
+class toDo;
+class Interaction;
+
 class Basededonnee
 {
 public:
@@ -15,13 +16,20 @@ public:
     void AjoutContact(Contact);
     void SupprimeContact(Contact);
     void ModifiContact(Contact,Contact);
-    void getAllContact(std::list<Contact>);
-    std::list<Contact> cherchercontact(std::string,std::string);
-    std::list<todo>* cherchelistetodo(std::string,std::string);
-    std::list<interaction>* chercheinterraction(std::string,std::string);
-    int Nombredecontact();
+    std::list<Contact> getAllContact();
+    std::list<Contact> cherchercontactparDates(std::string,std::string);
+    Contact cherchercontactparNom(std::string);
+    std::list<toDo> cherchelistetodo(std::string,std::string);
+    std::list<Interaction> chercheinterraction(std::string,std::string);
+    int  Nombredecontact();
+    void setID(int i){this->identifiant=i;}
+    int  getID(){return this->identifiant;}
+    GestionContact getStockecontact();
+    GestionContact* g;
+
 private:
     QSqlDatabase b;
+    int identifiant;
 
 };
 #endif // BASEDEDONNEE_H
