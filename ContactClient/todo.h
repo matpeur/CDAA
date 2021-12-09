@@ -31,15 +31,16 @@ public:
     void setDate(std::string const);
 
    std::string toString();
-
-
+   void setContenu(std::string const);
+   void setID(int i);
+   int getId();
 private :
 
     Interaction * owner;
     std::string contenu;
     std::string date;
+    int id;
 
-   void setContenu(std::string const);
 
 
 };

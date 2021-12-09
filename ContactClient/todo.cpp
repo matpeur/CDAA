@@ -4,9 +4,9 @@
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation des constructeurs*/
-toDo::toDo(){}
-toDo::toDo(Interaction * O, std::string & contenu)
-{
+toDo::toDo(){setID(0);}
+toDo::toDo(Interaction * O, std::string  & contenu)
+{   setID(0);
     setOwner(O);
     unsigned long long const indice  = contenu.find("@date");
     if (indice != std::string::npos)
@@ -53,6 +53,10 @@ std::string toDo::toString()
     result = "@todo" + getContenu() + " @date " + getDate();//.getDateToString();
     return result;
 }
+
+
+void toDo:: setID(int i){this->id=i;}
+int toDo:: getId(){return this->id;}
 
 
 

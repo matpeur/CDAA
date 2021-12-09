@@ -30,6 +30,8 @@ public:
     void addToDo(toDo &);
     void removeToDo(toDo &);
     friend std::ostream& operator<<(std::ostream &, const Interaction);
+    void setID(int i);
+    int  getID();
 
 private:
     std::string contenu;
@@ -38,6 +40,7 @@ private:
     GestionToDo gTD;
     void setDate(Date *);
     void setContenu(std::string &);
+    int id;
 
 
 };

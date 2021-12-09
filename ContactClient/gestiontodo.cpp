@@ -22,6 +22,11 @@ void GestionToDo::addToDo(toDo  td)
  * @date octobre 2021
  * @brief implémentation de la methode removetodo */
 
+void GestionToDo::createtodO(Interaction * I, std::string s)
+{
+  toDo t(I,s);
+  this->ltodo.push_back(t);
+}
 void GestionToDo::removeToDo(toDo & td)
 {
 

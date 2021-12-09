@@ -13,7 +13,7 @@ class GestionToDo
 public:
     GestionToDo();
     GestionToDo(Interface *);
-
+    void createtodO(Interaction *,std::string s);
     void addToDo(toDo );
     void removeToDo(toDo &);
     void removeAllToDo();

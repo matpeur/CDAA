@@ -14,8 +14,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.show();
-    /*
+//    w.show();
     Interface Inter;
     Contact c;
     Interaction I(&Inter, &c, "Test");
@@ -24,20 +23,58 @@ int main(int argc, char *argv[])
      //std::cout<<td1.toString();
     Date d;
         td1.setDate(d.getDateToString());
-    //std::cout<<td1.toString();
+    std::cout<<td1.toString();
     I.addToDo(td1);
-    Contact C(&Inter,"dfg","dfgh","dfgh","dfgh","df","sdfg","sdf");
+  //  I.getGestionToDo().createtodO(&I,"kkkkkkkk");
+    Contact C(&Inter,"MAMADOU","TRAORE","MYWO","dfgh","df","6-12-2021","sdf");
+    Contact K(&Inter,"MAMADU","DIARR","MYW","dfgh","7-12-2021","sdfg","sdf");
+    Contact L(&Inter,"MAdu","TRAORE","BNDA","dfgh","df","7-12-2021","sdf");
+    Contact H(&Inter,"Mouss","DIARR","BCEAO","dfgh","8-12-2021","sdfg","sdf");
     C.createInteraction("fghjk");
    //qDebug()<<(I.getGestionToDo().getSize());
     Basededonnee b;
     C.addInteraction(I);
+    L.addInteraction(I);
+    K.addInteraction(I);
+    H.addInteraction(I);
+    std::list<Contact> lC;
+   // GestionContact k=*b.getAllContact();
+   std::list<Contact>lk=b.getAllContact();
+   for(auto &it:b.getAllContact())
+    {   for(auto &itt:it.getGestionInteraction().getInteractionList())
+        {
+           for(auto &ittt:itt.getGestionToDo().getToDoList())
+           {
+              qDebug()<<QString::fromStdString(ittt.toString());
+           }
+       // qDebug()<<QString::fromStdString(itt.getContenu());
+       }
+     }
 
-  // qDebug()<<QString::fromStdString(td.getContenu());
-   //C.getGestionInteraction().get(0).addToDo(td);
-    qDebug()<<QString::fromStdString(C.getGestionInteraction().get(6).getGestionToDo().get(0).toString());
-   qDebug()<<C.getGestionInteraction().get(6).getGestionToDo().getSize();
-  b.AjoutContact(C);
-  */
+ /*  qDebug()<<"le nombre de contact est :";
+   qDebug()<<b.Nombredecontact();*/
+
+   /*for(auto &it:b.cherchercontactparDates("6-12-2021","8-12-2021"))
+     {
+          qDebug()<<QString::fromStdString(it.getNom());
+
+    }
+    for(auto &it:b.chercheinterraction("6-12-2021","8-12-2021"))
+    {
+
+        qDebug()<<QString::fromStdString(it.getContenu());
+
+
+
+}
+
+   for(auto &it:b.cherchelistetodo("6-12-2021","8-12-2021"))
+   {
+       qDebug()<<QString::fromStdString(it.toString());
+
+   }*/
+
+
    return a.exec();
 }
 
