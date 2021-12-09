@@ -37,20 +37,26 @@ int main(int argc, char *argv[])
     L.addInteraction(I);
     K.addInteraction(I);
     H.addInteraction(I);
+    b.AjoutContact(C);
+    b.AjoutContact(L);
+    b.AjoutContact(K);
+    b.AjoutContact(H);
+
+
     std::list<Contact> lC;
    // GestionContact k=*b.getAllContact();
 
-   for(auto &it:b.getAllContact().getContactList())
+  /* for(auto &it:b.getAllContact().getContactList())
     {   for(auto &itt:it.getGestionInteraction().getInteractionList())
         {
            for(auto &ittt:itt.getGestionToDo().getToDoList())
            {
-              qDebug()<<QString::fromStdString(ittt.toString());
+             // qDebug()<<QString::fromStdString(ittt.toString());
            }
-       qDebug()<<QString::fromStdString(itt.getContenu());
+     //  qDebug()<<QString::fromStdString(itt.getContenu());
        }
      }
-
+*/
  /*  qDebug()<<"le nombre de contact est :";
    qDebug()<<b.Nombredecontact();*/
 

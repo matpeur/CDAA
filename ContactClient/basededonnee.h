@@ -17,9 +17,9 @@ public:
     void ModifiContact(Contact,Contact);
     GestionContact getAllContact();
     GestionContact  cherchercontactparDates(std::string,std::string);
-    Contact cherchercontactparNom(std::string);
-    std::list<toDo> cherchelistetodo(std::string,std::string);
-    std::list<Interaction> chercheinterraction(std::string,std::string);
+    Contact recherchercontactparNom(std::string);
+    std::list<toDo> recherchelistetodopardate(std::string,std::string);
+    std::list<Interaction> recherchelisteinterractionpardate(std::string,std::string);
     Interaction getInterractionByID(int,int);
     toDo gettoDOByContact(int,int);
     int  Nombredecontact();
@@ -29,6 +29,8 @@ public:
     int getIDInteraction();
     void setIDTodo(int i);
     int getIDTodo();
+   std::list<Interaction> rechercheInterraction(std::string,std::string,Contact,bool,bool);
+   std::list<toDo> rechercheToDO(std::string,std::string,Interaction,bool,bool);
 
 private:
     QSqlDatabase b;
