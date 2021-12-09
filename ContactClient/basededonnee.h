@@ -22,8 +22,8 @@ public:
     std::list<toDo> cherchelistetodo(std::string,std::string);
     std::list<Interaction> chercheinterraction(std::string,std::string);
     int  Nombredecontact();
-    void setID(int i){this->identifiant=i;}
-    int  getID(){return this->identifiant;}
+    void setID(int i);
+    int getID();
     GestionContact getStockecontact();
     GestionContact* g;
 
