@@ -33,7 +33,7 @@ public:
    std::string toString();
    void setContenu(std::string const);
    void setID(int i);
-   int getId();
+   int getID();
 private :
 
     Interaction * owner;

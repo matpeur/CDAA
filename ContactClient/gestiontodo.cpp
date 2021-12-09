@@ -76,14 +76,14 @@ std::string GestionToDo::toString()
 
 }
 
-toDo GestionToDo::get( int t)
+toDo* GestionToDo::get( int t)
 {
       auto it=this->ltodo.begin();
         for (int i=0;i<t;i++)
         {
              ++it;
         }
-        return  *it ;
+        return &( *it) ;
 
 
 }

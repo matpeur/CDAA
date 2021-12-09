@@ -17,6 +17,7 @@
 #include <QModelIndex>
 #include "gestioncontact.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -46,8 +47,8 @@ private:
     QTableView *ListeSelection;
     QStandardItemModel *model;
     QStringList *titreCol;
-    list<Interaction*> resultRechInter;
-    list<toDo*> resultRechTodo;
+    std::list<Interaction*> resultRechInter;
+   std:: list<toDo*> resultRechTodo;
 
     void ajoutDonneesContact();
     void modifModel(int);

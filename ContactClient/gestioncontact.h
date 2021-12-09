@@ -1,6 +1,7 @@
 #ifndef GESTIONCONTACT_H
 #define GESTIONCONTACT_H
-#include "contact.h"
+class Contact;//#include "contact.h"
+#include "date.h"
 #include "interface.h"
 /**
  *@class Contact
@@ -12,7 +13,6 @@ class GestionContact
 public:
     GestionContact();
     ~GestionContact();
-
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string,std::string);
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string);
     void addContact(Contact c);
@@ -20,7 +20,11 @@ public:
     Interface * getInterface();
     std::list<Contact> getContactList() const;
     unsigned int getSize() const;
-    Contact get(int i);
+    Contact* getContactByID(int i);
+    Interaction* getInterractionByID(int id);
+    toDo* gettoDoByID(int id);
+
+
 private :
     std::list<Contact> lcontact;
     Interface* I;

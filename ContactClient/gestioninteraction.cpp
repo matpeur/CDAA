@@ -63,14 +63,14 @@ void GestionInteraction::removeAllInteraction()
  * @date octobre 2021
  * @brief implémentation de la methode get()*/
 
-Interaction GestionInteraction::get( int t)
+Interaction* GestionInteraction::get( int t)
 {
       auto it=this->linteraction.begin();
         for (int i=0;i<t;i++)
         {
              ++it;
         }
-        return  *it ;
+        return &(*it) ;
 
 
 }

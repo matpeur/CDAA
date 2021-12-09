@@ -242,5 +242,5 @@ void MainWindow::selectionTypeTodo()
 void MainWindow::affiche(QModelIndex MI)
 {
     int row = MI.row();
-    Contact c = gc.get(conversion[row]);
+    Contact c = *gc.getContactByID(conversion[row]);
 }

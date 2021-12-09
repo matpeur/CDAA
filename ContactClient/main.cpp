@@ -39,15 +39,15 @@ int main(int argc, char *argv[])
     H.addInteraction(I);
     std::list<Contact> lC;
    // GestionContact k=*b.getAllContact();
-   std::list<Contact>lk=b.getAllContact();
-   for(auto &it:b.getAllContact())
+
+   for(auto &it:b.getAllContact().getContactList())
     {   for(auto &itt:it.getGestionInteraction().getInteractionList())
         {
            for(auto &ittt:itt.getGestionToDo().getToDoList())
            {
               qDebug()<<QString::fromStdString(ittt.toString());
            }
-       // qDebug()<<QString::fromStdString(itt.getContenu());
+       qDebug()<<QString::fromStdString(itt.getContenu());
        }
      }
 

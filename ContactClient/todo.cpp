@@ -56,7 +56,7 @@ std::string toDo::toString()
 
 
 void toDo:: setID(int i){this->id=i;}
-int toDo:: getId(){return this->id;}
+int toDo:: getID(){return this->id;}
 
 
 

@@ -24,13 +24,14 @@ public:
     int getSize() const;
 
     std::string toString();
-    toDo get(int);
+    toDo* get(int);
 
 
 private :
 
     std::list<toDo> ltodo;
     Interface * I;
+
 
 };
 
