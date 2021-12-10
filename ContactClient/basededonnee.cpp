@@ -264,7 +264,7 @@ GestionContact  Basededonnee::getAllContact()
              C.setId(query.value(7).toInt());
              LC.addContact(C);
          }
-          for(auto &it:LC.getContactList())
+          for(auto it:LC.getContactList())
           {
 
 
