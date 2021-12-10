@@ -7,15 +7,14 @@ Contact::Contact(){}
  * @date octobre 2011
  * @brief implémentation du constructeur à parametre
  */
-Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto,string dateCreation,string mail)
+Contact::Contact(string nom, string prenom,string entreprise,string tel,string cheminPhoto,string dateCreation,string mail)
 {
-    setInterface(interface);
-    setNom(nom);
-    setPrenom(prenom);
-    setEntrprise(entreprise);
-    setTelephone(tel);
-    setPhoto(cheminPhoto);
-    setMail(mail);
+    this -> nom=nom;
+    this->prenom = prenom;
+    this->entreprise =entreprise;
+    this->telephone = tel;
+    this->Photo = cheminPhoto;
+    this->mail = mail;
     setDate(dateCreation);
     this->id=1;
 }
@@ -24,9 +23,8 @@ Contact::Contact(Interface * interface, string nom, string prenom,string entrepr
  * @date octobre 2021
  * @brief constructeur pour initialiser l'instance
  */
-Contact::Contact(Interface * interface, string nom, string prenom,string entreprise,string tel,string cheminPhoto, string mail)
+Contact::Contact(string nom, string prenom,string entreprise,string tel,string cheminPhoto, string mail)
 {
-    setInterface(interface);
     setNom(nom);
     setPrenom(prenom);
     setEntrprise(entreprise);
@@ -96,11 +94,7 @@ void   Contact:: setPhoto(std::string photo)
     this->Photo=photo;
 }
 void   Contact:: setDate(std::string t){this->dateCreation=t;}
-void   Contact:: setInterface(Interface * I)
-{
-    GestionInteraction Inter(I);
-    gI = Inter;
-}
+
 void Contact::setId(int k){this->id=k;}
 int Contact::getId(){return this->id;}
 string Contact:: getNom() const {return this->nom;}

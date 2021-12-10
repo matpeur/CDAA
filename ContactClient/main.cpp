@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.show();
-    /*
+    //w.show();
+/*
     Interface Inter;
     Contact c;
     Interaction I(&Inter, &c, "Test");
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     Contact H(&Inter,"Mouss","DIARR","BCEAO","dfgh","8-12-2021","sdfg","sdf");
     C.createInteraction("fghjk");
    //qDebug()<<(I.getGestionToDo().getSize());
-    Basededonnee b;
+
     C.addInteraction(I);
     L.addInteraction(I);
     K.addInteraction(I);
@@ -43,21 +43,23 @@ int main(int argc, char *argv[])
     b.AjoutContact(K);
     b.AjoutContact(H);
 
-
+*/
+    Basededonnee b;
     std::list<Contact> lC;
-   // GestionContact k=*b.getAllContact();
+    GestionContact k=b.getAllContact();
 
-   for(auto &it:b.getAllContact().getContactList())
+   for(auto &it:k.getContactList())
     {   for(auto &itt:it.getGestionInteraction().getInteractionList())
         {
            for(auto &ittt:itt.getGestionToDo().getToDoList())
            {
-             // qDebug()<<QString::fromStdString(ittt.toString());
+               std::string s=ittt.toString();
+              qDebug()<<QString::fromStdString(ittt.toString());
            }
-     //  qDebug()<<QString::fromStdString(itt.getContenu());
+      qDebug()<<QString::fromStdString(itt.getContenu());
        }
      }
-*/
+
  /*  qDebug()<<"le nombre de contact est :";
    qDebug()<<b.Nombredecontact();*/
 

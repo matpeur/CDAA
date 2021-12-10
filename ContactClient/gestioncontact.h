@@ -2,7 +2,9 @@
 #define GESTIONCONTACT_H
 class Contact;//#include "contact.h"
 #include "date.h"
-#include "interface.h"
+#include "contact.h"
+#include "interaction.h"
+#include "todo.h"
 /**
  *@class Contact
  @brief permet de gerer(ajouter,supprimer des
@@ -17,7 +19,7 @@ public:
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string);
     void addContact(Contact c);
     void removeContact(Contact);
-    Interface * getInterface();
+
     std::list<Contact> getContactList() const;
     unsigned int getSize() const;
     Contact* getContactByID(int i);
@@ -27,7 +29,6 @@ public:
 
 private :
     std::list<Contact> lcontact;
-    Interface* I;
     Date derniereSuppression;
 
 };

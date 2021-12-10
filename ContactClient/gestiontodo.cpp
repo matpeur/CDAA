@@ -4,10 +4,6 @@
  * @date octobre 2021
  * @brief implémentation des constructeurs*/
 GestionToDo::GestionToDo(){}
-GestionToDo::GestionToDo(Interface * interface)
-{
-    setInterface(interface);
-}
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
@@ -34,7 +30,6 @@ void GestionToDo::removeToDo(toDo & td)
     {
         if(it == td)
         {
-            I->deleteTodo(&it);
             ltodo.remove(it);
         }
     }
@@ -47,7 +42,6 @@ void GestionToDo::removeAllToDo()
 {
     for (auto it : ltodo)
     {
-        I->deleteTodo(&it);
     }
     ltodo.clear();
 }
@@ -61,7 +55,6 @@ std::list<toDo> GestionToDo::getToDoList() const
 }
 
  int GestionToDo::getSize() const{return (int)ltodo.size();}
-void GestionToDo::setInterface(Interface * I){this->I=I;}
 
 /**
  * @author BELLEGUELLE TRAORE

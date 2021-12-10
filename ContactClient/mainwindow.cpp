@@ -167,6 +167,11 @@ void MainWindow::ajoutDonneesInteraction()
 
 }
 
+void MainWindow::ajoutDonneesTodo()
+{
+
+}
+
 void MainWindow::selection(QString texte)
 {
     for (int i=0; i<model->rowCount(); i++)

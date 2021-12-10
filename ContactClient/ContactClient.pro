@@ -16,7 +16,6 @@ SOURCES += \
     gestioninteraction.cpp \
     gestiontodo.cpp \
     interaction.cpp \
-    interface.cpp \
     main.cpp \
     mainwindow.cpp \
     todo.cpp \

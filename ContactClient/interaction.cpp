@@ -10,10 +10,9 @@ Interaction::Interaction()
 
 }
 
-Interaction::Interaction(Interface* inter,Contact * c,std::string contenu)
+Interaction::Interaction(Contact * c,std::string contenu)
 {  setID(0);
     setContact(c);
-    setInterface(inter);
     this->setContenu(contenu);
 
  }
@@ -70,12 +69,6 @@ void Interaction::setDate(Date * d ){ datestring=(*d).getDateToString();}
 std::string Interaction::getDate() const {return this->datestring;}
 void Interaction::setContact(Contact* const C){this->contact = C;}
 Contact* Interaction::getContact() const{return this->contact;}
-
-void Interaction::setInterface(Interface * I)
-{
-    GestionToDo td(I);
-    gTD = td;
-}
 
 /**
  * @author BELLEGUELLE TRAORE

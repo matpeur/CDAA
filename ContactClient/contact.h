@@ -3,7 +3,6 @@
 #include <string>
 #include <iostream>
 #include "gestioninteraction.h"
-class Interface;
 /**
  *@class Contact
  *@brief Classe Contact
@@ -17,8 +16,8 @@ class Contact
 public:
     Contact();
 
-    Contact(Interface *,string,string,string,string,string,string,string);
-    Contact(Interface *,string,string,string,string,string,string);
+    Contact(string,string,string,string,string,string,string);
+    Contact(string,string,string,string,string,string);
     void addInteraction(Interaction inter);
     void createInteraction(std::string);
     void removeInteraction(Interaction & i);
@@ -29,7 +28,6 @@ public:
     void setTelephone(string tel);
     void setPhoto(string photo) ;
     void setDate(string t) ;
-    void setInterface(Interface *);
     void setMail(string);
     void setId(int);
     string getNom() const;

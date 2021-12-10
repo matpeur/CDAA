@@ -36,7 +36,7 @@ public:
 private:
     Ui::MainWindow *ui;
     GestionContact *gc;
-    Basededonnee bd;
+    //Basededonnee bd;
 
     QLineEdit *BarreRecherche;
     QComboBox *cBSelectionTri;

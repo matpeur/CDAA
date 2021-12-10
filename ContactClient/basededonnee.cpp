@@ -31,7 +31,7 @@ void Basededonnee::Connexion()
 
     b = QSqlDatabase::addDatabase("QSQLITE");
     setIDContact(0);
-    b.setDatabaseName("/tmp/basee1");
+    b.setDatabaseName("/home1/mb398063/Downloads/basee1");
 
       if(!b.open())
       {
@@ -254,20 +254,13 @@ GestionContact  Basededonnee::getAllContact()
        else {
          while(query.next())
          {
-             QString r=query.value(0).toString();
-             C.setNom(r.toStdString());
-             r=query.value(1).toString();
-             C.setPrenom(r.toStdString());
-             r=query.value(2).toString();
-             C.setEntrprise(r.toStdString());
-             r=query.value(3).toString();
-             C.setMail(r.toStdString());
-             r=query.value(4).toString();
-             C.setTelephone(r.toStdString());
-             r=query.value(5).toString();
-             C.setPhoto(r.toStdString());
-             r=query.value(6).toString();
-             C.setDate(r.toStdString());
+             Contact C(query.value(0).toString().toStdString(),
+                       query.value(1).toString().toStdString(),
+                       query.value(2).toString().toStdString(),
+                       query.value(3).toString().toStdString(),
+                       query.value(4).toString().toStdString(),
+                       query.value(5).toString().toStdString(),
+                       query.value(6).toString().toStdString());
              C.setId(query.value(7).toInt());
              LC.addContact(C);
          }
@@ -417,7 +410,6 @@ std::list<Interaction> Basededonnee::recherchelisteinterractionpardate(string da
 std::list<toDo> Basededonnee::recherchelistetodopardate(string date ,string date2)
 {
    std::list<toDo> LI;
-   Interface I;
  qDebug()<<this->recherchelisteinterractionpardate(date,date2).size();
  for(auto &it:recherchelisteinterractionpardate(date,date2))
   {

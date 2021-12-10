@@ -18,14 +18,13 @@ class Interaction
 public:
     Interaction();
 
-    Interaction(Interface *, Contact *,std::string);
+    Interaction(Contact *,std::string);
 
     std::string getContenu() const;
     std::string getDate() const;
     Contact* getContact() const;
     GestionToDo getGestionToDo() const;
     void setContact(Contact* const);
-    void setInterface(Interface * );
     bool operator==(Interaction  );
     void addToDo(toDo &);
     void removeToDo(toDo &);

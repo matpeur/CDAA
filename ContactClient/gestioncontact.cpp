@@ -8,7 +8,6 @@
  */
 GestionContact::GestionContact()
 {
-    I = new Interface();
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -17,7 +16,6 @@ GestionContact::GestionContact()
  */
 GestionContact::~GestionContact()
 {
-    delete I;
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -25,7 +23,7 @@ GestionContact::~GestionContact()
  * @brief implémentation de la methode addContact */
 void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail, std::string date)
 {
-    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto,mail,date);
+    Contact c( nom, prenom, entreprise, tel, cheminPhoto,mail,date);
     lcontact.push_back(c);
 }
 /**
@@ -35,7 +33,7 @@ void GestionContact::createContact(std:: string nom, std::string prenom,  std::s
  */
 void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail)
 {
-    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto, mail);
+    Contact c(nom, prenom, entreprise, tel, cheminPhoto, mail);
     lcontact.push_back(c);
 }
 /**

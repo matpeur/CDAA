@@ -6,17 +6,13 @@
  */
 GestionInteraction::GestionInteraction(){}
 
-GestionInteraction::GestionInteraction(Interface * interface)
-{
-    setInterface(interface);
-}
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief créer une Interaction et l'ajoute dans la liste */
 void GestionInteraction::createInteraction(Contact * C, std::string contenu)
 {
-    Interaction i(I, C, contenu);
+    Interaction i(C, contenu);
     linteraction.push_back(i);
 }
 /**
@@ -39,7 +35,6 @@ void GestionInteraction::removeInteraction(Interaction & Inter)
     {
         if(it == Inter)
         {
-            I->deleteInteraction(&it);
             linteraction.remove(it);
         }
     }
@@ -50,10 +45,6 @@ void GestionInteraction::removeInteraction(Interaction & Inter)
  * @brief implémentation de la methode removeAllInterraction*/
 void GestionInteraction::removeAllInteraction()
 {
-    for (auto it : linteraction)
-    {
-        I->deleteInteraction(&it);
-    }
     linteraction.clear();
 }
 
@@ -80,4 +71,4 @@ Interaction* GestionInteraction::get( int t)
  * @brief implémentation des accesseurs*/
 int GestionInteraction::getSize() const{return linteraction.size();}
 std::list<Interaction> GestionInteraction::getInteractionList() const {return linteraction;}
-void GestionInteraction::setInterface(Interface * I){this->I=I;}
+

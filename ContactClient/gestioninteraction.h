@@ -13,7 +13,6 @@ class GestionInteraction
 {
 public:
     GestionInteraction();
-    GestionInteraction(Interface *);
 
     void addInteraction(Interaction);
     void createInteraction(Contact *, std::string Contenu);
@@ -22,10 +21,8 @@ public:
     Interaction* get(int);
     std::list<Interaction> getInteractionList() const;
     int getSize() const;
-    void setInterface(Interface *);
 
 private :
-    Interface * I;
     std::list<Interaction> linteraction;
 
 };
