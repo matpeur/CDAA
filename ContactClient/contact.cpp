@@ -49,7 +49,7 @@ void Contact::createInteraction(std::string contenu)
  * @brief Ajoute une interaction déjà créer dans la liste de gestion Interaction
  * @param inter un interaction déjà créé à ajouter dans la liste
  */
-void Contact::addInteraction(Interaction inter)
+void Contact::addInteraction(Interaction *inter)
 {
     gI.addInteraction(inter);
 }
@@ -58,7 +58,7 @@ void Contact::addInteraction(Interaction inter)
  * @date octobre 2021
  * @brief implémentation de la methode removeInterraction
  */
-void Contact::removeInteraction(Interaction & i)
+void Contact::removeInteraction(Interaction *i)
 {
     gI.removeInteraction(i);
 }

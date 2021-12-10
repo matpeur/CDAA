@@ -114,7 +114,7 @@ void MainWindow::setGc(GestionContact *value)
     gc = value;
     for (auto& it : gc->getContactList())
     {
-        cBSelectionContact->addItem(QString::fromStdString(it.getPrenom()+" "+it.getNom()+" de "+it.getEntreprise()));
+        cBSelectionContact->addItem(QString::fromStdString(it->getPrenom()+" "+it->getNom()+" de "+it->getEntreprise()));
     }
     ajoutDonneesContact();
 }
@@ -127,7 +127,7 @@ void MainWindow::on_actionNouveau_Contact_triggered()
     if(res == QDialog::Accepted)
     {
         gc->createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString(),fc->getMail().toStdString());
-        std::list<Contact> liste = gc->getContactList();
+        std::list<Contact*> liste = gc->getContactList();
         for (auto & it : liste)
         {
             std::cout<<it<<std::endl;
@@ -146,17 +146,17 @@ void MainWindow::ajoutDonneesContact()
     int i=0;
     for(auto it : gc->getContactList())
     {
-        QStandardItem *item0 = new QStandardItem(QString::number(it.getId()));
+        QStandardItem *item0 = new QStandardItem(QString::number(it->getId()));
         model->setItem(i, 0, item0);
-        QStandardItem *item = new QStandardItem(QString::fromStdString(it.getNom()));
+        QStandardItem *item = new QStandardItem(QString::fromStdString(it->getNom()));
         model->setItem(i, 1, item);
-        QStandardItem *item1 = new QStandardItem(QString::fromStdString(it.getPrenom()));
+        QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getPrenom()));
         model->setItem(i,2,item1);
-        QStandardItem *item2 = new QStandardItem(QString::fromStdString(it.getEntreprise()));
+        QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getEntreprise()));
         model->setItem(i,3,item2);
-        QStandardItem *item3 = new QStandardItem(QString::fromStdString(it.getDate()));
+        QStandardItem *item3 = new QStandardItem(QString::fromStdString(it->getDate()));
         model->setItem(i,4,item3);
-        QStandardItem *item4 = new QStandardItem(QString::fromStdString(it.getGestionInteraction().getInteractionList().back().getDate()));
+        QStandardItem *item4 = new QStandardItem(QString::fromStdString(it->getGestionInteraction().getInteractionList().back()->getDate()));
         model->setItem(i,5,item4);
         i++;
     }
@@ -164,7 +164,22 @@ void MainWindow::ajoutDonneesContact()
 
 void MainWindow::ajoutDonneesInteraction()
 {
-
+    int i =0;
+    for ( auto it : gc->getContactList())
+    {
+        for (auto itt : it->getGestionInteraction().getInteractionList() )
+        {
+            QStandardItem *item0 = new QStandardItem(QString::number(itt->getID()));
+            model->setItem(i, 0, item0);
+            QStandardItem *item = new QStandardItem(QString::number(it->getId()));
+            model->setItem(i, 1, item);
+            QStandardItem *item1 = new QStandardItem(QString::fromStdString(itt->getContenu()));
+            model->setItem(i,2,item1);
+            QStandardItem *item2 = new QStandardItem(QString::fromStdString(itt->getDate()));
+            model->setItem(i,3,item2);
+            i++;
+        }
+    }
 }
 
 void MainWindow::ajoutDonneesTodo()
@@ -254,5 +269,5 @@ void MainWindow::selectionTypeTodo()
 void MainWindow::affiche(QModelIndex MI)
 {
     int row = MI.row();
-    Contact c = *gc->getContactByID(conversion[row]);
+    Contact c = *gc->getContactByID(model->index(row, 0).data().toInt());
 }

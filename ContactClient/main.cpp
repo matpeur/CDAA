@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    //w.show();
+    w.show();
 /*
     Interface Inter;
     Contact c;
@@ -43,13 +43,13 @@ int main(int argc, char *argv[])
     b.AjoutContact(K);
     b.AjoutContact(H);
 
-*/
+
     Basededonnee b;
     std::list<Contact> lC;
     GestionContact k=b.getAllContact();
 
    for(auto &it:k.getContactList())
-    {   for(auto &itt:it.getGestionInteraction().getInteractionList())
+    {   for(auto &itt:it->getGestionInteraction().getInteractionList())
         {
            for(auto &ittt:itt.getGestionToDo().getToDoList())
            {
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
        }
      }
 
- /*  qDebug()<<"le nombre de contact est :";
+   qDebug()<<"le nombre de contact est :";
    qDebug()<<b.Nombredecontact();*/
 
    /*for(auto &it:b.cherchercontactparDates("6-12-2021","8-12-2021"))

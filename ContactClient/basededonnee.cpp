@@ -270,7 +270,7 @@ GestionContact  Basededonnee::getAllContact()
 
               QSqlQuery query1;
               query1.prepare("SELECT * FROM interraction where id=:a");
-              query1.bindValue(":a",it.getId());
+              query1.bindValue(":a",it->getId());
               if(!query1.exec())
               {  qDebug()<<"erreur lors de la requete1 ";}
               else{
@@ -278,18 +278,18 @@ GestionContact  Basededonnee::getAllContact()
                           {
 
                               QString r=query1.value(1).toString();
-                              it.createInteraction(r.toStdString());
+                              it->createInteraction(r.toStdString());
 
                           }
 
 
 
-                        for(auto &itt:it.getGestionInteraction().getInteractionList())
+                        for(auto &itt:it->getGestionInteraction().getInteractionList())
                           {
                             //ici on recupere le nombre de todo ayant le meme id que l'interaction it
                             QSqlQuery query11;
                             query11.prepare("SELECT COUNT(*)FROM todo where id=:a");
-                            query11.bindValue(":a",itt.getID());
+                            query11.bindValue(":a",itt->getID());
                             int row=0;
                             query11.exec();
                             if(query11.next())
@@ -300,18 +300,18 @@ GestionContact  Basededonnee::getAllContact()
                            if(row!=0)
                              { QSqlQuery query2;
                               query2.prepare("SELECT * FROM todo where id=1");
-                              query2.bindValue(":a",itt.getID());
+                              query2.bindValue(":a",itt->getID());
                                if(query2.exec())
                                  {
                                    while(query2.next())
-                                   {   qDebug()<<itt.getID();
+                                   {   qDebug()<<itt->getID();
                                        std::string s=query2.value(1).toString().toStdString();
                                        toDo t ;
                                        t.setContenu(s);
-                                       t.setOwner(&itt);
+                                       t.setOwner(itt);
                                        Date d;
                                        t.setDate(d.getDateToString());
-                                       itt.addToDo(t);
+                                       itt->addToDo(t);
 
                                    }
                                  }else { qDebug()<<"erreur lors de la requete de todo ";}
@@ -391,13 +391,13 @@ std::list<Interaction> Basededonnee::recherchelisteinterractionpardate(string da
         while(query.next())
         {
            QString r=query.value(1).toString();
-           it.createInteraction(r.toStdString());
+           it->createInteraction(r.toStdString());
 
 
         }
-        for(auto &itt:it.getGestionInteraction().getInteractionList())
+        for(auto &itt:it->getGestionInteraction().getInteractionList())
         {
-                LI.push_back(itt);
+                LI.push_back(*itt);
 
 
         }

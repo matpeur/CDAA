@@ -20,7 +20,7 @@ public:
     void addContact(Contact c);
     void removeContact(Contact);
 
-    std::list<Contact> getContactList() const;
+    std::list<Contact*> getContactList() const;
     unsigned int getSize() const;
     Contact* getContactByID(int i);
     Interaction* getInterractionByID(int id);
@@ -28,7 +28,7 @@ public:
 
 
 private :
-    std::list<Contact> lcontact;
+    std::list<Contact*> lcontact;
     Date derniereSuppression;
 
 };

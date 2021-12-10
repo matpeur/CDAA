@@ -16,7 +16,7 @@ FenetreAjoutInter::FenetreAjoutInter(QWidget *parent, GestionContact *gC) : QDia
 
     for (auto& it : gC->getContactList())
     {
-        CB->addItem(QString::fromStdString(it.getPrenom()+" "+it.getNom()+" de "+it.getEntreprise()));
+        CB->addItem(QString::fromStdString(it->getPrenom()+" "+it->getNom()+" de "+it->getEntreprise()));
         Contacts.append(it);
     }
 
@@ -36,7 +36,7 @@ void FenetreAjoutInter::selection(int i)
 {
 
     cont = Contacts.at(i);
-    Nom->setText(QString::fromStdString("Vous avez choisi "+cont.getPrenom()+" "+cont.getNom()+" de "+cont.getEntreprise()));
+    Nom->setText(QString::fromStdString("Vous avez choisi "+cont->getPrenom()+" "+cont->getNom()+" de "+cont->getEntreprise()));
     if (VL->count()==1)
     {
     VL->addWidget(Nom);
@@ -103,8 +103,8 @@ void FenetreAjoutInter::sauvegarde()
             }
         }
     }
-    cont.createInteraction(interaction);
-    for (auto & it2 : cont.getGestionInteraction().getInteractionList() )
+    cont->createInteraction(interaction);
+    for (auto & it2 : cont->getGestionInteraction().getInteractionList() )
         std::cout<<it2<<std::endl;
     emit fini();
 }

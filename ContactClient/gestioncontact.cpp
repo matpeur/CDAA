@@ -23,7 +23,7 @@ GestionContact::~GestionContact()
  * @brief implémentation de la methode addContact */
 void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail, std::string date)
 {
-    Contact c( nom, prenom, entreprise, tel, cheminPhoto,mail,date);
+    Contact *c = new Contact( nom, prenom, entreprise, tel, cheminPhoto,mail,date);
     lcontact.push_back(c);
 }
 /**
@@ -33,7 +33,7 @@ void GestionContact::createContact(std:: string nom, std::string prenom,  std::s
  */
 void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail)
 {
-    Contact c(nom, prenom, entreprise, tel, cheminPhoto, mail);
+    Contact *c = new Contact(nom, prenom, entreprise, tel, cheminPhoto, mail);
     lcontact.push_back(c);
 }
 /**
@@ -41,7 +41,7 @@ void GestionContact::createContact(std:: string nom, std::string prenom,  std::s
   */
 void GestionContact::addContact(Contact c)
 {
-    lcontact.push_back(c);
+    lcontact.push_back(&c);
     std::cout<<"fghjkl";
 }
 /**
@@ -54,7 +54,7 @@ void GestionContact::removeContact(Contact Inter)
 
     for (auto &it : lcontact  )
     {
-        if(it == Inter)
+        if(*it == Inter)
         {
             //I->deleteContact(&it);
             lcontact.remove(it);
@@ -73,19 +73,19 @@ void GestionContact::removeContact(Contact Inter)
         {
              ++it;
         }
-        return  &(*it) ;
+        return  *it ;
 
 }
 
 Interaction* GestionContact::getInterractionByID(int id)
 {
-    Interaction* I;
+    Interaction* I = nullptr;
     for(auto &it :lcontact)
     {
-       for(auto &itt : it.getGestionInteraction().getInteractionList())
+       for(auto &itt : it->getGestionInteraction().getInteractionList())
        {
-           if(itt.getID()==id)
-               I= &(itt);
+           if(itt->getID()==id)
+               I= itt;
 
        }
 }
@@ -97,9 +97,9 @@ toDo* GestionContact::gettoDoByID(int id)
 {        toDo* I;
       for(auto &it :lcontact)
       {
-         for(auto &itt : it.getGestionInteraction().getInteractionList())
+         for(auto &itt : it->getGestionInteraction().getInteractionList())
          {
-           for(auto &ittt : itt.getGestionToDo().getToDoList())
+           for(auto &ittt : itt->getGestionToDo().getToDoList())
             {
              if(ittt.getID()==id)
                   I= &(ittt);
@@ -110,5 +110,5 @@ toDo* GestionContact::gettoDoByID(int id)
 
    }
 
-std::list<Contact> GestionContact::getContactList() const {return lcontact;}
+std::list<Contact*> GestionContact::getContactList() const {return lcontact;}
 unsigned int GestionContact::getSize() const {return lcontact.size();}

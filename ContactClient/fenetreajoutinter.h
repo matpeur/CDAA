@@ -22,10 +22,10 @@ public:
 
 private :
     QVBoxLayout * VL;
-    QVector<Contact> Contacts;
+    QVector<Contact*> Contacts;
     QLabel * Nom;
     QTextEdit * Contenu;
-    Contact cont;
+    Contact* cont;
     QVector<QLineEdit*> VLE;
     QVector<QDateEdit*> VDE;
     int nbTD;
