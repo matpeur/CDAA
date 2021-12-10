@@ -157,7 +157,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_contact.cpp
 release/qrc_contact.cpp: ../ContactClient/contact.qrc \
 		C:/Qt/5.12.11/mingw73_64/bin/rcc.exe \
-		../ContactClient/images/anonyme.png
+		../ContactClient/images/anonyme.jpg
 	C:\Qt\5.12.11\mingw73_64\bin\rcc.exe -name contact ..\ContactClient\contact.qrc -o release\qrc_contact.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h

@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     //initgc
+    gc = new GestionContact();
+    gc->createContact("Barnier", "Michel", "LR", "0625457852",":/anonyme.jpg","MB@LR.fr");
 
     //init UI
     QHBoxLayout *HL= new QHBoxLayout();
@@ -46,13 +48,13 @@ MainWindow::MainWindow(QWidget *parent)
                         BoutonsSelection = new QButtonGroup();
                             QRadioButton *SelContact = new QRadioButton("Contact");
                             SelContact->setChecked(true);
-                        BoutonsSelection->addButton(SelContact);
+                        BoutonsSelection->addButton(SelContact,0);
                     HB1->addWidget(SelContact);
                             QRadioButton *SelInteraction = new QRadioButton("Interaction");
-                        BoutonsSelection->addButton(SelInteraction);
+                        BoutonsSelection->addButton(SelInteraction,1);
                     HB1->addWidget(SelInteraction);
                             QRadioButton *SelTodo = new QRadioButton("Tâches");
-                        BoutonsSelection->addButton(SelTodo);
+                        BoutonsSelection->addButton(SelTodo,2);
                     HB1->addWidget(SelTodo);
                 VL1->addLayout(HB1);
                     checkRechAdvDate = new QCheckBox("Recherche par date");

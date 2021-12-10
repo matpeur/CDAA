@@ -45,8 +45,8 @@ FenetreContact::FenetreContact( QWidget *parent): QDialog(parent)
 
     HL1->addLayout(FL);
 
-    IW = new ImageWidget(this,":/anonyme.png");
-    setCheminPhoto(":/anonyme.png");
+    IW = new ImageWidget(this,":/anonyme.jpg");
+    setCheminPhoto(":/anonyme.jpg");
 
     VL1->addWidget(IW);
 
@@ -113,13 +113,11 @@ QString FenetreContact::getMail() const
 
 void FenetreContact::setMail(const QString &value)
 {
-    bool test = true;
-    if(!value.contains('@')){test = false; throw "Adresse mail non valide : absence de @";}
-    if(value.contains(".@")){test = false; throw "Adresse mail non valide : . devant un @";}
-    if(value.contains("..")){test = false; throw "Adresse mail non valide : deux . adjacant";}
-    if(value.lastIndexOf('@')>value.lastIndexOf('.')){test = false; throw "Adresse mail non valide : adresse de domaine invalide";}
-    if (test)
-        mail = value;
+    if(!value.contains('@')){throw "Adresse mail non valide : absence de @";}
+    if(value.contains(".@")){throw "Adresse mail non valide : . devant un @";}
+    if(value.contains("..")){throw "Adresse mail non valide : deux . adjacant";}
+    if(value.lastIndexOf('@')>value.lastIndexOf('.')){throw "Adresse mail non valide : adresse de domaine invalide";}
+    mail = value;
 }
 
 QString FenetreContact::getCheminPhoto() const
