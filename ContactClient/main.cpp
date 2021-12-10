@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-//    w.show();
+    w.show();
+    /*
     Interface Inter;
     Contact c;
     Interaction I(&Inter, &c, "Test");
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])
     std::list<Contact> lC;
    // GestionContact k=*b.getAllContact();
 
-  /* for(auto &it:b.getAllContact().getContactList())
+   for(auto &it:b.getAllContact().getContactList())
     {   for(auto &itt:it.getGestionInteraction().getInteractionList())
         {
            for(auto &ittt:itt.getGestionToDo().getToDoList())

@@ -30,11 +30,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void setGc(const GestionContact &value);
+    void setGc(GestionContact *value);
 
 private:
     Ui::MainWindow *ui;
-    GestionContact gc;
+    GestionContact *gc;
 
     QLineEdit *BarreRecherche;
     QComboBox *cBSelectionTri;

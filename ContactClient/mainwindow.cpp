@@ -107,10 +107,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setGc(const GestionContact &value)
+void MainWindow::setGc(GestionContact *value)
 {
     gc = value;
-    for (auto& it : gc.getContactList())
+    for (auto& it : gc->getContactList())
     {
         cBSelectionContact->addItem(QString::fromStdString(it.getPrenom()+" "+it.getNom()+" de "+it.getEntreprise()));
     }
@@ -124,8 +124,8 @@ void MainWindow::on_actionNouveau_Contact_triggered()
     int res = fc->exec();
     if(res == QDialog::Accepted)
     {
-        gc.createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString(),fc->getMail().toStdString());
-        std::list<Contact> liste = gc.getContactList();
+        gc->createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString(),fc->getMail().toStdString());
+        std::list<Contact> liste = gc->getContactList();
         for (auto & it : liste)
         {
             std::cout<<it<<std::endl;
@@ -135,14 +135,14 @@ void MainWindow::on_actionNouveau_Contact_triggered()
 
 void MainWindow::on_actionNouvelle_Interaction_triggered()
 {
-    FenetreAjoutInter *fai = new FenetreAjoutInter(this, &gc);
+    FenetreAjoutInter *fai = new FenetreAjoutInter(this, gc);
     fai->exec();
 }
 
 void MainWindow::ajoutDonneesContact()
 {
     int i=0;
-    for(auto it : gc.getContactList())
+    for(auto it : gc->getContactList())
     {
         QStandardItem *item0 = new QStandardItem(QString::number(it.getId()));
         model->setItem(i, 0, item0);
@@ -191,7 +191,7 @@ void MainWindow::modifModel(int index)
     cBSelectionTri->clear();
     switch(index)
     {
-    case 1: model = new QStandardItemModel((int)gc.getSize(), 6);
+    case 1: model = new QStandardItemModel((int)gc->getSize(), 6);
             titreCol->append("Id");
             titreCol->append("Nom");
             titreCol->append("Prenom");
@@ -242,5 +242,5 @@ void MainWindow::selectionTypeTodo()
 void MainWindow::affiche(QModelIndex MI)
 {
     int row = MI.row();
-    Contact c = *gc.getContactByID(conversion[row]);
+    Contact c = *gc->getContactByID(conversion[row]);
 }
