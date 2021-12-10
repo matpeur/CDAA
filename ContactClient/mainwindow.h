@@ -16,6 +16,7 @@
 #include <QStringList>
 #include <QModelIndex>
 #include "gestioncontact.h"
+#include "basededonnee.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -35,6 +36,7 @@ public:
 private:
     Ui::MainWindow *ui;
     GestionContact *gc;
+    Basededonnee bd;
 
     QLineEdit *BarreRecherche;
     QComboBox *cBSelectionTri;
@@ -51,6 +53,8 @@ private:
    std:: list<toDo*> resultRechTodo;
 
     void ajoutDonneesContact();
+    void ajoutDonneesInteraction();
+    void ajoutDonneesTodo();
     void modifModel(int);
     int conversion[];
 private slots:

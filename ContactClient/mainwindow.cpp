@@ -160,7 +160,10 @@ void MainWindow::ajoutDonneesContact()
         model->setItem(i,5,item4);
         i++;
     }
+}
 
+void MainWindow::ajoutDonneesInteraction()
+{
 
 }
 
@@ -211,6 +214,7 @@ void MainWindow::modifModel(int index)
             titreCol->append("Date");
             cBSelectionTri->addItems(*titreCol);
             model->setHorizontalHeaderLabels(*titreCol);
+            ajoutDonneesInteraction();
             break;
     case 3: model = new QStandardItemModel((int)resultRechTodo.size(), 4);
             titreCol->append("Id");
@@ -219,6 +223,7 @@ void MainWindow::modifModel(int index)
             titreCol->append("Date");
             cBSelectionTri->addItems(*titreCol);
             model->setHorizontalHeaderLabels(*titreCol);
+            ajoutDonneesTodo();
             break;
     }
     ListeSelection->setModel(model);
