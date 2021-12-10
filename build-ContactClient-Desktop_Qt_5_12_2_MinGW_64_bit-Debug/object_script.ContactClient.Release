@@ -11,9 +11,11 @@ release/fenetrecontact.o
 release/imagewidget.o
 release/contact.o
 release/fenetreajoutinter.o
+release/visucontactwidget.o
 release/qrc_contact.o
 release/moc_interface.o
 release/moc_mainwindow.o
 release/moc_fenetrecontact.o
 release/moc_imagewidget.o
 release/moc_fenetreajoutinter.o
+release/moc_visucontactwidget.o

@@ -14,14 +14,15 @@ MainWindow::MainWindow(QWidget *parent)
     //initgc
     gc = new GestionContact();
     gc->createContact("Barnier", "Michel", "LR", "0625457852",":/anonyme.jpg","MB@LR.fr");
+    gc->getContactList().front()->setId(2);
+    //gc->getContactByID(1)->createInteraction("Rendez-vous congrès\n@todo Renvoyer l'ascensseur @date 25/11/2021");
 
+
+    gc->createContact("Pécresse","Valérie", "LR", "0652147896", ":/anonyme.jpg","VP@LR.fr");
+    gc->getContactList().back()->setId(1);
     //init UI
     QHBoxLayout *HL= new QHBoxLayout();
-        QTabWidget *tabWidgetVisu = new QTabWidget();
-            QWidget *VisuContact = new QWidget();
-            tabWidgetVisu->addTab(VisuContact, "Contact");
-            QWidget *VisuInteraction = new QWidget();
-            tabWidgetVisu->addTab(VisuInteraction, "Interaction");
+        tabWidgetVisu = new QTabWidget();
     HL->addWidget(tabWidgetVisu);
         QVBoxLayout *VL= new QVBoxLayout();
             BarreRecherche = new QLineEdit;
@@ -247,7 +248,7 @@ void MainWindow::modifModel(int index)
             break;
     }
     ListeSelection->setModel(model);
-    ListeSelection->hideColumn(0);
+    //ListeSelection->hideColumn(0);
     model->sort(cBSelectionTri->currentIndex());
 }
 
@@ -269,5 +270,9 @@ void MainWindow::selectionTypeTodo()
 void MainWindow::affiche(QModelIndex MI)
 {
     int row = MI.row();
-    Contact c = *gc->getContactByID(model->index(row, 0).data().toInt());
+    switch (BoutonsSelection->checkedId()) {
+        case 0 : tabWidgetVisu->clear();
+        int i = model->index(row, 0).data().toInt();
+                 tabWidgetVisu->addTab(new VisuContactWidget(gc->getContactByID(i)), "Contact");
+    }
 }

@@ -11,9 +11,11 @@ debug/fenetrecontact.o
 debug/imagewidget.o
 debug/contact.o
 debug/fenetreajoutinter.o
+debug/visucontactwidget.o
 debug/qrc_contact.o
 debug/moc_interface.o
 debug/moc_mainwindow.o
 debug/moc_fenetrecontact.o
 debug/moc_imagewidget.o
 debug/moc_fenetreajoutinter.o
+debug/moc_visucontactwidget.o

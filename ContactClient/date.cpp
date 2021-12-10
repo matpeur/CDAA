@@ -63,9 +63,7 @@ void Date::setDate(const std::string dateS)
     Odate -> tm_mon = mois -1;
     Odate -> tm_mday = jour;
     mktime( Odate);
-    std::cout<<Odate ->tm_mday<<std::endl;
     setDate(Odate);
-    std::cout<<this->getDate()->tm_mday<<std::endl;
 }
 /**
  * @author BELLEGUELLE TRAORE

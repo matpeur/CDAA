@@ -15,6 +15,7 @@
 #include <QStandardItemModel>
 #include <QStringList>
 #include <QModelIndex>
+#include "visucontactwidget.h"
 #include "gestioncontact.h"
 #include "basededonnee.h"
 
@@ -49,6 +50,7 @@ private:
     QTableView *ListeSelection;
     QStandardItemModel *model;
     QStringList *titreCol;
+    QTabWidget *tabWidgetVisu;
     std::list<Interaction*> resultRechInter;
    std:: list<toDo*> resultRechTodo;
 

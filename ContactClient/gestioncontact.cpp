@@ -68,12 +68,12 @@ void GestionContact::removeContact(Contact Inter)
 
  Contact* GestionContact::getContactByID( int t)
 {
-      auto it=lcontact.begin();
-        for (int i=0;i<t;i++)
+        for (auto it : lcontact)
         {
-             ++it;
+             if(it->getId() == t)
+                 return it;
         }
-        return  *it ;
+        return  nullptr;
 
 }
 
