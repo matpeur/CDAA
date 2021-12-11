@@ -69,6 +69,7 @@ private slots:
     void selectionTypeInteraction();
     void selectionTypeTodo();
     void affiche(QModelIndex);
+    void effaceContact(Contact *);
 
 };
 #endif // MAINWINDOW_H

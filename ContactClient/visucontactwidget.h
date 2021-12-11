@@ -7,6 +7,7 @@
 #include <QLabel>
 #include "contact.h"
 #include "imagewidget.h"
+
 /**
  * @brief Classe VIsuContactWidget, widget spécialisé pour la visualisation des contacts, calquer sur la boite de dialogue FenetreContact
  * @author BELEGUEULLE Mathieu
@@ -29,12 +30,12 @@ private :
 
     QLabel *Erreur;
 
-    std::string nom;
-    std::string prenom;
-    std::string entreprise;
-    std::string mail;
-    std::string photo;
-    std::string tel;
+    QString nom;
+    QString prenom;
+    QString entreprise;
+    QString mail;
+    QString photo;
+    QString tel;
 
     void setTel(const QString &value);
     void setMail(const QString &value);
@@ -42,6 +43,8 @@ private :
 
 signals:
 
+    void verouille(bool);
+    void efface(Contact *);
 
 public slots :
     void supprimer();

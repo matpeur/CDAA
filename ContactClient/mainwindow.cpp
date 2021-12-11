@@ -49,13 +49,13 @@ MainWindow::MainWindow(QWidget *parent)
                         BoutonsSelection = new QButtonGroup();
                             QRadioButton *SelContact = new QRadioButton("Contact");
                             SelContact->setChecked(true);
-                        BoutonsSelection->addButton(SelContact,0);
+                        BoutonsSelection->addButton(SelContact,1);
                     HB1->addWidget(SelContact);
                             QRadioButton *SelInteraction = new QRadioButton("Interaction");
-                        BoutonsSelection->addButton(SelInteraction,1);
+                        BoutonsSelection->addButton(SelInteraction,2);
                     HB1->addWidget(SelInteraction);
                             QRadioButton *SelTodo = new QRadioButton("Tâches");
-                        BoutonsSelection->addButton(SelTodo,2);
+                        BoutonsSelection->addButton(SelTodo,3);
                     HB1->addWidget(SelTodo);
                 VL1->addLayout(HB1);
                     checkRechAdvDate = new QCheckBox("Recherche par date");
@@ -271,8 +271,17 @@ void MainWindow::affiche(QModelIndex MI)
 {
     int row = MI.row();
     switch (BoutonsSelection->checkedId()) {
-        case 0 : tabWidgetVisu->clear();
-        int i = model->index(row, 0).data().toInt();
-                 tabWidgetVisu->addTab(new VisuContactWidget(gc->getContactByID(i)), "Contact");
+        case 1 : tabWidgetVisu->clear();
+                 int i = model->index(row, 0).data().toInt();
+                 VisuContactWidget * VCW = new VisuContactWidget(gc->getContactByID(i));
+                 tabWidgetVisu->addTab(VCW, "Contact");
+                 connect(VCW, SIGNAL(efface(Contact*)), this, SLOT(effaceContact(Contact*)));
     }
+}
+
+void MainWindow::effaceContact(Contact * c)
+{
+
+    gc->removeContact(*c);
+    modifModel(BoutonsSelection->checkedId());
 }

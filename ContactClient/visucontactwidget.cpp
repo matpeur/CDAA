@@ -8,6 +8,7 @@
 VisuContactWidget::VisuContactWidget(Contact *c,QWidget *parent) : QWidget(parent)
 {
     contact = c;
+    photo = QString::fromStdString(c->getPhoto());
 
     QVBoxLayout * VL=new QVBoxLayout();
 
@@ -57,6 +58,7 @@ VisuContactWidget::VisuContactWidget(Contact *c,QWidget *parent) : QWidget(paren
     VL1->addWidget(IW);
 
     QPushButton * BParcourir = new QPushButton("Parcourir");
+    BParcourir->setEnabled(false);
 
     VL1->addWidget(BParcourir);
 
@@ -89,6 +91,15 @@ VisuContactWidget::VisuContactWidget(Contact *c,QWidget *parent) : QWidget(paren
     connect(BSupprimer, SIGNAL(clicked()), this, SLOT(supprimer()));
     connect(BSauvegarder, SIGNAL(clicked()),this, SLOT(sauvegarde()));
     connect(BParcourir, SIGNAL(clicked()), this, SLOT(parcourir()));
+    connect(this, SIGNAL(verouille(bool)), BSauvegarder, SLOT(hide()));
+    connect(this, SIGNAL(verouille(bool)), BModifier, SLOT(show()));
+    connect(this, SIGNAL(verouille(bool)), LENom, SLOT(setDisabled(bool)));
+    connect(this, SIGNAL(verouille(bool)), LEPrenom, SLOT(setDisabled(bool)));
+    connect(this, SIGNAL(verouille(bool)), LEEntreprise, SLOT(setDisabled(bool)));
+    connect(this, SIGNAL(verouille(bool)), LEAdresseMail, SLOT(setDisabled(bool)));
+    connect(this, SIGNAL(verouille(bool)), LETelephone, SLOT(setDisabled(bool)));
+    connect(this, SIGNAL(verouille(bool)), BParcourir, SLOT(setDisabled(bool)));
+
 }
 /**
  * @brief reprise de la fonction ParcourirImages dans FenetreContact. Ouvre une fenêtre de dialogue pour sélectionner une image de profil.
@@ -106,7 +117,7 @@ void VisuContactWidget::parcourir()
         try
         {
             IW->setImage(fileName);
-             photo = fileName.toStdString();
+             photo = fileName;
              Erreur->setText("");
         } catch (const char* s) {Erreur->setText(s);}
     }
@@ -123,7 +134,7 @@ void VisuContactWidget::setMail(const QString &value)
     if(value.contains(".@")){throw "Adresse mail non valide : . devant un @";}
     if(value.contains("..")){throw "Adresse mail non valide : deux . adjacant";}
     if(value.lastIndexOf('@')>value.lastIndexOf('.')){throw "Adresse mail non valide : adresse de domaine invalide";}
-    mail = value.toStdString();
+    mail = value;
 }
 /**
  * @brief reprise de la méthode de éponyme dans FenetreContact. Compare la valeur donnée au modèle d'un numéro de téléphone par une expression régulière.
@@ -136,5 +147,40 @@ void VisuContactWidget::setTel(const QString &value)
     QRegExp eval("^\\+{0,1}(\\d|\\-|\\s|\\((\\d|\\-?)*\\))*$");
     bool test = eval.exactMatch(value);
     if(!test){throw "Numéro de téléphone invalide";}
-    tel = value.toStdString();
+    tel = value;
+}
+/**
+ * @brief Sauvegarde des champs données dans le contact
+ * @author BELLEGUEULLE Mathieu
+ * @date decembre 2021
+ */
+void VisuContactWidget::sauvegarde()
+{
+    try {
+        setMail(LEAdresseMail->text());
+        setTel(LETelephone->text());
+    }  catch (const char* s) {Erreur->setText(s);}
+    nom = LENom->text();
+    prenom = LEPrenom->text();
+    entreprise = LEEntreprise->text();
+
+    if(nom!=QString::fromStdString(contact->getNom()))
+        contact->setNom(nom.toStdString());
+    if(prenom!=QString::fromStdString(contact->getPrenom()))
+        contact->setPrenom(prenom.toStdString());
+    if(entreprise!=QString::fromStdString(contact->getEntreprise()))
+        contact->setEntrprise(entreprise.toStdString());
+    if(photo!=QString::fromStdString(contact->getPhoto()))
+        contact->setPhoto(photo.toStdString());
+    if(mail!=QString::fromStdString(contact->getMail()))
+        contact->setMail(mail.toStdString());
+    if(tel!=QString::fromStdString(contact->getTelephone()))
+        contact->setTelephone(tel.toStdString());
+    emit verouille(true);
+}
+
+void VisuContactWidget::supprimer()
+{
+    this->hide();
+    emit efface(contact);
 }
