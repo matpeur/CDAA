@@ -13,7 +13,6 @@ class Contact;//#include "contact.h"
 class GestionContact
 {
 public:
-
     GestionContact();
     ~GestionContact();
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string,std::string);

@@ -101,8 +101,8 @@ toDo* GestionContact::gettoDoByID(int id)
          {
            for(auto &ittt : itt->getGestionToDo().getToDoList())
             {
-             if(ittt.getID()==id)
-                  I= &(ittt);
+             if(ittt->getID()==id)
+                  I= (ittt);
             }
            }
          }
