@@ -32,14 +32,12 @@ public:
 
    std::string toString();
    void setContenu(std::string const);
-   void setID(int i);
-   int getID();
 private :
 
     Interaction * owner;
     std::string contenu;
     std::string date;
-    int id;
+
 
 
 

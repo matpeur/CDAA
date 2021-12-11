@@ -13,17 +13,21 @@ class GestionInteraction
 {
 public:
     GestionInteraction();
+    GestionInteraction(Interface *);
 
-    void addInteraction(Interaction *);
+    void addInteraction(Interaction);
     void createInteraction(Contact *, std::string Contenu);
-    void removeInteraction(Interaction *);
+    void removeInteraction(Interaction &);
     void removeAllInteraction();
-    Interaction* get(int);
-    std::list<Interaction*> getInteractionList() const;
+    Interaction get(int);
+
+    std::list<Interaction> getInteractionList() const;
     int getSize() const;
+    void setInterface(Interface *);
 
 private :
-    std::list<Interaction*> linteraction;
+    Interface * I;
+    std::list<Interaction> linteraction;
 
 };
 

@@ -12,7 +12,8 @@ class GestionToDo
 {
 public:
     GestionToDo();
-    void createtodO(Interaction *,std::string s);
+    GestionToDo(Interface *);
+
     void addToDo(toDo );
     void removeToDo(toDo &);
     void removeAllToDo();
@@ -23,13 +24,13 @@ public:
     int getSize() const;
 
     std::string toString();
-    toDo* get(int);
+    toDo get(int);
 
 
 private :
 
     std::list<toDo> ltodo;
-
+    Interface * I;
 
 };
 

@@ -4,7 +4,7 @@
 class toDo;
 class Interaction;
 class Contact;
-//#include "basededonnee.h"
+#include "basededonnee.h"
 
 
 
@@ -20,7 +20,7 @@ public:
     void deleteContact(Contact *);
     void ajouteContact(Contact*);
     void modifieContact(Contact*,Contact*);
-   // Basededonnee* db;
+    Basededonnee* db;
 signals:
 
 

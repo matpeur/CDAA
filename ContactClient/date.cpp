@@ -24,8 +24,8 @@ std::string Date::getDateToString() const
     int jour = tdate->tm_mday;
     int mois = tdate->tm_mon+1;
     int an = tdate->tm_year+1900;
-    result+=to_string(jour)+"/";
-    result+=to_string(mois)+"/";
+    result+=to_string(jour)+"-";
+    result+=to_string(mois)+"-";
     result+=to_string(an);
     return result;
 }
@@ -40,8 +40,8 @@ void Date::setDate(tm * d){tdate = d;}
 
 void Date::setDate(const std::string dateS)
 {
-    unsigned long long indice1 = dateS.find('/');
-    unsigned long long indice2 = dateS.find('/', indice1+1);
+    unsigned long long indice1 = dateS.find('-');
+    unsigned long long indice2 = dateS.find('-', indice1+1);
     if(indice1>dateS.size()||indice2>dateS.size())
        throw "Format date érroné";
     int jour = std::stoi(dateS.substr(indice1-2,2));
@@ -63,7 +63,9 @@ void Date::setDate(const std::string dateS)
     Odate -> tm_mon = mois -1;
     Odate -> tm_mday = jour;
     mktime( Odate);
+    std::cout<<Odate ->tm_mday<<std::endl;
     setDate(Odate);
+    std::cout<<this->getDate()->tm_mday<<std::endl;
 }
 /**
  * @author BELLEGUELLE TRAORE

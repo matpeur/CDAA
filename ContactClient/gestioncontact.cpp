@@ -1,6 +1,4 @@
 #include "gestioncontact.h"
-#include "contact.h"
-#include <string>
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
@@ -8,6 +6,7 @@
  */
 GestionContact::GestionContact()
 {
+    I = new Interface();
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -16,24 +15,15 @@ GestionContact::GestionContact()
  */
 GestionContact::~GestionContact()
 {
+    delete I;
 }
 /**
  * @author BELLEGUELLE TRAORE
- * @date decembre 2021
- * @brief implémentation de la methode addContact */
-void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail, std::string date)
-{
-    Contact *c = new Contact( nom, prenom, entreprise, tel, cheminPhoto,mail,date);
-    lcontact.push_back(c);
-}
-/**
- * @author BELLEGUEULLE TRAORE
  * @date octobre 2021
- * @brief créer un contact à partir de ses attributs caractÃ©ristiques
- */
-void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail)
+ * @brief implémentation de la methode addContact */
+void GestionContact::createContact( string nom, string prenom,string entreprise,string tel,string cheminPhoto,string mail,string date)
 {
-    Contact *c = new Contact(nom, prenom, entreprise, tel, cheminPhoto, mail);
+    Contact c(I, nom, prenom, entreprise, tel, cheminPhoto,mail,date);
     lcontact.push_back(c);
 }
 /**
@@ -41,8 +31,8 @@ void GestionContact::createContact(std:: string nom, std::string prenom,  std::s
   */
 void GestionContact::addContact(Contact c)
 {
-    lcontact.push_back(&c);
-    std::cout<<"fghjkl";
+    lcontact.push_back(c);
+
 }
 /**
  * @author BELLEGUELLE TRAORE
@@ -54,9 +44,9 @@ void GestionContact::removeContact(Contact Inter)
 
     for (auto &it : lcontact  )
     {
-        if(*it == Inter)
+        if(it == Inter)
         {
-            //I->deleteContact(&it);
+            I->deleteContact(&it);
             lcontact.remove(it);
         }
     }
@@ -66,49 +56,18 @@ void GestionContact::removeContact(Contact Inter)
 }
 
 
- Contact* GestionContact::getContactByID( int t)
+ Contact GestionContact::get( int t)
 {
-        for (auto it : lcontact)
+      auto it=lcontact.begin();
+        for (int i=0;i<t;i++)
         {
-             if(it->getId() == t)
-                 return it;
+             ++it;
         }
-        return  nullptr;
+        return  *it ;
+
 
 }
 
-Interaction* GestionContact::getInterractionByID(int id)
-{
-    Interaction* I = nullptr;
-    for(auto &it :lcontact)
-    {
-       for(auto &itt : it->getGestionInteraction().getInteractionList())
-       {
-           if(itt->getID()==id)
-               I= itt;
 
-       }
-}
-          return I;
-}
-
-
-toDo* GestionContact::gettoDoByID(int id)
-{        toDo* I;
-      for(auto &it :lcontact)
-      {
-         for(auto &itt : it->getGestionInteraction().getInteractionList())
-         {
-           for(auto &ittt : itt->getGestionToDo().getToDoList())
-            {
-             if(ittt.getID()==id)
-                  I= &(ittt);
-            }
-           }
-         }
-        return I;
-
-   }
-
-std::list<Contact*> GestionContact::getContactList() const {return lcontact;}
+std::list<Contact> GestionContact::getContactList() const {return lcontact;}
 unsigned int GestionContact::getSize() const {return lcontact.size();}
