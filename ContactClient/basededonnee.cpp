@@ -1,4 +1,4 @@
-#include "basededonnee.h"
+/*#include "basededonnee.h"
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
 #include <QtSql/QSqlQuery>
@@ -609,7 +609,7 @@ int Basededonnee::Nombredecontact()
 
 
 
-
+*/
 
 
 

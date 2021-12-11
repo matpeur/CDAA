@@ -23,7 +23,8 @@ SOURCES += \
     imagewidget.cpp \
     contact.cpp \
     fenetreajoutinter.cpp \
-    visucontactwidget.cpp
+    visucontactwidget.cpp \
+    visuinteractionwidget.cpp
 
 HEADERS += \
     basededonnee.h \
@@ -39,7 +40,8 @@ HEADERS += \
     fenetrecontact.h \
     imagewidget.h \
     fenetreajoutinter.h \
-    visucontactwidget.h
+    visucontactwidget.h \
+    visuinteractionwidget.h
 
 FORMS += \
     mainwindow.ui

@@ -1,4 +1,4 @@
-#ifndef BASEDEDONNEE_H
+/*#ifndef BASEDEDONNEE_H
 #define BASEDEDONNEE_H
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
@@ -45,3 +45,4 @@ private:
     GestionContact gc;
 };
 #endif // BASEDEDONNEE_H
+*/
