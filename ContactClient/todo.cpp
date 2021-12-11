@@ -34,7 +34,7 @@ void toDo::setDate(std::string d) {date= d;}
 void toDo::setOwner(Interaction * I) {owner = I;}
 
 std::string toDo::getContenu() const{return contenu;}
-std::string toDo::getDate() const{return datestring;}
+std::string toDo::getDate() const{return date;}
 Interaction * toDo::getOwner() const{return owner;}
 /**
  * @author BELLEGUELLE TRAORE
@@ -49,8 +49,7 @@ bool toDo::operator==(toDo td){return this->contenu==td.getContenu()&&this->date
 std::string toDo::toString()
 {
     std::string result ="";
-    //std::cout<<getDate().getDate()->tm_mday<<std::endl;
-    result = "@todo" + getContenu() + " @date " + getDate();//.getDateToString();
+    result = "@todo" + getContenu() + " @date " + getDate();
     return result;
 }
 

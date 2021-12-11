@@ -22,9 +22,11 @@ private :
     QComboBox *CBTD;
     QTextEdit *LEContenu;
     Interaction * interaction;
-
+    QVector<toDo*> Vtodo;
+public slots:
+    void envoierequete(int);
 signals:
-
+    void afficheToDo(toDo*);
 };
 
 #endif // VISUINTERACTIONWIDGET_H

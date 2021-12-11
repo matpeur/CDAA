@@ -489,11 +489,12 @@ std::list<toDo*> Basededonnee::recherchelistetodo(std::string date, std::string 
 
         if(parCONTACT&&parDATE)
         {
+            list<toDo*> lc1;
             list<toDo*> lc;
             for(auto it:recherchelistetodoparinterraction(idCONTACT,idINTERAC))
-                lc.push_back(it);
+                lc1.push_back(it);
             for(auto it:recherchelistetodoparinterraction(idCONTACT,idINTERAC))
-                lc.push_back(it);
+                lc1.push_back(it);
             return lc;
         }else {
 

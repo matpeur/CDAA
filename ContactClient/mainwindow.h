@@ -15,9 +15,13 @@
 #include <QStandardItemModel>
 #include <QStringList>
 #include <QModelIndex>
+#include <QStringView>
 #include "visucontactwidget.h"
+#include "visuinteractionwidget.h"
+#include "visutodowidget.h"
 #include "gestioncontact.h"
 #include "basededonnee.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -37,7 +41,7 @@ public:
 private:
     Ui::MainWindow *ui;
     GestionContact *gc;
-    //Basededonnee bd;
+    Basededonnee bd;
 
     QLineEdit *BarreRecherche;
     QComboBox *cBSelectionTri;
@@ -52,7 +56,8 @@ private:
     QStringList *titreCol;
     QTabWidget *tabWidgetVisu;
     std::list<Interaction*> resultRechInter;
-   std:: list<toDo*> resultRechTodo;
+    std:: list<toDo*> resultRechTodo;
+    QVector<Contact *> listeContact;
 
     void ajoutDonneesContact();
     void ajoutDonneesInteraction();
@@ -70,6 +75,7 @@ private slots:
     void selectionTypeTodo();
     void affiche(QModelIndex);
     void effaceContact(Contact *);
+    void afficheTabTodo(toDo*);
 
 };
 #endif // MAINWINDOW_H

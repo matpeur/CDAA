@@ -31,14 +31,15 @@ public:
     friend std::ostream& operator<<(std::ostream &, const Interaction);
     void setID(int i);
     int  getID();
+    void setDate(Date *);
+    void setContenu(std::string &);
 
 private:
     std::string contenu;
     std::string datestring;
     Contact * contact;
     GestionToDo gTD;
-    void setDate(Date *);
-    void setContenu(std::string &);
+
     int id;
 
 
