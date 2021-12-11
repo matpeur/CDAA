@@ -331,7 +331,7 @@ std::list<Contact*> Basededonnee::recherchercontactparNom(std::string nom)
 
 std::list<Contact> Basededonnee::recherchercontactparDates(std::string date, std::string date2)
 {
-    Contact C;
+
     std::list<Contact>  lc;
     if(b.open() )
     {
@@ -348,6 +348,7 @@ std::list<Contact> Basededonnee::recherchercontactparDates(std::string date, std
          {
           while(query.next())
           {
+             Contact C;
              QString r=query.value(0).toString();
              C.setNom(r.toStdString());
              r=query.value(1).toString();
@@ -373,7 +374,7 @@ std::list<Contact> Basededonnee::recherchercontactparDates(std::string date, std
 
 }
 
-std::list<Contact> Basededonnee::recherchecontact(std::string nom, std::string date, std::string date2,bool parNom,bool parDate )
+std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string date, std::string date2,bool parNom,bool parDate )
 {
 
  if(parNom&&parDate)
@@ -393,9 +394,9 @@ std::list<Contact> Basededonnee::recherchecontact(std::string nom, std::string d
               return recherchercontactparDates(date,date2);}
  }
 }
-std::list<Interaction> Basededonnee::recherchelisteinterractionpardate(string date ,string date2)
+std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(string date ,string date2)
 {
-   std::list<Interaction> LI;
+   std::list<Interaction*> LI;
 
    for(auto &it:recherchercontactparDates(date,date2))
   {
@@ -432,7 +433,7 @@ std::list<Interaction> Basededonnee::recherchelisteinterractionpardate(string da
   }
     return LI;
 }
-std::list<Interaction> Basededonnee::recherchelisteinterractionparContact(Contact C)
+std::list<Interaction*> Basededonnee::recherchelisteinterractionparContact(Contact C)
 {
     std::list<Interaction> LC;
     QSqlQuery query ;
