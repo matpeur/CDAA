@@ -1,4 +1,4 @@
-/*#ifndef BASEDEDONNEE_H
+#ifndef BASEDEDONNEE_H
 #define BASEDEDONNEE_H
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
@@ -17,7 +17,7 @@ public:
     void ModifiContact(Contact,Contact);
     GestionContact getAllContact();
     std::list<Contact>  recherchercontactparDates(std::string,std::string);
-    std::list<Contact*>recherchercontactparNom(std::string);
+    std::list<Contact>recherchercontactparNom(std::string);
     std::list<Contact> recherchecontact(std::string,std::string,std::string,bool,bool);
     std::list<toDo> recherchelistetodopardate(std::string,std::string);
     std::list<toDo> recherchelistetodoparinterraction(Interaction);
@@ -42,7 +42,5 @@ private:
     int idContact;
     int idInteraction;
     int idTodo;
-    GestionContact gc;
 };
 #endif // BASEDEDONNEE_H
-*/

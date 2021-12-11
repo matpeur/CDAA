@@ -1,4 +1,4 @@
-/*#include "basededonnee.h"
+#include "basededonnee.h"
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
 #include <QtSql/QSqlQuery>
@@ -245,18 +245,18 @@ GestionContact  Basededonnee::getAllContact()
        else {
          while(query.next())
          {
-             Contact *C = new Contact(query.value(0).toString().toStdString(),
+             Contact C(query.value(0).toString().toStdString(),
                        query.value(1).toString().toStdString(),
                        query.value(2).toString().toStdString(),
                        query.value(3).toString().toStdString(),
                        query.value(4).toString().toStdString(),
                        query.value(5).toString().toStdString(),
                        query.value(6).toString().toStdString());
-              C->setId(query.value(7).toInt());
+              C.setId(query.value(7).toInt());
 
               QSqlQuery query1;
               query1.prepare("SELECT * FROM interraction where idCONTACT=:a");
-              query1.bindValue(":a",C->getId());
+              query1.bindValue(":a",C.getId());
               if(!query1.exec())
               {  qDebug()<<"erreur lors de la requete2 ";}
               else{
@@ -264,13 +264,13 @@ GestionContact  Basededonnee::getAllContact()
                           {
 
                             QString r=query1.value(1).toString();
-                            Interaction *I =new Interaction(C,r.toStdString());
-                            I->setID(query1.value(3).toInt());
+                            Interaction I(&C,r.toStdString());
+                            I.setID(query1.value(3).toInt());
 
 
                             QSqlQuery query2;
                               query2.prepare("SELECT * FROM todo where idINTERAC=:a");
-                              query2.bindValue(":a",I->getID());
+                              query2.bindValue(":a",I.getID());
                                if(query2.exec())
                                  {
                                    while(query2.next())
@@ -278,15 +278,15 @@ GestionContact  Basededonnee::getAllContact()
                                        std::string s=query2.value(1).toString().toStdString();
                                        toDo t ;
                                        t.setContenu(s);
-                                       t.setOwner(I);
+                                       t.setOwner(&I);
                                        t.setID(query2.value(2).toInt());
                                        t.setDate(query2.value(3).toString().toStdString());
-                                       I->addToDo(t);
+                                       I.addToDo(t);
 
                                    }
                                  }else { qDebug()<<"erreur lors de la requete de todo ";}
 
-                               C->addInteraction(I);
+                               C.addInteraction(I);
                          }
 
               }
@@ -300,17 +300,17 @@ GestionContact  Basededonnee::getAllContact()
     return LC;
 }
 
-std::list<Contact*> Basededonnee::recherchercontactparNom(std::string nom)
+std::list<Contact> Basededonnee::recherchercontactparNom(std::string nom)
 {
 
 
-
-    std::list<Contact*> lc;
+    Contact C;
+    std::list<Contact> lc;
     if(b.open() )
     {
 
          QSqlQuery query;
-         query.prepare("SELECT id FROM contact WHERE nom=:a");
+         query.prepare("SELECT * FROM contact WHERE nom=:a");
          query.bindValue(":a",QString::fromStdString(nom));
 
          if(!query.exec())
@@ -321,8 +321,24 @@ std::list<Contact*> Basededonnee::recherchercontactparNom(std::string nom)
          {
           while(query.next())
           {
-             lc.push_back(gc.getContactByID(query.value(0).toInt()));
-          }
+             QString r=query.value(0).toString();
+             C.setNom(r.toStdString());
+             r=query.value(1).toString();
+             C.setPrenom(r.toStdString());
+             r=query.value(2).toString();
+             C.setEntrprise(r.toStdString());
+             r=query.value(3).toString();
+             C.setMail(r.toStdString());
+             r=query.value(4).toString();
+             C.setTelephone(r.toStdString());
+             r=query.value(5).toString();
+             C.setPhoto(r.toStdString());
+             r=query.value(6).toString();
+             C.setDate(r.toStdString());
+             C.setId(query.value(7).toInt());
+             lc.push_back(C);
+      }
+
    }
 
   }
@@ -331,7 +347,7 @@ std::list<Contact*> Basededonnee::recherchercontactparNom(std::string nom)
 
 std::list<Contact> Basededonnee::recherchercontactparDates(std::string date, std::string date2)
 {
-
+    Contact C;
     std::list<Contact>  lc;
     if(b.open() )
     {
@@ -348,7 +364,6 @@ std::list<Contact> Basededonnee::recherchercontactparDates(std::string date, std
          {
           while(query.next())
           {
-             Contact C;
              QString r=query.value(0).toString();
              C.setNom(r.toStdString());
              r=query.value(1).toString();
@@ -374,7 +389,7 @@ std::list<Contact> Basededonnee::recherchercontactparDates(std::string date, std
 
 }
 
-std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string date, std::string date2,bool parNom,bool parDate )
+std::list<Contact> Basededonnee::recherchecontact(std::string nom, std::string date, std::string date2,bool parNom,bool parDate )
 {
 
  if(parNom&&parDate)
@@ -394,9 +409,9 @@ std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string 
               return recherchercontactparDates(date,date2);}
  }
 }
-std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(string date ,string date2)
+std::list<Interaction> Basededonnee::recherchelisteinterractionpardate(string date ,string date2)
 {
-   std::list<Interaction*> LI;
+   std::list<Interaction> LI;
 
    for(auto &it:recherchercontactparDates(date,date2))
   {
@@ -433,7 +448,7 @@ std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(string d
   }
     return LI;
 }
-std::list<Interaction*> Basededonnee::recherchelisteinterractionparContact(Contact C)
+std::list<Interaction> Basededonnee::recherchelisteinterractionparContact(Contact C)
 {
     std::list<Interaction> LC;
     QSqlQuery query ;
@@ -609,7 +624,7 @@ int Basededonnee::Nombredecontact()
 
 
 
-*/
+
 
 
 
