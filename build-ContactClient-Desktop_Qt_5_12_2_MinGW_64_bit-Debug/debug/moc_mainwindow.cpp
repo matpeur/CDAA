@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[11];
-    char stringdata0[185];
+    QByteArrayData data[13];
+    char stringdata0[208];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,14 +41,17 @@ QT_MOC_LITERAL(6, 101, 20), // "selectionTypeContact"
 QT_MOC_LITERAL(7, 122, 24), // "selectionTypeInteraction"
 QT_MOC_LITERAL(8, 147, 17), // "selectionTypeTodo"
 QT_MOC_LITERAL(9, 165, 7), // "affiche"
-QT_MOC_LITERAL(10, 173, 11) // "QModelIndex"
+QT_MOC_LITERAL(10, 173, 11), // "QModelIndex"
+QT_MOC_LITERAL(11, 185, 13), // "effaceContact"
+QT_MOC_LITERAL(12, 199, 8) // "Contact*"
 
     },
     "MainWindow\0on_actionNouveau_Contact_triggered\0"
     "\0on_actionNouvelle_Interaction_triggered\0"
     "selection\0tri\0selectionTypeContact\0"
     "selectionTypeInteraction\0selectionTypeTodo\0"
-    "affiche\0QModelIndex"
+    "affiche\0QModelIndex\0effaceContact\0"
+    "Contact*"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +61,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,14 +69,15 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x08 /* Private */,
-       3,    0,   55,    2, 0x08 /* Private */,
-       4,    1,   56,    2, 0x08 /* Private */,
-       5,    1,   59,    2, 0x08 /* Private */,
-       6,    0,   62,    2, 0x08 /* Private */,
-       7,    0,   63,    2, 0x08 /* Private */,
-       8,    0,   64,    2, 0x08 /* Private */,
-       9,    1,   65,    2, 0x08 /* Private */,
+       1,    0,   59,    2, 0x08 /* Private */,
+       3,    0,   60,    2, 0x08 /* Private */,
+       4,    1,   61,    2, 0x08 /* Private */,
+       5,    1,   64,    2, 0x08 /* Private */,
+       6,    0,   67,    2, 0x08 /* Private */,
+       7,    0,   68,    2, 0x08 /* Private */,
+       8,    0,   69,    2, 0x08 /* Private */,
+       9,    1,   70,    2, 0x08 /* Private */,
+      11,    1,   73,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -84,6 +88,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 10,    2,
+    QMetaType::Void, 0x80000000 | 12,    2,
 
        0        // eod
 };
@@ -102,6 +107,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->selectionTypeInteraction(); break;
         case 6: _t->selectionTypeTodo(); break;
         case 7: _t->affiche((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 8: _t->effaceContact((*reinterpret_cast< Contact*(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -136,13 +142,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

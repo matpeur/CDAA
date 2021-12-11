@@ -1655,6 +1655,25 @@ debug/mainwindow.o: ../ContactClient/mainwindow.cpp ../ContactClient/mainwindow.
 		C:/Qt/5.12.2/mingw73_64/include/QtSql/QSqlQuery \
 		C:/Qt/5.12.2/mingw73_64/include/QtSql/qsqlquery.h \
 		ui_mainwindow.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtCore/QVariant \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QAction \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qaction.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QApplication \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qapplication.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtCore/qeventloop.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qguiapplication.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qinputmethod.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QMenu \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qmenu.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QMenuBar \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qmenubar.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QStatusBar \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qstatusbar.h \
 		../ContactClient/fenetrecontact.h \
 		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QDialog \
 		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qdialog.h \
@@ -1662,9 +1681,7 @@ debug/mainwindow.o: ../ContactClient/mainwindow.cpp ../ContactClient/mainwindow.
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QVector \
 		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QTextEdit \
 		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qtextedit.h \
-		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextdocument.h \
-		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QPushButton \
-		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qpushbutton.h
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextdocument.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\ContactClient\mainwindow.cpp
 
 debug/todo.o: ../ContactClient/todo.cpp ../ContactClient/todo.h \
