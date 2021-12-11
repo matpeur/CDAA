@@ -81,11 +81,6 @@ FenetreContact::~FenetreContact()
     delete IW;
 }
 
-std::string FenetreContact::getText()
-{
-    return "du texte de la fenetre";
-}
-
 QString FenetreContact::getNom() const
 {
     return nom;
@@ -110,7 +105,12 @@ QString FenetreContact::getMail() const
 {
     return mail;
 }
-
+/**
+ * @brief reprise de la fonction éponyme dans FenetreContact. Compare la valeur donnée au modèle d'une adresse e-mail en vérifiant l'absence de motifs interdits
+ * @param value Adresse Mail à vérifier
+ * @author BELLEGUEULLE Mathieu
+ * @date decembre 2021
+ */
 void FenetreContact::setMail(const QString &value)
 {
     if(!value.contains('@')){throw "Adresse mail non valide : absence de @";}
@@ -144,7 +144,12 @@ void FenetreContact::setEntreprise(const QString &value)
 {
     entreprise = value;
 }
-
+/**
+ * @brief Compare la valeur donnée au modèle d'un numéro de téléphone par une expression régulière.
+ * @param value Numéro de téléphone à vérifier
+ * @author BELLEGUEULLE Mathieu
+ * @date decembre 2021
+ */
 void FenetreContact::setTel(const QString &value)
 {
     QRegExp eval("^\\+{0,1}(\\d|\\-|\\s|\\((\\d|\\-?)*\\))*$");

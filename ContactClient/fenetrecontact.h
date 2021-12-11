@@ -17,7 +17,6 @@ class FenetreContact : public QDialog
         FenetreContact(QWidget *parent = nullptr);
         ~FenetreContact();
 
-        std::string getText();
         QString getNom() const;
         void setNom(const QString &value);
 

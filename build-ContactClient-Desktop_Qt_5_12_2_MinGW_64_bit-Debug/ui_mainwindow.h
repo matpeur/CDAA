@@ -13,12 +13,12 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,7 +30,8 @@ public:
     QAction *actionNouvelle_Interaction;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
-    QTableView *tableView;
+    QLineEdit *lineEdit;
+    QPushButton *pushButton;
     QMenuBar *menubar;
     QMenu *menuAjouter;
     QStatusBar *statusbar;
@@ -48,10 +49,15 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        tableView = new QTableView(centralwidget);
-        tableView->setObjectName(QString::fromUtf8("tableView"));
+        lineEdit = new QLineEdit(centralwidget);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
 
-        horizontalLayout->addWidget(tableView);
+        horizontalLayout->addWidget(lineEdit);
+
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        horizontalLayout->addWidget(pushButton);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -78,6 +84,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         actionNouveau_Contact->setText(QApplication::translate("MainWindow", "&Nouveau Contact", nullptr));
         actionNouvelle_Interaction->setText(QApplication::translate("MainWindow", "Nouvelle &Interaction", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
         menuAjouter->setTitle(QApplication::translate("MainWindow", "A&jouter", nullptr));
     } // retranslateUi
 
