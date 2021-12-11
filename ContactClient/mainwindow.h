@@ -43,6 +43,7 @@ private:
     GestionContact *gc;
     Basededonnee bd;
 
+    QLabel *LNbContact;
     QLineEdit *BarreRecherche;
     QComboBox *cBSelectionTri;
     QComboBox *cBSelectionContact;

@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
         tabWidgetVisu = new QTabWidget();
     HL->addWidget(tabWidgetVisu);
         QVBoxLayout *VL= new QVBoxLayout();
+            LNbContact = new QLabel(QString::fromStdString("Il y a "+to_string(bd.Nombredecontact())+" contacts dans la base de donnée"));
             BarreRecherche = new QLineEdit;
             BarreRecherche->setPlaceholderText("Recherche");
         VL->addWidget(BarreRecherche);
@@ -89,6 +90,8 @@ MainWindow::MainWindow(QWidget *parent)
             ListeSelection->setSelectionMode(QAbstractItemView::SingleSelection);
             modifModel(1);
         VL->addWidget(ListeSelection);
+            QPushButton *BJSON = new QPushButton("Export en json");
+        VL->addWidget(BJSON);
     HL->addLayout(VL);
 
     QWidget *cw = new QWidget();
