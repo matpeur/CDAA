@@ -15,7 +15,7 @@ VisuInteractionWidget::VisuInteractionWidget(Interaction * i,QWidget *parent) : 
         CBTD = new QComboBox();
         for (auto& it : i->getGestionToDo().getToDoList())
         {
-            CBTD->addItem(QString::fromStdString(it.getContenu()));
+            CBTD->addItem(QString::fromStdString(it->getContenu()));
         }
 
 }

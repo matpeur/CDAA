@@ -26,8 +26,8 @@ public:
     GestionToDo getGestionToDo() const;
     void setContact(Contact* const);
     bool operator==(Interaction  );
-    void addToDo(toDo &);
-    void removeToDo(toDo &);
+    void addToDo(toDo *);
+    void removeToDo(toDo *);
     friend std::ostream& operator<<(std::ostream &, const Interaction);
     void setID(int i);
     int  getID();

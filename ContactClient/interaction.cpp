@@ -50,7 +50,7 @@ void Interaction::setContenu(std::string  & cont)
                 s=buffer;
                 buffer ="";
             }
-             toDo t (this, s);
+             toDo *t = new toDo(this, s);
 
             addToDo(t);
         }
@@ -74,8 +74,8 @@ Contact* Interaction::getContact() const{return this->contact;}
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation des methodes addToo et removeTodo*/
-void Interaction::addToDo(toDo &td){gTD.addToDo(td);}
-void Interaction::removeToDo(toDo & td){ gTD.removeToDo(td);}
+void Interaction::addToDo(toDo *td){gTD.addToDo(td);}
+void Interaction::removeToDo(toDo * td){ gTD.removeToDo(td);}
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021

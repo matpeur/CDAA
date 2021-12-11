@@ -279,11 +279,11 @@ void  Basededonnee::getAllContact()
                                    while(query2.next())
                                    {
                                        std::string s=query2.value(1).toString().toStdString();
-                                       toDo t ;
-                                       t.setContenu(s);
-                                       t.setOwner(I);
-                                       t.setID(query2.value(2).toInt());
-                                       t.setDate(query2.value(3).toString().toStdString());
+                                       toDo *t = new toDo();
+                                       t->setContenu(s);
+                                       t->setOwner(I);
+                                       t->setID(query2.value(2).toInt());
+                                       t->setDate(query2.value(3).toString().toStdString());
                                        I->addToDo(t);
 
                                    }
