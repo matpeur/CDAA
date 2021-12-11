@@ -9,7 +9,7 @@ GestionToDo::GestionToDo(){}
  * @date octobre 2021
  * @brief implémentation de la methode addTodo */
 
-void GestionToDo::addToDo(toDo  td)
+void GestionToDo::addToDo(toDo  *td)
 {
     ltodo.push_back(td);
 }
@@ -20,10 +20,10 @@ void GestionToDo::addToDo(toDo  td)
 
 void GestionToDo::createtodO(Interaction * I, std::string s)
 {
-  toDo t(I,s);
+  toDo *t = new toDo(I,s);
   this->ltodo.push_back(t);
 }
-void GestionToDo::removeToDo(toDo & td)
+void GestionToDo::removeToDo(toDo * td)
 {
 
     for (auto it: ltodo )
@@ -40,16 +40,14 @@ void GestionToDo::removeToDo(toDo & td)
  * @brief implémentation de la methode removealltodo*/
 void GestionToDo::removeAllToDo()
 {
-    for (auto it : ltodo)
-    {
-    }
+
     ltodo.clear();
 }
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation des accesseurs*/
-std::list<toDo> GestionToDo::getToDoList() const
+std::list<toDo*> GestionToDo::getToDoList() const
 {
     return ltodo;
 }
@@ -64,7 +62,7 @@ std::string GestionToDo::toString()
 {
     std::string result = "";
     for (auto it : ltodo)
-        result += it.toString()+"\n";
+        result += it->toString()+"\n";
     return result;
 
 }
@@ -76,7 +74,7 @@ toDo* GestionToDo::get( int t)
         {
              ++it;
         }
-        return &( *it) ;
+        return *it ;
 
 
 }
