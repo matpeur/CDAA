@@ -17,7 +17,7 @@ public:
     ~GestionContact();
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string,std::string);
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string);
-    void addContact(Contact c);
+    void addContact(Contact *);
     void removeContact(Contact);
 
     std::list<Contact*> getContactList() const;

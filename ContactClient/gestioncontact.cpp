@@ -39,9 +39,9 @@ void GestionContact::createContact(std:: string nom, std::string prenom,  std::s
 /**
   *
   */
-void GestionContact::addContact(Contact c)
+void GestionContact::addContact(Contact *c)
 {
-    lcontact.push_back(&c);
+    lcontact.push_back(c);
     std::cout<<"fghjkl";
 }
 /**
