@@ -53,9 +53,8 @@ VisuContactWidget::VisuContactWidget(Contact *c,QWidget *parent) : QWidget(paren
 
     try {
         IW = new ImageWidget(this,QString::fromStdString(c->getPhoto()));
+        VL1->addWidget(IW);
     } catch (const char* s) {Erreur->setText(s);}
-
-    VL1->addWidget(IW);
 
     QPushButton * BParcourir = new QPushButton("Parcourir");
     BParcourir->setEnabled(false);
