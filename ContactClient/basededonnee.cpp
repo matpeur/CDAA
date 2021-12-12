@@ -114,7 +114,7 @@ void Basededonnee::AjoutContact(Contact* C)
                query1.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,id)" "VALUES(:A,:B,:C,:D)");
                query1.bindValue(":A",getIDContact());
                query1.bindValue(":B",QString::fromStdString(C->getGestionInteraction().get(i)->getContenu()));
-               query1.bindValue(":C",QString::fromStdString(C->getDate()));
+               query1.bindValue(":C",QString::fromStdString(C->getGestionInteraction().get(i)->getDate()));
                query1.bindValue(":D",getIDInteraction());
                if(!query1.exec()){qDebug()<<"error";}
 
@@ -130,7 +130,7 @@ void Basededonnee::AjoutContact(Contact* C)
                       query2.bindValue(":A",getIDInteraction());
                       query2.bindValue(":B",QString::fromStdString(C->getGestionInteraction().get(i)->getGestionToDo().get(j)->getContenu()));
                       query2.bindValue(":C",getIDTodo());
-                      query2.bindValue(":D",QString::fromStdString(C->getGestionInteraction().get(i)->getGestionToDo().get(j)->datestring));
+                      query2.bindValue(":D",QString::fromStdString(C->getGestionInteraction().get(i)->getGestionToDo().get(j)->getDate()));
                       setIDTodo(getIDTodo()+1);//on incremente l'id des todos
                        if(!query2.exec())
                           qDebug()<<"erruer";
@@ -146,48 +146,80 @@ void Basededonnee::AjoutContact(Contact* C)
   }
 
 }
+/**
+ * @brief Ajoute une interaction à la base de donnée
+ * @param Inter
+ * @author BELLEGUEULLE Mathieu
+ */
+void Basededonnee::AjoutInter(Interaction * Inter)
+{
+    if(b.open())
+    {
+    //on ajoute en un premier toutes les données de l'interaction
+      QSqlQuery query;
+      query.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,id)" "VALUES(:A,:B,:C,:D)");
+      query.bindValue(":A",Inter->getContact()->getId());
+      query.bindValue(":B",QString::fromStdString(Inter->getContenu()));
+      query.bindValue(":C",QString::fromStdString(Inter->getDate()));
+      query.bindValue(":D",getIDInteraction());
+      if(!query.exec())
+      {
+          qDebug()<<"erreur lors de la  requete1";
 
+      }
+      else
+      {
+         // on test si elle a une liste de todos si oui on les ajoute dans la table todo
+        if(!Inter->getGestionToDo().getToDoList().empty())
+        {
+            for(int i=0;i<Inter->getGestionToDo().getSize();i++)
+             {
+                QSqlQuery query2;
+                query2.prepare("INSERT INTO todo(idINTERAC,contenu,id,dates)" "VALUES(:A,:B,:C,:D)");
+                query2.bindValue(":A",getIDInteraction());
+                query2.bindValue(":B",QString::fromStdString(Inter->getGestionToDo().get(i)->getContenu()));
+                query2.bindValue(":C",getIDTodo());
+                query2.bindValue(":D",QString::fromStdString(Inter->getGestionToDo().get(i)->getDate()));
+                setIDTodo(getIDTodo()+1);//on incremente l'id des todos
+                 if(!query2.exec())
+                    qDebug()<<"erreur";
+             }
+         }
+       }
+    }
+    setIDInteraction(getIDInteraction()+1);
+}
 
-
-void Basededonnee::SupprimeContact(Contact C)
+void Basededonnee::SupprimeContact(Contact *C)
 {
     if(b.open())
     {
      QSqlQuery query;
-     query.prepare("DELETE FROM contact WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and dates=:G");
-     query.bindValue(":A",QString::fromStdString(C.getNom()));
-     query.bindValue(":B",QString::fromStdString(C.getPrenom()));
-     query.bindValue(":C",QString::fromStdString(C.getEntreprise()));
-     query.bindValue(":D",QString::fromStdString(C.getMail()));
-     query.bindValue(":E",QString::fromStdString(C.getTelephone()));
-     query.bindValue(":F",QString::fromStdString(C.getPhoto()));
-     query.bindValue(":G",QString::fromStdString(C.getDate()));
+     query.prepare("DELETE FROM contact WHERE id= :A");
+     query.bindValue(":A",QString::number(C->getId()));
 
      if(query.exec())
      {
-         if(!C.getGestionInteraction().getInteractionList().empty())
+         if(!C->getGestionInteraction().getInteractionList().empty())
          {
-             for(int i=0;i<C.getGestionInteraction().getSize();i++)
+             for(int i=0;i<C->getGestionInteraction().getSize();i++)
               {
-                                QSqlQuery query1;
-                                query1.prepare("DELETE FROM interraction WHERE id=:A and contenu=:B and dates=:C");
-                                query1.bindValue(":A",C.getId());
-                                query1.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i)->getContenu()));
-                                query1.bindValue(":C",QString::fromStdString(C.getDate()));
-                                if(query1.exec())
-                                 {
-                                   if(!C.getGestionInteraction().get(i)->getGestionToDo().getToDoList().empty())
-                                   {
-                                      for (int j=0;j<C.getGestionInteraction().get(i)->getGestionToDo().getSize();j++)
-                                      {
-                                       QSqlQuery query2;
-                                       query2.prepare("DELETE FROM todo WHERE id=:A and contenu=:B");
-                                       query2.bindValue(":A",C.getId());
-                                       query2.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i)->getGestionToDo().get(j)->getContenu()));
-                                       if(!query2.exec()){qDebug()<<"erreur";}else {C.setId(C.getId()+1);}//on incremente l'id
-                                      }
-                                   }
-                                  }
+                QSqlQuery query1;
+                query1.prepare("DELETE FROM interraction WHERE idContact=:A");
+                query1.bindValue(":A",C->getId());
+                if(query1.exec())
+                {
+                     if(!C->getGestionInteraction().get(i)->getGestionToDo().getToDoList().empty())
+                     {
+                        for (int j=0;j<C->getGestionInteraction().get(i)->getGestionToDo().getSize();j++)
+                        {
+                        QSqlQuery query2;
+                        query2.prepare("DELETE FROM todo WHERE idContact=:A");
+                        query2.bindValue(":A",C->getId());
+                        if(!query2.exec()){qDebug()<<"erreur";}else {C->setId(C->getId()+1);}//on incremente l'id
+                        }
+                     }
+                }
              }
          }
 
@@ -202,30 +234,23 @@ void Basededonnee::SupprimeContact(Contact C)
 
 
 
-void Basededonnee::ModifiContact(Contact old, Contact C)
+void Basededonnee::ModifiContact(Contact *C)
 {
 
 
     QSqlQuery query ;
 
-    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g,id=:h WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and date=:G and id=:H"  ) ;
-    query.bindValue(":A",QString::fromStdString(C.getNom()));
-    query.bindValue(":B",QString::fromStdString(C.getPrenom()));
-    query.bindValue(":C",QString::fromStdString(C.getEntreprise()));
-    query.bindValue(":D",QString::fromStdString(C.getMail()));
-    query.bindValue(":E",QString::fromStdString(C.getTelephone()));
-    query.bindValue(":F",QString::fromStdString(C.getPhoto()));
-    query.bindValue(":G",QString::fromStdString(C.getDate()));
-    query.bindValue(":H",C.getId());
+    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g WHERE id=:A"  ) ;
+    query.bindValue(":A",QString::number(C->getId()));
 
-    query.bindValue(":a",QString::fromStdString(old.getNom()));
-    query.bindValue(":b",QString::fromStdString(old.getPrenom()));
-    query.bindValue(":c",QString::fromStdString(old.getEntreprise()));
-    query.bindValue(":d",QString::fromStdString(old.getMail()));
-    query.bindValue(":e",QString::fromStdString(old.getTelephone()));
-    query.bindValue(":f",QString::fromStdString(old.getPhoto()));
-    query.bindValue(":g",QString::fromStdString(old.getDate()));
-    query.bindValue(":h",C.getId());
+
+    query.bindValue(":a",QString::fromStdString(C->getNom()));
+    query.bindValue(":b",QString::fromStdString(C->getPrenom()));
+    query.bindValue(":c",QString::fromStdString(C->getEntreprise()));
+    query.bindValue(":d",QString::fromStdString(C->getMail()));
+    query.bindValue(":e",QString::fromStdString(C->getTelephone()));
+    query.bindValue(":f",QString::fromStdString(C->getPhoto()));
+    query.bindValue(":g",QString::fromStdString(C->getDate()));
 
     if(!query.exec())
     {
@@ -598,65 +623,46 @@ int Basededonnee::Nombredecontact()
   return row ;
 }
 
-
-/*
+/**
+ * @brief sauvegarde de la base de onnée
+ * @author BELLEGUEULLE Mathieu
+ * @date Décembre 2021
+ */
 void Basededonnee::sauvegarder()
 {
 
-  for(auto &it:gc.getContactList())
+  GestionContact gctotal = gc; //liste actuel
+  getAllContact(); //gc contient la base de donnée
+  for(auto &it:gctotal.getContactList())
   {
-      QSqlQuery query;
-      query.prepare("select * from contact where id=:a");
-      query.bindValue(":a",it->getId());
-      if(query.exec())
+      if(it->getId()!=-1)
       {
-          Contact *C = new Contact(query.value(0).toString().toStdString(),
-                    query.value(1).toString().toStdString(),
-                    query.value(2).toString().toStdString(),
-                    query.value(3).toString().toStdString(),
-                    query.value(4).toString().toStdString(),
-                    query.value(5).toString().toStdString(),
-                    query.value(6).toString().toStdString());
-       if(it!=C)
-       {   SupprimeContact(*C);
-           ModifiContact(*C,*it);
-       }
+           Contact * test = gc.getContactByID(it->getId());
+           if(test==nullptr)
+           {
+                  AjoutContact(it);
+                  gctotal.removeContact(*it);
+           }
+          else
+          {
+             if(!(it==test))
+                 ModifiContact(it);
+             if(it->getGestionInteraction().getSize()!=0)
+                for(auto inter : it->getGestionInteraction().getInteractionList())
+                    if (inter->getID()==-1)
+                        AjoutInter(inter);
 
+          }
       }
+      //identifiant inconnu
       else
       {
-         AjoutContact(it);
+          AjoutContact(it);
+          gc.removeContact(*it);
       }
-
-
-
-
-
-
-
   }
-
-
-
-
-
-
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  if(gc.getSize()>0)
+    for (auto it:gc.getContactList())
+        SupprimeContact(it);
+}
 

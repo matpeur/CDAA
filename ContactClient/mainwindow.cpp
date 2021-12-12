@@ -13,14 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //initgc
     gc = &bd.gc;
-            /*new GestionContact();
-    gc->createContact("Barnier", "Michel", "LR", "0625457852",":/anonyme.jpg","MB@LR.fr");
-    gc->getContactList().front()->setId(2);
-
-
-    gc->createContact("Pécresse","Valérie", "LR", "0652147896", ":/anonyme.jpg","VP@LR.fr");
-    gc->getContactList().back()->setId(1);
-            */
     //init UI
     QHBoxLayout *HL= new QHBoxLayout();
         tabWidgetVisu = new QTabWidget();
@@ -118,7 +110,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/**
+ * @brief accesseur en écriture de gc
+ * @param value
+ */
 void MainWindow::setGc(GestionContact *value)
 {
     gc = value;
@@ -129,6 +124,9 @@ void MainWindow::setGc(GestionContact *value)
     ajoutDonneesContact();
 }
 
+/**
+ * @brief Affiche une boîte de dialogue pour ajouter un contact
+ */
 void MainWindow::on_actionNouveau_Contact_triggered()
 {
     FenetreContact* fc = new FenetreContact();
@@ -144,6 +142,9 @@ void MainWindow::on_actionNouveau_Contact_triggered()
         }
     }
 }
+/**
+ * @brief Affiche une boîte de dialogue pour ajouter une interaction
+ */
 
 void MainWindow::on_actionNouvelle_Interaction_triggered()
 {
@@ -151,6 +152,10 @@ void MainWindow::on_actionNouvelle_Interaction_triggered()
     fai->exec();
 }
 
+
+/**
+ * @brief Rempli le model pour
+ */
 void MainWindow::ajoutDonneesContact()
 {
     if(checkRechAdvDate->isChecked())
@@ -425,3 +430,4 @@ void MainWindow::afficheTabTodo(toDo* t)
     tabWidgetVisu->addTab(VTW, "Tâche");
     tabWidgetVisu->setCurrentIndex(2);
 }
+

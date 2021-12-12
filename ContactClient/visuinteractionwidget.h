@@ -9,7 +9,11 @@
 #include <QComboBox>
 #include <QTextEdit>
 #include "contact.h"
-
+/**
+ * @brief Classe VisuInteractionWidget, widget spécialisé pour la visualisation des intéractions
+ * @author BELEGUEULLE Mathieu
+ * @date decembre 2021
+ */
 class VisuInteractionWidget : public QWidget
 {
     Q_OBJECT

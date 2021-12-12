@@ -22,7 +22,10 @@ VisuInteractionWidget::VisuInteractionWidget(Interaction * i,QWidget *parent) : 
     this->setLayout(VL);
     connect(CBTD, SIGNAL(currentIndexChanged(int)), this, SLOT(envoierequete(int)));
 }
-
+/**
+ * @brief EnvoieRequete signal pour afficher le todo d'indice i
+ * @param indice du todo à afficher
+ */
 void VisuInteractionWidget::envoierequete(int i)
 {
     emit afficheToDo(Vtodo[i]);

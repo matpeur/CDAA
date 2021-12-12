@@ -13,8 +13,9 @@ public:
     Basededonnee();
     void Connexion();
     void AjoutContact(Contact *);
-    void SupprimeContact(Contact);
-    void ModifiContact(Contact,Contact);
+    void AjoutInter(Interaction *);
+    void SupprimeContact(Contact*);
+    void ModifiContact(Contact*);
     void getAllContact();
     std::list<Contact*>  recherchercontactparDates(std::string ,std::string );
     std::list<Contact*>recherchercontactparNom(std::string );

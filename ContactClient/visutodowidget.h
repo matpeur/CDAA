@@ -6,7 +6,11 @@
 #include <QDateEdit>
 #include <QTextEdit>
 #include "contact.h"
-
+/**
+ * @brief Classe VisuTodoWidget, widget spécialisé pour la visualisation des todos
+ * @author BELEGUEULLE Mathieu
+ * @date decembre 2021
+ */
 class VisuTodoWidget : public QWidget
 {
     Q_OBJECT
