@@ -305,7 +305,7 @@ void Basededonnee::getAllContact()
 
 }
 
-std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string &nom)
+std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string nom)
 {
 
 
@@ -323,7 +323,7 @@ std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string &nom)
 }
 
 
-std::list<Contact*> Basededonnee::recherchercontactparDates(std::string &date, std::string &date2)
+std::list<Contact*> Basededonnee::recherchercontactparDates(std::string date, std::string date2)
 {
     std::list<Contact*> LC;
     bool drapeau=true;
@@ -365,7 +365,7 @@ std::list<Contact*> Basededonnee::recherchercontactparDates(std::string &date, s
 
 }
 
-std::list<Contact*> Basededonnee::recherchecontact(std::string &nom, std::string & date, std::string & date2,bool parNom,bool parDate )
+std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string  date, std::string  date2,bool parNom,bool parDate )
 {
 
   if(parNom&&parDate)
@@ -404,7 +404,7 @@ std::list<Contact*> Basededonnee::recherchecontact(std::string &nom, std::string
 
 }
 
-std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(int idCONTACT ,string &date ,string &date2)
+std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(int idCONTACT ,string date ,string date2)
 {
 
     std::list<Interaction*> LI;
@@ -449,7 +449,7 @@ std::list<Interaction*> Basededonnee::recherchelisteinterractionparContact(int i
     }
     return  LI;
 }
-std::list<Interaction*> Basededonnee::rechercheInterraction(std::string &date, std::string &date2,int idContact, bool parDate, bool parCONTACT)
+std::list<Interaction*> Basededonnee::rechercheInterraction(std::string date, std::string date2,int idContact, bool parDate, bool parCONTACT)
 {
 
     if(parCONTACT&&parDate)
@@ -484,7 +484,7 @@ std::list<Interaction*> Basededonnee::rechercheInterraction(std::string &date, s
     }
 
 }
-std::list<toDo*> Basededonnee::recherchelistetodopardate(int idCONTACT,string &date ,string &date2)
+std::list<toDo*> Basededonnee::recherchelistetodopardate(int idCONTACT,string date ,string date2)
 {
     std::list<toDo*> LT;
 
@@ -543,7 +543,7 @@ std::list<toDo*> Basededonnee::recherchelistetodopaContact(int idCONTACT)
 
 }
 
-std::list<toDo*> Basededonnee::recherchelistetodo(std::string &date, std::string &date2,int idCONTACT,bool parDATE,bool parCONTACT)
+std::list<toDo*> Basededonnee::recherchelistetodo(std::string date, std::string date2,int idCONTACT,bool parDATE,bool parCONTACT)
 {
     list<toDo*> lc;
 

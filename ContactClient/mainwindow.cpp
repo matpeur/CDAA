@@ -153,7 +153,8 @@ void MainWindow::ajoutDonneesContact()
 {
     if(checkRechAdvDate->isChecked())
     {
-        std::list<Contact*> liste = bd.recherchecontact("",dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+        std::string s = "";
+        std::list<Contact*> liste = bd.recherchecontact(s,dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
                                                        dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
                                                        false, true);
 
@@ -247,7 +248,7 @@ void MainWindow::ajoutDonneesTodo()
     int i = listeContact[cBSelectionContact->currentIndex()]->getId();
     std::list<toDo*> liste = bd.recherchelistetodo(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
                                                    dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                   i,-1, checkRechAdvDate->isChecked(),
+                                                   i, checkRechAdvDate->isChecked(),
                                                    checkRechAdvContact->isChecked());
 
 
