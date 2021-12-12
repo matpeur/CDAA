@@ -12,13 +12,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     //initgc
-    gc = new GestionContact();
+    gc = &bd.gc;
+            /*new GestionContact();
     gc->createContact("Barnier", "Michel", "LR", "0625457852",":/anonyme.jpg","MB@LR.fr");
     gc->getContactList().front()->setId(2);
 
 
     gc->createContact("Pécresse","Valérie", "LR", "0652147896", ":/anonyme.jpg","VP@LR.fr");
     gc->getContactList().back()->setId(1);
+            */
     //init UI
     QHBoxLayout *HL= new QHBoxLayout();
         tabWidgetVisu = new QTabWidget();
@@ -201,91 +203,99 @@ void MainWindow::ajoutDonneesContact()
 
 void MainWindow::ajoutDonneesInteraction()
 {
-    int i = listeContact[cBSelectionContact->currentIndex()]->getId();
-    std::list<Interaction*> liste = bd.rechercheInterraction(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                   dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                   i, checkRechAdvDate->isChecked(),
-                                                   checkRechAdvContact->isChecked());
+    if (checkRechAdvDate->isChecked()||checkRechAdvContact->isChecked())
+    {
 
 
-    int index =0;
-    for(auto it : liste)
-    {
-        QStandardItem *item0 = new QStandardItem(QString::number(it->getID()));
-        model->setItem(i, 0, item0);
-        QStandardItem *item = new QStandardItem(QString::number(it->getContact()->getId()));
-        model->setItem(i, 1, item);
-        QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getContenu()));
-        model->setItem(i,2,item1);
-        QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getDate()));
-        model->setItem(i,3,item2);
-        index++;
-    }
-    //avec bdd
-    /* sans base de donnée
-    int i =0;
-    for ( auto it : gc->getContactList())
-    {
-        for (auto itt : it->getGestionInteraction().getInteractionList() )
+        int i = listeContact[cBSelectionContact->currentIndex()]->getId();
+        std::list<Interaction*> liste = bd.rechercheInterraction(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+                                                       dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+                                                       i, checkRechAdvDate->isChecked(),
+                                                       checkRechAdvContact->isChecked());
+
+
+        int index =0;
+        for(auto it : liste)
         {
-            QStandardItem *item0 = new QStandardItem(QString::number(itt->getID()));
+            QStandardItem *item0 = new QStandardItem(QString::number(it->getID()));
             model->setItem(i, 0, item0);
-            QStandardItem *item = new QStandardItem(QString::number(it->getId()));
+            QStandardItem *item = new QStandardItem(QString::number(it->getContact()->getId()));
             model->setItem(i, 1, item);
-            QStandardItem *item1 = new QStandardItem(QString::fromStdString(itt->getContenu()));
+            QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getContenu()));
             model->setItem(i,2,item1);
-            QStandardItem *item2 = new QStandardItem(QString::fromStdString(itt->getDate()));
+            QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getDate()));
             model->setItem(i,3,item2);
-            i++;
+            index++;
         }
     }
-    */
-}
-
-void MainWindow::ajoutDonneesTodo()
-{
-    //avec bdd
-    int i = listeContact[cBSelectionContact->currentIndex()]->getId();
-    std::list<toDo*> liste = bd.recherchelistetodo(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                   dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                   i, checkRechAdvDate->isChecked(),
-                                                   checkRechAdvContact->isChecked());
-
-
-    int index =0;
-    for(auto it : liste)
+    else
     {
-        QStandardItem *item0 = new QStandardItem(QString::number(it->getID()));
-        model->setItem(i, 0, item0);
-        QStandardItem *item = new QStandardItem(QString::number(it->getOwner()->getID()));
-        model->setItem(i, 1, item);
-        QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getContenu()));
-        model->setItem(i,2,item1);
-        QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getDate()));
-        model->setItem(i,3,item2);
-        index++;
-    }
-    /* sans bdd
-    int i=0;
-    for ( auto it : gc->getContactList())
-    {
-        for (auto itt : it->getGestionInteraction().getInteractionList() )
+        int i =0;
+        for ( auto it : gc->getContactList())
         {
-            for(auto ittt : itt->getGestionToDo().getToDoList())
+            for (auto itt : it->getGestionInteraction().getInteractionList() )
             {
-                QStandardItem *item0 = new QStandardItem(QString::number(ittt->getID()));
+                QStandardItem *item0 = new QStandardItem(QString::number(itt->getID()));
                 model->setItem(i, 0, item0);
-                QStandardItem *item = new QStandardItem(QString::number(itt->getID()));
+                QStandardItem *item = new QStandardItem(QString::number(it->getId()));
                 model->setItem(i, 1, item);
-                QStandardItem *item1 = new QStandardItem(QString::fromStdString(ittt->getContenu()));
+                QStandardItem *item1 = new QStandardItem(QString::fromStdString(itt->getContenu()));
                 model->setItem(i,2,item1);
-                QStandardItem *item2 = new QStandardItem(QString::fromStdString(ittt->getDate()));
+                QStandardItem *item2 = new QStandardItem(QString::fromStdString(itt->getDate()));
                 model->setItem(i,3,item2);
                 i++;
             }
         }
     }
-    */
+}
+
+void MainWindow::ajoutDonneesTodo()
+{
+    if(checkRechAdvDate->isChecked()||checkRechAdvContact->isChecked())
+    {
+        int i = listeContact[cBSelectionContact->currentIndex()]->getId();
+        std::list<toDo*> liste = bd.recherchelistetodo(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+                                                       dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+                                                       i, checkRechAdvDate->isChecked(),
+                                                       checkRechAdvContact->isChecked());
+
+
+        int index =0;
+        for(auto it : liste)
+        {
+            QStandardItem *item0 = new QStandardItem(QString::number(it->getID()));
+            model->setItem(i, 0, item0);
+            QStandardItem *item = new QStandardItem(QString::number(it->getOwner()->getID()));
+            model->setItem(i, 1, item);
+            QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getContenu()));
+            model->setItem(i,2,item1);
+            QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getDate()));
+            model->setItem(i,3,item2);
+            index++;
+        }
+    }
+    else
+    {
+        int i=0;
+        for ( auto it : gc->getContactList())
+        {
+            for (auto itt : it->getGestionInteraction().getInteractionList() )
+            {
+                for(auto ittt : itt->getGestionToDo().getToDoList())
+                {
+                    QStandardItem *item0 = new QStandardItem(QString::number(ittt->getID()));
+                    model->setItem(i, 0, item0);
+                    QStandardItem *item = new QStandardItem(QString::number(itt->getID()));
+                    model->setItem(i, 1, item);
+                    QStandardItem *item1 = new QStandardItem(QString::fromStdString(ittt->getContenu()));
+                    model->setItem(i,2,item1);
+                    QStandardItem *item2 = new QStandardItem(QString::fromStdString(ittt->getDate()));
+                    model->setItem(i,3,item2);
+                    i++;
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::selection(QString texte)

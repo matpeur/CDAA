@@ -30,7 +30,6 @@ void GestionInteraction::createInteraction(Contact * C, std::string contenu)
   */
 void GestionInteraction::addInteraction(Interaction* inter)
 {
-    inter->setID(indicecourant());
     linteraction.push_back(inter);
 }
 /**

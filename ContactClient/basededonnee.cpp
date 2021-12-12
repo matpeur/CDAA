@@ -481,6 +481,7 @@ std::list<Interaction*> Basededonnee::rechercheInterraction(std::string date, st
              return recherchelisteinterractionparContact(idContact);
           else {if(parDate)
                  return recherchelisteinterractionpardate(idContact,date,date2);}
+
     }
 
 }

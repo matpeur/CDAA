@@ -20,7 +20,7 @@ int GestionToDo::indicecourant()
  * @brief implémentation de la methode addTodo */
 
 void GestionToDo::addToDo(toDo  *td)
-{  td->setID(indicecourant());
+{
     ltodo.push_back(td);
 }
 
