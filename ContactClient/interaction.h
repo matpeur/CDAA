@@ -33,6 +33,7 @@ public:
     int  getID();
     void setDate(Date *);
     void setContenu(std::string &);
+    void setdatedb(std::string);
 
 private:
     std::string contenu;

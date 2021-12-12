@@ -5,7 +5,12 @@
  * @brief implémentation des consructeurs
  */
 GestionInteraction::GestionInteraction(){}
-
+/**
+ * @author BELLEGUEULLE TRAORE
+ * @date octobre 2021
+ * @brief  retourne l'indice courant +1 de la liste d'interaction
+ */
+int GestionInteraction::indicecourant(){return getSize();}
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
@@ -13,8 +18,11 @@ GestionInteraction::GestionInteraction(){}
 void GestionInteraction::createInteraction(Contact * C, std::string contenu)
 {
     Interaction *i = new Interaction(C, contenu);
+    i->setID(indicecourant());
     linteraction.push_back(i);
 }
+
+
 /**
   *@author BELLEGUEULLE TRAORE
   *@date octobre 2021
@@ -22,7 +30,7 @@ void GestionInteraction::createInteraction(Contact * C, std::string contenu)
   */
 void GestionInteraction::addInteraction(Interaction* inter)
 {
-
+    inter->setID(indicecourant());
     linteraction.push_back(inter);
 }
 /**

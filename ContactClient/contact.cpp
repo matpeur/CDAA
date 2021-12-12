@@ -7,7 +7,7 @@ Contact::Contact(){}
  * @date octobre 2011
  * @brief implémentation du constructeur à parametre
  */
-Contact::Contact(string nom, string prenom,string entreprise,string tel,string cheminPhoto,string dateCreation,string mail)
+Contact::Contact(string nom, string prenom,string entreprise,string mail,string tel,string cheminPhoto,string dateCreation)
 {
     this -> nom=nom;
     this->prenom = prenom;
@@ -23,7 +23,7 @@ Contact::Contact(string nom, string prenom,string entreprise,string tel,string c
  * @date octobre 2021
  * @brief constructeur pour initialiser l'instance
  */
-Contact::Contact(string nom, string prenom,string entreprise,string tel,string cheminPhoto, string mail)
+Contact::Contact(string nom, string prenom,string entreprise,string tel,string cheminPhoto,string mail)
 {
     setNom(nom);
     setPrenom(prenom);

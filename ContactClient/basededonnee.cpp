@@ -12,7 +12,8 @@ Basededonnee::Basededonnee()
 {
      Connexion();
    QSqlQuery query1;
-   query1.prepare("select MAX(id) from contact");
+ if(Nombredecontact()!=0)
+ {  query1.prepare("select MAX(id) from contact");
    if(query1.exec())
    {
        if(query1.next())
@@ -20,7 +21,6 @@ Basededonnee::Basededonnee()
            idContact=query1.value(0).toInt()+1;
        }
    }
-    qDebug()<<idContact;
 
     QSqlQuery query2;
     query2.prepare("select MAX(id) from interraction");
@@ -32,7 +32,6 @@ Basededonnee::Basededonnee()
         }
     }
 
-    qDebug()<<idInteraction;
 
    QSqlQuery query3;
    query3.prepare("select MAX(id) from todo");
@@ -43,9 +42,13 @@ Basededonnee::Basededonnee()
            idTodo=query3.value(0).toInt()+1;
        }
    }
-   qDebug()<<idTodo;
 
 
+} else {
+     idContact=-1;
+     idInteraction=-1;
+     idTodo=-1;
+}
 getAllContact();
 }
 void setIDInteraction(int i);
@@ -60,7 +63,6 @@ int  Basededonnee:: getIDInteraction(){return this->idInteraction;}
 
 void Basededonnee:: setIDTodo(int i){idTodo=i;}
 int  Basededonnee:: getIDTodo(){return this->idTodo;}
-GestionContact Basededonnee::getGC(){return this->gc;}
 void Basededonnee::Connexion()
 {
 
@@ -81,7 +83,7 @@ void Basededonnee::Connexion()
 
 
 
-void Basededonnee::AjoutContact(Contact C)
+void Basededonnee::AjoutContact(Contact* C)
 {
 
 
@@ -90,13 +92,13 @@ void Basededonnee::AjoutContact(Contact C)
    //on ajoute en un premier tant les données du contact
      QSqlQuery query;
      query.prepare("INSERT INTO contact (nom,prenom,entreprise,mail,telephone,photo,dates,id)" "VALUES (:A,:B,:C,:D,:E,:F,:G,:H)");
-     query.bindValue(":A",QString::fromStdString(C.getNom()));
-     query.bindValue(":B",QString::fromStdString(C.getPrenom()));
-     query.bindValue(":C",QString::fromStdString(C.getEntreprise()));
-     query.bindValue(":D",QString::fromStdString(C.getMail()));
-     query.bindValue(":E",QString::fromStdString(C.getTelephone()));
-     query.bindValue(":F",QString::fromStdString(C.getPhoto()));
-     query.bindValue(":G",QString::fromStdString(C.getDate()));
+     query.bindValue(":A",QString::fromStdString(C->getNom()));
+     query.bindValue(":B",QString::fromStdString(C->getPrenom()));
+     query.bindValue(":C",QString::fromStdString(C->getEntreprise()));
+     query.bindValue(":D",QString::fromStdString(C->getMail()));
+     query.bindValue(":E",QString::fromStdString(C->getTelephone()));
+     query.bindValue(":F",QString::fromStdString(C->getPhoto()));
+     query.bindValue(":G",QString::fromStdString(C->getDate()));
      query.bindValue(":H",getIDContact());
      if(!query.exec())
      {
@@ -105,30 +107,30 @@ void Basededonnee::AjoutContact(Contact C)
      }
      else
      {//ensuite on test si il à des interractions si oui on les ajoute dans  la table interraction
-       if(!C.getGestionInteraction().getInteractionList().empty())
+       if(!C->getGestionInteraction().getInteractionList().empty())
        {
-           for(int i=0;i<C.getGestionInteraction().getSize();i++)
+           for(int i=0;i<C->getGestionInteraction().getSize();i++)
             {  QSqlQuery query1;
                query1.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,id)" "VALUES(:A,:B,:C,:D)");
                query1.bindValue(":A",getIDContact());
-               query1.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i)->getContenu()));
-               query1.bindValue(":C",QString::fromStdString(C.getDate()));
+               query1.bindValue(":B",QString::fromStdString(C->getGestionInteraction().get(i)->getContenu()));
+               query1.bindValue(":C",QString::fromStdString(C->getDate()));
                query1.bindValue(":D",getIDInteraction());
                if(!query1.exec()){qDebug()<<"error";}
 
           //ensuite pour chaque interraction on test si elle a une liste de todos si oui on les ajoute dans la table todo
-              if(!C.getGestionInteraction().get(i)->getGestionToDo().getToDoList().empty())
+              if(!C->getGestionInteraction().get(i)->getGestionToDo().getToDoList().empty())
               {
                 if(query1.exec())
                  {
-                  for (int j=0;j<C.getGestionInteraction().get(i)->getGestionToDo().getSize();j++)
+                  for (int j=0;j<C->getGestionInteraction().get(i)->getGestionToDo().getSize();j++)
                    {  qDebug()<<"j'ai des todos";
                       QSqlQuery query2;
                       query2.prepare("INSERT INTO todo(idINTERAC,contenu,id,dates)" "VALUES(:A,:B,:C,:D)");
                       query2.bindValue(":A",getIDInteraction());
-                      query2.bindValue(":B",QString::fromStdString(C.getGestionInteraction().get(i)->getGestionToDo().get(j)->getContenu()));
+                      query2.bindValue(":B",QString::fromStdString(C->getGestionInteraction().get(i)->getGestionToDo().get(j)->getContenu()));
                       query2.bindValue(":C",getIDTodo());
-                      query2.bindValue(":D",QString::fromStdString(C.getGestionInteraction().get(i)->getGestionToDo().get(j)->datestring));
+                      query2.bindValue(":D",QString::fromStdString(C->getGestionInteraction().get(i)->getGestionToDo().get(j)->datestring));
                       setIDTodo(getIDTodo()+1);//on incremente l'id des todos
                        if(!query2.exec())
                           qDebug()<<"erruer";
@@ -206,7 +208,7 @@ void Basededonnee::ModifiContact(Contact old, Contact C)
 
     QSqlQuery query ;
 
-    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and date=:G" ) ;
+    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g,id=:h WHERE nom=:A and prenom=:B and entreprise=:C and mail=:D and telephone=:E and photo=:F and date=:G and id=:H"  ) ;
     query.bindValue(":A",QString::fromStdString(C.getNom()));
     query.bindValue(":B",QString::fromStdString(C.getPrenom()));
     query.bindValue(":C",QString::fromStdString(C.getEntreprise()));
@@ -214,6 +216,7 @@ void Basededonnee::ModifiContact(Contact old, Contact C)
     query.bindValue(":E",QString::fromStdString(C.getTelephone()));
     query.bindValue(":F",QString::fromStdString(C.getPhoto()));
     query.bindValue(":G",QString::fromStdString(C.getDate()));
+    query.bindValue(":H",C.getId());
 
     query.bindValue(":a",QString::fromStdString(old.getNom()));
     query.bindValue(":b",QString::fromStdString(old.getPrenom()));
@@ -222,21 +225,19 @@ void Basededonnee::ModifiContact(Contact old, Contact C)
     query.bindValue(":e",QString::fromStdString(old.getTelephone()));
     query.bindValue(":f",QString::fromStdString(old.getPhoto()));
     query.bindValue(":g",QString::fromStdString(old.getDate()));
+    query.bindValue(":h",C.getId());
 
     if(!query.exec())
     {
         qDebug()<<"erreur";
-
-
-
     }
 }
 
 
-void  Basededonnee::getAllContact()
+void Basededonnee::getAllContact()
 {
     Contact C;
-
+    GestionContact G;
     if(b.open())
      {
          QSqlQuery query("SELECT * FROM contact  ");
@@ -269,9 +270,11 @@ void  Basededonnee::getAllContact()
                             QString r=query1.value(1).toString();
                             Interaction *I =new Interaction(C,r.toStdString());
                             I->setID(query1.value(3).toInt());
+                            I->setdatedb(query1.value(2).toString().toStdString());
 
+                            qDebug()<<QString::fromStdString(I->getDate());
 
-                            QSqlQuery query2;
+                             QSqlQuery query2;
                               query2.prepare("SELECT * FROM todo where idINTERAC=:a");
                               query2.bindValue(":a",I->getID());
                                if(query2.exec())
@@ -293,73 +296,102 @@ void  Basededonnee::getAllContact()
                          }
 
               }
-              getGC().addContact(C);
+              this->gc.addContact(C);
             }
 
          }
 
        }
 
-
 }
 
-std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string nom)
+std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string &nom)
 {
 
 
     std::list<Contact*> LC;
-    for (auto it:getGC().getContactList())
+   if(!gc.getContactList().empty())
+   {
+    for (auto it:gc.getContactList())
     {
      if(nom==it->getNom())
         LC.push_back(it);
     }
+
+   }
     return LC;
 }
 
 
-std::list<Contact*> Basededonnee::recherchercontactparDates(std::string date, std::string date2)
+std::list<Contact*> Basededonnee::recherchercontactparDates(std::string &date, std::string &date2)
 {
     std::list<Contact*> LC;
     bool drapeau=true;
     int compteur=0;
     int indiceDate=0;
     int indiceDate2=0;
-    for(auto it:getGC().getContactList())
+   if(!gc.getContactList().empty())
+   {
+    for(auto it:gc.getContactList())
     {
         if(it->getDate()==date&&drapeau)
          {
             indiceDate=compteur;
             drapeau=false;
+
         }
         else
         {
             if(it->getDate()==date2)
              {
                 indiceDate2=compteur;
+
+
              }
         }
-        compteur++;
+        ++compteur;
     }
+   }
 
-     for (int i=indiceDate;i<indiceDate2;i++)
+
+
+     for (int i=indiceDate;i<=indiceDate2;i++)
      {
-           LC.push_back(getGC().getContactByID(i));
+            LC.push_back(gc.getContactByID(i));
+
      }
 
     return LC;
 
 }
 
-std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string date, std::string date2,bool parNom,bool parDate )
+std::list<Contact*> Basededonnee::recherchecontact(std::string &nom, std::string & date, std::string & date2,bool parNom,bool parDate )
 {
 
- if(parNom&&parDate)
- {
+  if(parNom&&parDate)
+  {
      list<Contact*> lc;
-     for(auto it:recherchercontactparNom(nom))
-         lc.push_back(it);
-     for(auto &it:recherchercontactparDates(date,date2))
-         lc.push_back(it);
+
+    if(!recherchercontactparNom(nom).empty()&&!recherchercontactparDates(date,date2).empty())
+     { for(auto it:recherchercontactparNom(nom))
+       {    for(auto itt:recherchercontactparDates(date,date2))
+            {
+                if(it==itt)
+                    lc.push_back(it);
+            }
+       }
+   }else{
+               if(recherchercontactparDates(date,date2).empty())
+                   return recherchercontactparNom(nom);
+               else {
+                   if(recherchercontactparNom(nom).empty())
+                   {
+                       return  recherchercontactparDates(date,date2);
+                   }
+               }
+        }
+
+
      return lc;
  }else {
 
@@ -368,9 +400,11 @@ std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string 
           return recherchercontactparNom(nom);
        else {if(parDate)
               return recherchercontactparDates(date,date2);}
- }
+      }
+
 }
-std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(int idCONTACT ,string date ,string date2)
+
+std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(int idCONTACT ,string &date ,string &date2)
 {
 
     std::list<Interaction*> LI;
@@ -378,62 +412,79 @@ std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(int idCO
     int compteur=0;
     int indiceDate=0;
     int indiceDate2=0;
-    for(auto it:getGC().getContactByID(idCONTACT)->getGestionInteraction().getInteractionList())
+
+    for(auto it:gc.getContactByID(idCONTACT)->getGestionInteraction().getInteractionList())
     {
         if(it->getDate()==date&&drapeau)
          {
             indiceDate=compteur;
             drapeau=false;
+
         }
         else
         {
             if(it->getDate()==date2)
              {
                 indiceDate2=compteur;
+
+
              }
         }
-        compteur++;
-    }
+        ++compteur;
 
-     for (int i=indiceDate;i<indiceDate2;i++)
+    }
+     for (int i=indiceDate;i<=indiceDate2;i++)
      {
-           LI.push_back(getGC().getInterractionByID(i));
+           LI.push_back(gc.getInterractionByID(i));
      }
 
     return LI;
 }
+
 std::list<Interaction*> Basededonnee::recherchelisteinterractionparContact(int idCONTACT)
 {std::list<Interaction*> LI;
-    for(auto it:getGC().getContactByID(idCONTACT)->getGestionInteraction().getInteractionList())
+    for(auto it:gc.getContactByID(idCONTACT)->getGestionInteraction().getInteractionList())
     {
           LI.push_back(it);
     }
     return  LI;
 }
-std::list<Interaction*> Basededonnee::rechercheInterraction(std::string date, std::string date2,int idContact, bool parDate, bool parNom)
+std::list<Interaction*> Basededonnee::rechercheInterraction(std::string &date, std::string &date2,int idContact, bool parDate, bool parCONTACT)
 {
 
-
-
-    if(parNom&&parDate)
+    if(parCONTACT&&parDate)
     {
-        list<Interaction*> lc;
-        for(auto it:recherchelisteinterractionparContact(idContact))
-            lc.push_back(it);
-        for(auto &it:recherchelisteinterractionpardate(idContact,date,date2))
-            lc.push_back(it);
+        std::list<Interaction*> lc;
+        if(!recherchelisteinterractionparContact(idContact).empty()&&!recherchelisteinterractionpardate(idContact,date,date2).empty())
+         { for(auto it:recherchelisteinterractionparContact(idContact))
+           {    for(auto itt:recherchelisteinterractionpardate(idContact,date,date2))
+                {
+                    if(it==itt)
+                        lc.push_back(it);
+                }
+           }
+       }else{
+                   if(recherchelisteinterractionpardate(idContact,date,date2).empty())
+                       return recherchelisteinterractionparContact(idContact);
+                   else {
+                       if(recherchelisteinterractionparContact(idContact).empty())
+                       {
+                           return  recherchelisteinterractionpardate(idContact,date,date2);
+                       }
+                   }
+            }
         return lc;
     }else {
 
 
-        if(parNom)
+        if(parCONTACT)
              return recherchelisteinterractionparContact(idContact);
           else {if(parDate)
                  return recherchelisteinterractionpardate(idContact,date,date2);}
     }
 
 }
-std::list<toDo*> Basededonnee::recherchelistetodopardate(int idCONTACT,int idINTERAC,string date ,string date2)
+std::list<toDo*> Basededonnee::recherchelistetodopardate(int idCONTACT,string &date ,string &date2)
 {
     std::list<toDo*> LT;
 
@@ -441,74 +492,94 @@ std::list<toDo*> Basededonnee::recherchelistetodopardate(int idCONTACT,int idINT
     int compteur=0;
     int indiceDate=0;
     int indiceDate2=0;
-        for(auto it:getGC().getContactByID( idCONTACT)->getGestionInteraction().get(idINTERAC)->getGestionToDo().getToDoList())
+     qDebug()<<gc.getContactByID( 0)->getGestionInteraction().get(0)->getGestionToDo().getSize();
+
+     for(int i=0;i<gc.getContactByID(idCONTACT)->getGestionInteraction().getSize();i++){
+
+      if(!gc.getContactByID(idCONTACT)->getGestionInteraction().get(i)->getGestionToDo().getToDoList().empty())
+      { for(auto it:gc.getContactByID( idCONTACT)->getGestionInteraction().get(i)->getGestionToDo().getToDoList())
         {
-            if(it->datestring==date&&drapeau)
+            if(it->getDate()==date&&drapeau)
              {
                 indiceDate=compteur;
                 drapeau=false;
             }
             else
             {
-                if(it->datestring==date2)
+                if(it->getDate()==date2)
                  {
                     indiceDate2=compteur;
                  }
             }
             compteur++;
         }
+    }
+  }
 
 
 
-     for(int i=indiceDate;i<indiceDate2;i++)
+     for(int i=indiceDate;i<=indiceDate2;i++)
      {
-      LT.push_front(getGC().gettoDoByID(i));
+      LT.push_front(gc.gettoDoByID(i));
      }
-
 
         return  LT;
 
-
-
-
 }
 
-std::list<toDo*> Basededonnee::recherchelistetodoparinterraction(int idCONTACT,int idINTERAC)
+std::list<toDo*> Basededonnee::recherchelistetodopaContact(int idCONTACT)
 {  std::list<toDo*> LT;
-    for(auto it:getGC().getContactByID(idCONTACT)->getGestionInteraction().get(idINTERAC)->getGestionToDo().getToDoList())
-    {
+  for(int i=0;i<gc.getContactByID(idCONTACT)->getGestionInteraction().getSize();i++){
+
+   if(!gc.getContactByID(idCONTACT)->getGestionInteraction().get(i)->getGestionToDo().getToDoList().empty())
+   {
+     for(auto it:gc.getContactByID(idCONTACT)->getGestionInteraction().get(i)->getGestionToDo().getToDoList())
+      {
           LT.push_back(it);
-    }
+       }
+   }
+  }
     return  LT;
 
 }
 
-std::list<toDo*> Basededonnee::recherchelistetodo(std::string date, std::string date2,int idCONTACT,int  idINTERAC ,bool parDATE,bool parCONTACT)
+std::list<toDo*> Basededonnee::recherchelistetodo(std::string &date, std::string &date2,int idCONTACT,bool parDATE,bool parCONTACT)
+{
+    list<toDo*> lc;
 
-  {
-
-        if(parCONTACT&&parDATE)
+if(parDATE&&parCONTACT)
+  { if(!recherchelistetodopaContact(idCONTACT).empty()&&!recherchelistetodopardate(idCONTACT,date,date2).empty())
+    {
+      for(auto it:recherchelistetodopaContact(idCONTACT))
+      {    for(auto itt:recherchelistetodopardate(idCONTACT,date,date2))
         {
-            list<toDo*> lc1;
-            list<toDo*> lc;
-            for(auto it:recherchelistetodoparinterraction(idCONTACT,idINTERAC))
-                lc1.push_back(it);
-            for(auto it:recherchelistetodoparinterraction(idCONTACT,idINTERAC))
-                lc1.push_back(it);
-            return lc;
-        }else {
-
-
-            if(parDATE)
-                 return recherchelistetodoparinterraction(idCONTACT,idINTERAC);
-              else {if(parDATE)
-                     return recherchelistetodoparinterraction(idCONTACT,idINTERAC);
-            }
+            if(it==itt)
+                lc.push_back(it);
         }
+     }
 
-    }
+      return lc;
 
+     }else{
+           if((! recherchelistetodopardate(idCONTACT,date,date2).empty()))
+                 return recherchelistetodopaContact(idCONTACT);
+           else {
+               if(recherchelistetodopaContact(idCONTACT).empty())
+                {
+                   return  recherchelistetodopardate(idCONTACT,date,date2);
+                 }
+            }
+       }
 
+      }
+        else{
+                 if(parCONTACT)
+                      return recherchelistetodopaContact(idCONTACT);
+                   else {if(parDATE)
+                          return recherchelistetodopardate(idCONTACT,date,date2);
+                 }
+             }
+}
 
 
 int Basededonnee::Nombredecontact()
@@ -523,15 +594,53 @@ int Basededonnee::Nombredecontact()
       row+=query11.value(0).toInt();
      }
 
-
-
-
   return row ;
 }
 
 
+/*
+void Basededonnee::sauvegarder()
+{
+
+  for(auto &it:gc.getContactList())
+  {
+      QSqlQuery query;
+      query.prepare("select * from contact where id=:a");
+      query.bindValue(":a",it->getId());
+      if(query.exec())
+      {
+          Contact *C = new Contact(query.value(0).toString().toStdString(),
+                    query.value(1).toString().toStdString(),
+                    query.value(2).toString().toStdString(),
+                    query.value(3).toString().toStdString(),
+                    query.value(4).toString().toStdString(),
+                    query.value(5).toString().toStdString(),
+                    query.value(6).toString().toStdString());
+       if(it!=C)
+       {   SupprimeContact(*C);
+           ModifiContact(*C,*it);
+       }
+
+      }
+      else
+      {
+         AjoutContact(it);
+      }
 
 
+
+
+
+
+
+  }
+
+
+
+
+
+
+}*/
 
 
 

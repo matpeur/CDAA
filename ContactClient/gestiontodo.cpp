@@ -4,15 +4,26 @@
  * @date octobre 2021
  * @brief implémentation des constructeurs*/
 GestionToDo::GestionToDo(){}
+
+/**
+ * @author BELLEGUEULLE TRAORE
+ * @date octobre 2021
+ * @brief  retourne l'indice courant +1 de la liste d'interaction
+ */
+int GestionToDo::indicecourant()
+{
+    return getSize();
+}
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation de la methode addTodo */
 
 void GestionToDo::addToDo(toDo  *td)
-{
+{  td->setID(indicecourant());
     ltodo.push_back(td);
 }
+
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
@@ -21,6 +32,7 @@ void GestionToDo::addToDo(toDo  *td)
 void GestionToDo::createtodO(Interaction * I, std::string s)
 {
   toDo *t = new toDo(I,s);
+  t->setID(indicecourant());
   this->ltodo.push_back(t);
 }
 void GestionToDo::removeToDo(toDo * td)

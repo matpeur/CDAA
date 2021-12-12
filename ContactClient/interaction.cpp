@@ -10,6 +10,7 @@ Interaction::Interaction()
 
 }
 
+void Interaction::setdatedb(std::string s){this->datestring=s;}
 Interaction::Interaction(Contact * c,std::string contenu)
 {  setID(0);
     setContact(c);

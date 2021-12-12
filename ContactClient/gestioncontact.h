@@ -21,11 +21,11 @@ public:
     void removeContact(Contact);
 
     std::list<Contact*> getContactList() const;
-    unsigned int getSize() const;
+    int getSize() const;
     Contact* getContactByID(int i);
     Interaction* getInterractionByID(int id);
     toDo* gettoDoByID(int id);
-
+    int indicecourant();
 
 private :
     std::list<Contact*> lcontact;

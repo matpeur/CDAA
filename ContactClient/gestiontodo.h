@@ -24,6 +24,7 @@ public:
 
     std::string toString();
     toDo* get(int);
+    int indicecourant();
 
 
 private :

@@ -21,6 +21,7 @@ public:
     Interaction* get(int);
     std::list<Interaction*> getInteractionList() const;
     int getSize() const;
+    int indicecourant();
 
 private :
     std::list<Interaction*> linteraction;
