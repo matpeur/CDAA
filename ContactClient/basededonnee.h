@@ -3,6 +3,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
 #include <QtSql/QSqlQuery>
+#include <QDate>
 class toDo;
 class Interaction;
 class Contact;
@@ -20,10 +21,10 @@ public:
     std::list<Contact*>  recherchercontactparDates(std::string ,std::string );
     std::list<Contact*>recherchercontactparNom(std::string );
     std::list<Contact*> recherchecontact(std::string ,std::string ,std::string ,bool,bool);
-    std::list<toDo*> recherchelistetodopardate(int  idCONTACT,std::string ,std::string );
+    std::list<toDo*> recherchelistetodopardate(std::string ,std::string );
     std::list<toDo*> recherchelistetodopaContact(int idCONTACT);
     std::list<toDo*> recherchelistetodo(std::string ,std::string ,int  idCONTACT,bool,bool);
-    std::list<Interaction*> recherchelisteinterractionpardate(int idCONTACT,std::string ,std::string );
+    std::list<Interaction*> recherchelisteinterractionpardate(std::string ,std::string );
     std::list<Interaction*> recherchelisteinterractionparContact(int idCONTACT);
     std::list<Interaction*> rechercheInterraction(std::string ,std::string ,int idCONTACT,bool,bool);
     Interaction getInterractionByID(int,int);

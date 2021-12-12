@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
         tabWidgetVisu = new QTabWidget();
     HL->addWidget(tabWidgetVisu);
         QVBoxLayout *VL= new QVBoxLayout();
-            LNbContact = new QLabel(QString::fromStdString("Il y a "+to_string(bd.Nombredecontact())+" contacts dans la base de donnée"));
+            LNbContact = new QLabel(QString::fromStdString("Il y a "+to_string(bd.Nombredecontact())+" contacts dans la base de données"));
+       VL->addWidget(LNbContact);
             BarreRecherche = new QLineEdit;
             BarreRecherche->setPlaceholderText("Recherche");
         VL->addWidget(BarreRecherche);
@@ -135,12 +136,9 @@ void MainWindow::on_actionNouveau_Contact_triggered()
     if(res == QDialog::Accepted)
     {
         gc->createContact(fc->getNom().toStdString(), fc->getPrenom().toStdString(), fc->getEntreprise().toStdString(), fc->getTel().toStdString(), fc->getCheminPhoto().toStdString(),fc->getMail().toStdString());
-        std::list<Contact*> liste = gc->getContactList();
-        for (auto & it : liste)
-        {
-            std::cout<<it<<std::endl;
-        }
     }
+    bd.sauvegarder();
+    bd.getAllContact();
 }
 /**
  * @brief Affiche une boîte de dialogue pour ajouter une interaction
@@ -150,23 +148,27 @@ void MainWindow::on_actionNouvelle_Interaction_triggered()
 {
     FenetreAjoutInter *fai = new FenetreAjoutInter(this, gc);
     fai->exec();
+    bd.sauvegarder();
+    bd.getAllContact();
 }
 
 
 /**
- * @brief Rempli le model pour
+ * @brief Rempli le model pour le QTableView avec des contacts
+ * @author BELLEGUEULLE Mathieu
  */
 void MainWindow::ajoutDonneesContact()
 {
     if(checkRechAdvDate->isChecked())
     {
         std::string s = "";
-        std::list<Contact*> liste = bd.recherchecontact(s,dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                       dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+        std::list<Contact*> liste = bd.recherchecontact(s,dateEditDebutRech->date().toString("dd-MM-yyyy").toStdString(),
+                                                       dateEditFinRech->date().toString("dd-MM-yyyy").toStdString(),
                                                        false, true);
 
 
         int index =0;
+        if(liste.size()>0)
         for(auto it : liste)
         {
             QStandardItem *item0 = new QStandardItem(QString::number(it->getId()));
@@ -205,7 +207,10 @@ void MainWindow::ajoutDonneesContact()
         }
     }
 }
-
+/**
+ * @brief Rempli le model pour le QTableView avec des interactions
+ * @author BELLEGUEULLE Mathieu
+ */
 void MainWindow::ajoutDonneesInteraction()
 {
     if (checkRechAdvDate->isChecked()||checkRechAdvContact->isChecked())
@@ -213,8 +218,8 @@ void MainWindow::ajoutDonneesInteraction()
 
 
         int i = listeContact[cBSelectionContact->currentIndex()]->getId();
-        std::list<Interaction*> liste = bd.rechercheInterraction(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                       dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+        std::list<Interaction*> liste = bd.rechercheInterraction(dateEditDebutRech->date().toString("dd-MM-yyyy").toStdString(),
+                                                       dateEditFinRech->date().toString("dd-MM-yyyy").toStdString(),
                                                        i, checkRechAdvDate->isChecked(),
                                                        checkRechAdvContact->isChecked());
 
@@ -223,13 +228,13 @@ void MainWindow::ajoutDonneesInteraction()
         for(auto it : liste)
         {
             QStandardItem *item0 = new QStandardItem(QString::number(it->getID()));
-            model->setItem(i, 0, item0);
+            model->setItem(index, 0, item0);
             QStandardItem *item = new QStandardItem(QString::number(it->getContact()->getId()));
-            model->setItem(i, 1, item);
+            model->setItem(index, 1, item);
             QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getContenu()));
-            model->setItem(i,2,item1);
+            model->setItem(index,2,item1);
             QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getDate()));
-            model->setItem(i,3,item2);
+            model->setItem(index,3,item2);
             index++;
         }
     }
@@ -253,14 +258,17 @@ void MainWindow::ajoutDonneesInteraction()
         }
     }
 }
-
+/**
+ * @brief Rempli le model pour le QTableView avec des todos
+ * @author BELLEGUEULLE Mathieu
+ */
 void MainWindow::ajoutDonneesTodo()
 {
     if(checkRechAdvDate->isChecked()||checkRechAdvContact->isChecked())
     {
         int i = listeContact[cBSelectionContact->currentIndex()]->getId();
-        std::list<toDo*> liste = bd.recherchelistetodo(dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
-                                                       dateEditDebutRech->date().toString("dd/MM/yyyy").toStdString(),
+        std::list<toDo*> liste = bd.recherchelistetodo(dateEditDebutRech->date().toString("dd-MM-yyyy").toStdString(),
+                                                       dateEditFinRech->date().toString("dd-MM-yyyy").toStdString(),
                                                        i, checkRechAdvDate->isChecked(),
                                                        checkRechAdvContact->isChecked());
 
@@ -269,13 +277,13 @@ void MainWindow::ajoutDonneesTodo()
         for(auto it : liste)
         {
             QStandardItem *item0 = new QStandardItem(QString::number(it->getID()));
-            model->setItem(i, 0, item0);
+            model->setItem(index, 0, item0);
             QStandardItem *item = new QStandardItem(QString::number(it->getOwner()->getID()));
-            model->setItem(i, 1, item);
+            model->setItem(index, 1, item);
             QStandardItem *item1 = new QStandardItem(QString::fromStdString(it->getContenu()));
-            model->setItem(i,2,item1);
+            model->setItem(index,2,item1);
             QStandardItem *item2 = new QStandardItem(QString::fromStdString(it->getDate()));
-            model->setItem(i,3,item2);
+            model->setItem(index,3,item2);
             index++;
         }
     }
@@ -302,7 +310,10 @@ void MainWindow::ajoutDonneesTodo()
         }
     }
 }
-
+/**
+ * @brief montre ou cache les lignes qui correspondent ou non au texte de la barre de recherche
+ * @author BELLEGUEULLE Mathieu
+ */
 void MainWindow::selection(QString texte)
 {
     for (int i=0; i<model->rowCount(); i++)
@@ -321,11 +332,20 @@ void MainWindow::selection(QString texte)
             ListeSelection->showRow(i);
     }
 }
-
+/**
+ * @brief Déclenche un tri suivant l'option sélectionnéée
+ * @author BELLEGUEULLE Mathieu
+ */
 void MainWindow::tri(int index)
 {
     model->sort(index);
 }
+
+/**
+ * @brief Modifie le model et la comboBox suivant l'option sélectionné
+ * @author BELLEGUEULLE Mathieu
+ * @param index valeur(1,2,3) pour (contact, interaction, todo)
+ */
 void MainWindow::modifModel(int index)
 {
     titreCol->clear();
@@ -366,22 +386,35 @@ void MainWindow::modifModel(int index)
     //ListeSelection->hideColumn(0);
     model->sort(cBSelectionTri->currentIndex());
 }
-
+/**
+ * @brief Déclenche le changement de modle pour les contacts
+ * @author BELLEGUEULL MATHIEU
+ */
 void MainWindow::selectionTypeContact()
 {
     modifModel(1);
 }
-
+/**
+ * @brief Déclenche le changement de modle pour les interactions
+ * @author BELLEGUEULL MATHIEU
+ */
 void MainWindow::selectionTypeInteraction()
 {
     modifModel(2);
 }
-
+/**
+ * @brief Déclenche le changement de modle pour les todos
+ * @author BELLEGUEULL MATHIEU
+ */
 void MainWindow::selectionTypeTodo()
 {
     modifModel(3);
 }
 
+/**
+ * @brief Déclenche l'affichage de l'objet demandée(contact, interaction, todo) dans la partie gauche de l'application par la création éventuel d'instance de visucontactwidget/interaction/todo
+ * @param MI Elément sélectionné dans le QTableView
+ */
 void MainWindow::affiche(QModelIndex MI)
 {
     int row = MI.row();
@@ -414,14 +447,23 @@ void MainWindow::affiche(QModelIndex MI)
     if (VIW != nullptr)
         connect(VIW, SIGNAL(afficheToDo(toDo*)), this, SLOT(afficheTabTodo(toDo*)));
 }
-
+/**
+ * @brief slot pour effacer un contact
+ * @param c Contact à effacer
+ */
 void MainWindow::effaceContact(Contact * c)
 {
 
-    gc->removeContact(*c);
+    gc->removeContact(c);
     modifModel(BoutonsSelection->checkedId());
+    bd.SupprimeContact(c);
+    bd.sauvegarder();
+    bd.getAllContact();
 }
-
+/**
+ * @brief slot pour afficher un todo depuis le visuinteractionwidget
+ * @param t Todo à afficher
+ */
 void MainWindow::afficheTabTodo(toDo* t)
 {
     if(tabWidgetVisu->count()==3)

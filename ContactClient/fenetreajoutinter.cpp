@@ -99,7 +99,7 @@ void FenetreAjoutInter::sauvegarde()
             QDate date = VDE[t]->date();
             if(QDate::currentDate()!=date)
             {
-                interaction+=" @date "+to_string(date.day())+"/"+to_string(date.month())+"/"+to_string(date.year());
+                interaction+=" @date "+to_string(date.day())+"-"+to_string(date.month())+"-"+to_string(date.year());
             }
         }
     }

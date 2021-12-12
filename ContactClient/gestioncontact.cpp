@@ -10,15 +10,6 @@ GestionContact::GestionContact()
 {
 }
 /**
- * @author BELLEGUEULLE TRAORE
- * @date octobre 2021
- * @brief retourner l'indice courant de la liste de contact
- */
-int GestionContact::indicecourant()
-{
-    return getSize();
-}
-/**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation du destructeur
@@ -34,7 +25,6 @@ GestionContact::~GestionContact()
 void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail, std::string date)
 {
     Contact *c = new Contact( nom, prenom, entreprise, tel, cheminPhoto,mail,date);
-    c->setId(indicecourant());
     lcontact.push_back(c);
 }
 
@@ -46,36 +36,26 @@ void GestionContact::createContact(std:: string nom, std::string prenom,  std::s
 void GestionContact::createContact(std:: string nom, std::string prenom,  std::string entreprise, std::string tel,  std::string cheminPhoto, std::string mail)
 {
     Contact *c = new Contact(nom, prenom, entreprise, tel, cheminPhoto, mail);
-    c->setId(indicecourant());
+    c->setId(-1);
     lcontact.push_back(c);
 }
 /**
   *
   */
 void GestionContact::addContact(Contact *c)
-{   c->setId(indicecourant());
+{
     lcontact.push_back(c);
-    std::cout<<"fghjkl";
 }
 /**
  * @author BELLEGUELLE TRAORE
  * @date octobre 2021
  * @brief implémentation de la methode removeContact
  */
-void GestionContact::removeContact(Contact Inter)
+void GestionContact::removeContact(Contact *Inter)
 {
-
-    for (auto &it : lcontact  )
-    {
-        if(*it == Inter)
-        {
-            //I->deleteContact(&it);
-            lcontact.remove(it);
-        }
-    }
+    lcontact.remove(Inter);
     Date * d = new Date;
     derniereSuppression = * d;
-    delete d;
 }
 
 
@@ -107,7 +87,7 @@ Interaction* GestionContact::getInterractionByID(int id)
 
 
 toDo* GestionContact::gettoDoByID(int id)
-{        toDo* I;
+{        toDo* I =nullptr;
       for(auto &it :lcontact)
       {
          for(auto &itt : it->getGestionInteraction().getInteractionList())

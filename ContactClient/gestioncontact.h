@@ -18,14 +18,13 @@ public:
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string,std::string);
     void createContact(std::string,std::string,std::string,std::string,std::string,std::string);
     void addContact(Contact *);
-    void removeContact(Contact);
+    void removeContact(Contact*);
 
     std::list<Contact*> getContactList() const;
     int getSize() const;
     Contact* getContactByID(int i);
     Interaction* getInterractionByID(int id);
     toDo* gettoDoByID(int id);
-    int indicecourant();
 
 private :
     std::list<Contact*> lcontact;

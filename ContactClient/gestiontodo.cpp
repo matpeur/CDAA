@@ -32,7 +32,7 @@ void GestionToDo::addToDo(toDo  *td)
 void GestionToDo::createtodO(Interaction * I, std::string s)
 {
   toDo *t = new toDo(I,s);
-  t->setID(indicecourant());
+  t->setID(-1);
   this->ltodo.push_back(t);
 }
 void GestionToDo::removeToDo(toDo * td)

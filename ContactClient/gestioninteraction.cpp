@@ -18,7 +18,7 @@ int GestionInteraction::indicecourant(){return getSize();}
 void GestionInteraction::createInteraction(Contact * C, std::string contenu)
 {
     Interaction *i = new Interaction(C, contenu);
-    i->setID(indicecourant());
+    i->setID(-1);
     linteraction.push_back(i);
 }
 
