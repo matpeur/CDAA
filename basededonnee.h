@@ -6,14 +6,14 @@
 #include <QDate>
 
 /**
- * @brief Classe Basedonnee servant d'interface permettant les echanges des données
+ * @brief Classe Basedonnee servant d'interface permettant les echanges de données
  * @author TRAORE MOUSSA
  * @date decembre 2021
  */
 class toDo;
 class Interaction;
 class Contact;
-#include "gestioncontact.h"//class   GestionContact ;
+#include "gestioncontact.h"
 class Basededonnee
 {
 public:

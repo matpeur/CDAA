@@ -8,7 +8,6 @@
 #include "gestioncontact.h"
 #include <string.h>
 #include <stdio.h>
-#include "contact.h"
 /**
  * @brief constructeur  dans lequel on fait appel à la methode connexion() permettant d'activer la connexion de la base de données
  * ,elle permet aussi d'initialiser les variables idContact ,idInter,idtodo avec les indices courant de chaques tables .
@@ -21,7 +20,7 @@ Basededonnee::Basededonnee()
      Connexion();
    QSqlQuery query1;
  if(Nombredecontact()!=0)
- {  query1.prepare("select MAX(idCONTACT) from contact");
+ {  query1.prepare("select MAX(id) from contact");
    if(query1.exec())
    {
        if(query1.next())
@@ -31,7 +30,7 @@ Basededonnee::Basededonnee()
    }
 
     QSqlQuery query2;
-    query2.prepare("select MAX(idINTERAC) from interraction");
+    query2.prepare("select MAX(id) from interraction");
     if(query2.exec())
     {
         if(query2.next())
@@ -42,7 +41,7 @@ Basededonnee::Basededonnee()
 
 
    QSqlQuery query3;
-   query3.prepare("select MAX(idTODO) from todo");
+   query3.prepare("select MAX(id) from todo");
    if(query3.exec())
    {
        if(query3.next())
@@ -76,6 +75,7 @@ int  Basededonnee:: getIDInteraction(){return this->idInteraction;}
 
 void Basededonnee:: setIDTodo(int i){idTodo=i;}
 int  Basededonnee:: getIDTodo(){return this->idTodo;}
+
 /**
  * @brief implementation de la methode connexion qui permet de connecter l'interface à la base de donnees
  * @author  TRAORE MOUSSA
@@ -99,13 +99,13 @@ void Basededonnee::Connexion()
        }
 }
 
+
 /**
  * @brief  implementation de la methode ajoutcontact permettant d'ajouter un contact avec toutes ses interractions ainsi que
  * les todos et cela avec les indices appropriés
  * @author  TRAORE Moussa
  * @date decembre 2021
  */
-
 void Basededonnee::AjoutContact(Contact* C)
 {
 
@@ -114,7 +114,7 @@ void Basededonnee::AjoutContact(Contact* C)
    {
    //on ajoute en un premier tant les données du contact
      QSqlQuery query;
-     query.prepare("INSERT INTO contact (nom,prenom,entreprise,mail,telephone,photo,dates,idCONTACT)" "VALUES (:A,:B,:C,:D,:E,:F,:G,:H)");
+     query.prepare("INSERT INTO contact (nom,prenom,entreprise,mail,telephone,photo,dates,id)" "VALUES (:A,:B,:C,:D,:E,:F,:G,:H)");
      query.bindValue(":A",QString::fromStdString(C->getNom()));
      query.bindValue(":B",QString::fromStdString(C->getPrenom()));
      query.bindValue(":C",QString::fromStdString(C->getEntreprise()));
@@ -134,7 +134,7 @@ void Basededonnee::AjoutContact(Contact* C)
        {
            for(int i=0;i<C->getGestionInteraction().getSize();i++)
             {  QSqlQuery query1;
-               query1.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,idINTERAC)" "VALUES(:A,:B,:C,:D)");
+               query1.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,id)" "VALUES(:A,:B,:C,:D)");
                query1.bindValue(":A",getIDContact());
                query1.bindValue(":B",QString::fromStdString(C->getGestionInteraction().get(i)->getContenu()));
                query1.bindValue(":C",QString::fromStdString(C->getGestionInteraction().get(i)->getDate()));
@@ -149,7 +149,7 @@ void Basededonnee::AjoutContact(Contact* C)
                   for (int j=0;j<C->getGestionInteraction().get(i)->getGestionToDo().getSize();j++)
                    {  qDebug()<<"j'ai des todos";
                       QSqlQuery query2;
-                      query2.prepare("INSERT INTO todo(idINTERAC,contenu,idTODO,dates)" "VALUES(:A,:B,:C,:D)");
+                      query2.prepare("INSERT INTO todo(idINTERAC,contenu,id,dates)" "VALUES(:A,:B,:C,:D)");
                       query2.bindValue(":A",getIDInteraction());
                       query2.bindValue(":B",QString::fromStdString(C->getGestionInteraction().get(i)->getGestionToDo().get(j)->getContenu()));
                       query2.bindValue(":C",getIDTodo());
@@ -172,7 +172,7 @@ void Basededonnee::AjoutContact(Contact* C)
 /**
  * @brief Ajoute une interaction à la base de donnée
  * @param Inter
- * @author  TRAORE MOUSSA
+ * @author BELLEGUEULLE TRAORE
  */
 void Basededonnee::AjoutInter(Interaction * Inter)
 {
@@ -180,7 +180,7 @@ void Basededonnee::AjoutInter(Interaction * Inter)
     {
     //on ajoute en un premier toutes les données de l'interaction
       QSqlQuery query;
-      query.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,idINTERAC)" "VALUES(:A,:B,:C,:D)");
+      query.prepare("INSERT INTO interraction(idCONTACT,contenu,dates,id)" "VALUES(:A,:B,:C,:D)");
       query.bindValue(":A",Inter->getContact()->getId());
       query.bindValue(":B",QString::fromStdString(Inter->getContenu()));
       query.bindValue(":C",QString::fromStdString(Inter->getDate()));
@@ -198,7 +198,7 @@ void Basededonnee::AjoutInter(Interaction * Inter)
             for(int i=0;i<Inter->getGestionToDo().getSize();i++)
              {
                 QSqlQuery query2;
-                query2.prepare("INSERT INTO todo(idINTERAC,contenu,idTODO,dates)" "VALUES(:A,:B,:C,:D)");
+                query2.prepare("INSERT INTO todo(idINTERAC,contenu,id,dates)" "VALUES(:A,:B,:C,:D)");
                 query2.bindValue(":A",getIDInteraction());
                 query2.bindValue(":B",QString::fromStdString(Inter->getGestionToDo().get(i)->getContenu()));
                 query2.bindValue(":C",getIDTodo());
@@ -222,7 +222,7 @@ void Basededonnee::SupprimeContact(Contact *C)
     if(b.open())
     {
      QSqlQuery query;
-     query.prepare("DELETE FROM contact WHERE idCONTACT= :A");
+     query.prepare("DELETE FROM contact WHERE id= :A");
      query.bindValue(":A",QString::number(C->getId()));
 
      if(query.exec())
@@ -232,7 +232,7 @@ void Basededonnee::SupprimeContact(Contact *C)
              for(int i=0;i<C->getGestionInteraction().getSize();i++)
               {
                 QSqlQuery query1;
-                query1.prepare("DELETE FROM interraction WHERE idCONTACT=:A");
+                query1.prepare("DELETE FROM interraction WHERE idContact=:A");
                 query1.bindValue(":A",C->getId());
                 if(query1.exec())
                 {
@@ -241,7 +241,7 @@ void Basededonnee::SupprimeContact(Contact *C)
                         for (int j=0;j<C->getGestionInteraction().get(i)->getGestionToDo().getSize();j++)
                         {
                         QSqlQuery query2;
-                        query2.prepare("DELETE FROM todo WHERE idCONTACT=:A");
+                        query2.prepare("DELETE FROM todo WHERE idContact=:A");
                         query2.bindValue(":A",C->getId());
                         if(!query2.exec()){qDebug()<<"erreur";}else {C->setId(C->getId()+1);}//on incremente l'id
                         }
@@ -265,13 +265,14 @@ void Basededonnee::SupprimeContact(Contact *C)
  * @date decembre 2021
  */
 
+
 void Basededonnee::ModifiContact(Contact *C)
 {
 
 
     QSqlQuery query ;
 
-    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g WHERE idCONTACT=:A"  ) ;
+    query.prepare( "UPDATE contact  SET nom=:a , prenom=:b , entreprise=:c,mail=:d,telephone=:e,photo=:f,dates=:g WHERE id=:A"  ) ;
     query.bindValue(":A",QString::number(C->getId()));
 
 
@@ -288,13 +289,13 @@ void Basededonnee::ModifiContact(Contact *C)
         qDebug()<<"erreur";
     }
 }
+
 /**
  * @brief implementation de la methode getAllcontact() qui permet de recurperer et de stocker toutes les données  de la
  * base de données avec des indices precis
  * @author  TRAORE MOUSSA
  * @date decembre 2021
  */
-
 void Basededonnee::getAllContact()
 {
     Contact C;
@@ -369,7 +370,7 @@ void Basededonnee::getAllContact()
 
 }
 /**
- * @brief  implementation de la methode recherche contact par nom
+ * @brief  implementation des methodes de recherches  avancées
  * @author  TRAORE MOUSSA
  * @date decembre 2021
  */
@@ -390,11 +391,7 @@ std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string nom)
     return LC;
 }
 
-/**
- * @brief implementation la methode recherchecontactpardates
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
+
 std::list<Contact*> Basededonnee::recherchercontactparDates(std::string date, std::string date2)
 {
     QSqlQuery query("SELECT dates, id FROM contact");
@@ -416,11 +413,7 @@ std::list<Contact*> Basededonnee::recherchercontactparDates(std::string date, st
     return LI;
 
 }
-/**
- * @brief implementation de la methode rechercontact
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
+
 std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string  date, std::string  date2,bool parNom,bool parDate )
 {
 
@@ -460,12 +453,6 @@ std::list<Contact*> Basededonnee::recherchecontact(std::string nom, std::string 
 
 }
 
-/**
- * @brief   implemetation de la methode recherchelisteinterractionpardate
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
-
 std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(string date ,string date2)
 {
 
@@ -487,11 +474,7 @@ std::list<Interaction*> Basededonnee::recherchelisteinterractionpardate(string d
     }
     return LI;
 }
-/**
- * @brief  implementation de la methode recherchelisteinterractionpzrcontact
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
+
 std::list<Interaction*> Basededonnee::recherchelisteinterractionparContact(int idCONTACT)
 {std::list<Interaction*> LI;
     for(auto it:gc.getContactByID(idCONTACT)->getGestionInteraction().getInteractionList())
@@ -500,11 +483,6 @@ std::list<Interaction*> Basededonnee::recherchelisteinterractionparContact(int i
     }
     return  LI;
 }
-/**
- * @brief  implementation de la methode rechercheInterraction
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
 std::list<Interaction*> Basededonnee::rechercheInterraction(std::string date, std::string date2,int idContact, bool parDate, bool parCONTACT)
 {
 
@@ -541,12 +519,6 @@ std::list<Interaction*> Basededonnee::rechercheInterraction(std::string date, st
     }
 
 }
-
-/**
- * @brief  implementation de la methode recherchelistetodopardate
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
 std::list<toDo*> Basededonnee::recherchelistetodopardate(string date ,string date2)
 {
     std::list<toDo*> LT;
@@ -569,11 +541,6 @@ std::list<toDo*> Basededonnee::recherchelistetodopardate(string date ,string dat
     return LT;
 }
 
-/**
- * @brief implementation de la methode  recherchelistetodocontact
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
 std::list<toDo*> Basededonnee::recherchelistetodopaContact(int idCONTACT)
 {  std::list<toDo*> LT;
   for(int i=0;i<gc.getContactByID(idCONTACT)->getGestionInteraction().getSize();i++){
@@ -589,11 +556,7 @@ std::list<toDo*> Basededonnee::recherchelistetodopaContact(int idCONTACT)
     return  LT;
 
 }
-/**
- * @brief   implementation de la methode recherlistetodo
- * @author  TRAORE MOUSSA
- * @date decembre 2021
- */
+
 std::list<toDo*> Basededonnee::recherchelistetodo(std::string date, std::string date2,int idCONTACT,bool parDATE,bool parCONTACT)
 {
     list<toDo*> lc;
@@ -632,10 +595,11 @@ if(parDATE&&parCONTACT)
              }
 }
 /**
- * @brief   implemenntation de la methode Nombredecontact
+ * @brief  implementation de la methode Nombredecontact()
  * @author  TRAORE MOUSSA
  * @date decembre 2021
  */
+
 
 int Basededonnee::Nombredecontact()
 {
@@ -674,8 +638,7 @@ void Basededonnee::sauvegarder()
            }
           else
           {
-             if(!(it==test))
-                 ModifiContact(it);
+             ModifiContact(it);
              if(it->getGestionInteraction().getSize()!=0)
                 for(auto inter : it->getGestionInteraction().getInteractionList())
                     if (inter->getID()==-1)
