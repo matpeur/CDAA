@@ -51,9 +51,11 @@ VisuContactWidget::VisuContactWidget(Contact *c,QWidget *parent) : QWidget(paren
 
     HL1->addLayout(FL);
 
+
     try {
         IW = new ImageWidget(this,QString::fromStdString(c->getPhoto()));
         VL1->addWidget(IW);
+        IW->setMinimumSize(300,300);
     } catch (const char* s) {Erreur->setText(s);}
 
 
@@ -63,8 +65,8 @@ VisuContactWidget::VisuContactWidget(Contact *c,QWidget *parent) : QWidget(paren
 
     VL1->addWidget(BParcourir);
 
-    HL1->addLayout(VL1);
-
+    VL->addLayout(VL1);
+    VL->addLayout(HL1);
     VL->addLayout(HL1);
 
     QPushButton* BModifier = new QPushButton("Modifier");
@@ -111,9 +113,9 @@ void VisuContactWidget::parcourir()
 {
     QFileDialog *fd = new QFileDialog(this ,"Ouvrir une image", ".");
     fd->exec();
-    if(fd->AcceptOpen)
+    if(fd->result()==QDialog::Accepted)
     {
-        QString fileName = QFileDialog::getOpenFileName (this ,"Ouvrir une image", ".");
+        QString fileName = fd->getOpenFileName (this ,"Ouvrir une image", ".");
 
         try
         {
@@ -178,6 +180,7 @@ void VisuContactWidget::sauvegarde()
     if(tel!=QString::fromStdString(contact->getTelephone()))
         contact->setTelephone(tel.toStdString());
     emit verouille(true);
+    emit sauv();
 }
 
 void VisuContactWidget::supprimer()

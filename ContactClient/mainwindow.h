@@ -64,7 +64,6 @@ private:
     void ajoutDonneesInteraction();
     void ajoutDonneesTodo();
     void modifModel(int);
-    int conversion[];
 private slots:
 
     void on_actionNouveau_Contact_triggered();
@@ -77,6 +76,7 @@ private slots:
     void affiche(QModelIndex);
     void effaceContact(Contact *);
     void afficheTabTodo(toDo*);
+    void sauvegarde();
 
 };
 #endif // MAINWINDOW_H

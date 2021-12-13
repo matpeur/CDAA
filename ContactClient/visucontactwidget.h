@@ -45,6 +45,7 @@ signals:
 
     void verouille(bool);
     void efface(Contact *);
+    void sauv();
 
 public slots :
     void supprimer();

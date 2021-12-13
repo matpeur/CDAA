@@ -592,8 +592,7 @@ void Basededonnee::sauvegarder()
            }
           else
           {
-             if(!(it==test))
-                 ModifiContact(it);
+             ModifiContact(it);
              if(it->getGestionInteraction().getSize()!=0)
                 for(auto inter : it->getGestionInteraction().getInteractionList())
                     if (inter->getID()==-1)

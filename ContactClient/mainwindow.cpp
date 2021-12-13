@@ -86,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent)
             modifModel(1);
         VL->addWidget(ListeSelection);
             QPushButton *BJSON = new QPushButton("Export en json");
-        VL->addWidget(BJSON);
+        //VL->addWidget(BJSON);
     HL->addLayout(VL);
 
     QWidget *cw = new QWidget();
@@ -443,7 +443,10 @@ void MainWindow::affiche(QModelIndex MI)
                  tabWidgetVisu->setCurrentIndex(2);
     }
     if (VCW != nullptr)
+    {
+        connect(VCW, SIGNAL(sauv()), this, SLOT(sauvegarde()));
         connect(VCW, SIGNAL(efface(Contact*)), this, SLOT(effaceContact(Contact*)));
+    }
     if (VIW != nullptr)
         connect(VIW, SIGNAL(afficheToDo(toDo*)), this, SLOT(afficheTabTodo(toDo*)));
 }
@@ -473,3 +476,8 @@ void MainWindow::afficheTabTodo(toDo* t)
     tabWidgetVisu->setCurrentIndex(2);
 }
 
+void MainWindow::sauvegarde()
+{
+    bd.sauvegarder();
+    bd.getAllContact();
+}

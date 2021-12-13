@@ -35,7 +35,6 @@ void ImageWidget::setImage(QString chemin)
         throw "Impossible de charger l'image";
     }
     Image.load(chemin);
-    this->setMinimumSize(Image.width(), Image.height());
     repaint();
 
 }
