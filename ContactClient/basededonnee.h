@@ -8,6 +8,11 @@ class toDo;
 class Interaction;
 class Contact;
 #include "gestioncontact.h"//class   GestionContact ;
+/**
+ * @brief Classe Basedonnee servant d'interface permettant les echanges de données
+ * @author TRAORE MOUSSA
+ * @date decembre 2021
+ */
 class Basededonnee
 {
 public:

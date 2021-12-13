@@ -8,8 +8,7 @@ class Interaction;
 class Interface;
 /**
  *@class todo
- *@brief Classe todo
- *@todo permet de de taguer des mots dans un champs de texte et capable
+ *@brief permet de de taguer des mots dans un champs de texte et capable
  * de modifier la date d'un champs de texte
 */
 class toDo

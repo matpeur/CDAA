@@ -2,11 +2,9 @@
 #define GESTIONTODO_H
 #include "todo.h"
 #include <list>
-#include "interface.h"
 /**
  *@class gestiontodo
  *@brief Classe gestiontodo
- *@todo gere(ajouter,supprimer) une liste de todo
  */
 class GestionToDo
 {

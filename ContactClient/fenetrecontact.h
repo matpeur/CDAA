@@ -7,7 +7,10 @@
 #include <QLabel>
 #include "imagewidget.h"
 
-
+/**
+ * @brief Hérite de la classe QDialog. La classe est une boîte de dialogue qui permet de créer un contact.
+ * @author BELLEGUEULLE Mathieu
+ */
 class FenetreContact : public QDialog
 {
 

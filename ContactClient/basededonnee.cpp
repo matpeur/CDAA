@@ -8,6 +8,13 @@
 #include "gestioncontact.h"
 #include <string.h>
 #include <stdio.h>
+/**
+ * @brief constructeur  dans lequel on fait appel à la methode connexion() permettant d'activer la connexion de la base de données
+ * ,elle permet aussi d'initialiser les variables idContact ,idInter,idtodo avec les indices courant de chaques tables .
+ * @author TRAORE MOUSSA
+ * @date decembre 2021 constructeur
+ *
+ */
 Basededonnee::Basededonnee()
 {
      Connexion();
@@ -51,6 +58,11 @@ Basededonnee::Basededonnee()
 }
 getAllContact();
 }
+/**
+ * @brief  implementation des acceceurs des differents attributs  de la classe
+ * @author  TRAORE MOUSSA
+ * @date decembre 2021
+ */
 void setIDInteraction(int i);
 int getIDInteractiont();
 void setIDTodo(int i);
@@ -63,6 +75,11 @@ int  Basededonnee:: getIDInteraction(){return this->idInteraction;}
 
 void Basededonnee:: setIDTodo(int i){idTodo=i;}
 int  Basededonnee:: getIDTodo(){return this->idTodo;}
+/**
+ * @brief implementation de la methode connexion qui permet de connecter l'interface à la base de donnees
+ * @author  TRAORE MOUSSA
+ * @date decembre 2021
+ */
 void Basededonnee::Connexion()
 {
 
@@ -81,8 +98,12 @@ void Basededonnee::Connexion()
        }
 }
 
-
-
+/**
+ * @brief  implementation de la methode ajoutcontact permettant d'ajouter un contact avec toutes ses interractions ainsi que
+ * les todos et cela avec les indices appropriés
+ * @author  TRAORE Moussa
+ * @date decembre 2021
+ */
 void Basededonnee::AjoutContact(Contact* C)
 {
 
@@ -147,9 +168,9 @@ void Basededonnee::AjoutContact(Contact* C)
 
 }
 /**
- * @brief Ajoute une interaction à la base de donnée
+ * @brief Ajoute une interaction à la base de données
  * @param Inter
- * @author BELLEGUEULLE Mathieu
+ * @authors BELLEGUEULLE TRAORE
  */
 void Basededonnee::AjoutInter(Interaction * Inter)
 {
@@ -189,7 +210,11 @@ void Basededonnee::AjoutInter(Interaction * Inter)
     }
     setIDInteraction(getIDInteraction()+1);
 }
-
+/**
+ * @brief  implementaion de la methode supprimecontact(Contact *c ) permettant de supprimer un contact de la base de donnée
+ * @author  TRAORE MOUSSA
+ * @date decembre 2021
+ */
 void Basededonnee::SupprimeContact(Contact *C)
 {
     if(b.open())
@@ -225,15 +250,12 @@ void Basededonnee::SupprimeContact(Contact *C)
 
      }
    }
-
-
-
-
-
  }
-
-
-
+ /**
+  * @brief implementation de la methode modifiecontact
+  * @author  TRAORE MOUSSA
+  * @date decembre 2021
+  */
 void Basededonnee::ModifiContact(Contact *C)
 {
 
@@ -258,7 +280,12 @@ void Basededonnee::ModifiContact(Contact *C)
     }
 }
 
-
+/**
+ * @brief implementation de la methode getAllcontact() qui permet de recurperer et de stocker toutes les données  de la
+ * base de données avec des indices precis
+ * @author  TRAORE MOUSSA
+ * @date decembre 2021
+ */
 void Basededonnee::getAllContact()
 {
     Contact C;
@@ -332,7 +359,11 @@ void Basededonnee::getAllContact()
        }
 
 }
-
+/**
+ * @brief  implementation des methodes de recherches  avancées
+ * @author  TRAORE MOUSSA
+ * @date decembre 2021
+ */
 std::list<Contact*> Basededonnee::recherchercontactparNom(std:: string nom)
 {
 
@@ -554,7 +585,11 @@ if(parDATE&&parCONTACT)
              }
 }
 
-
+/**
+ * @brief  implementation de la methode Nombredecontact()
+ * @author  TRAORE MOUSSA
+ * @date decembre 2021
+ */
 int Basededonnee::Nombredecontact()
 {
 
@@ -571,7 +606,7 @@ int Basededonnee::Nombredecontact()
 }
 
 /**
- * @brief sauvegarde de la base de onnée
+ * @brief sauvegarde de la base de données
  * @author BELLEGUEULLE Mathieu
  * @date Décembre 2021
  */
@@ -606,4 +641,3 @@ void Basededonnee::sauvegarder()
       }
   }
 }
-

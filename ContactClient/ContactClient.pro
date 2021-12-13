@@ -35,7 +35,6 @@ HEADERS += \
     gestioninteraction.h \
     gestiontodo.h \
     interaction.h \
-    interface.h \
     mainwindow.h \
     todo.h \
     fenetrecontact.h \

@@ -85,8 +85,6 @@ MainWindow::MainWindow(QWidget *parent)
             ListeSelection->setSelectionMode(QAbstractItemView::SingleSelection);
             modifModel(1);
         VL->addWidget(ListeSelection);
-            QPushButton *BJSON = new QPushButton("Export en json");
-        //VL->addWidget(BJSON);
     HL->addLayout(VL);
 
     QWidget *cw = new QWidget();
@@ -475,7 +473,9 @@ void MainWindow::afficheTabTodo(toDo* t)
     tabWidgetVisu->addTab(VTW, "Tâche");
     tabWidgetVisu->setCurrentIndex(2);
 }
-
+/**
+ * @brief Slot pour sauvegarder la base de données
+ */
 void MainWindow::sauvegarde()
 {
     bd.sauvegarder();

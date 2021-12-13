@@ -1,6 +1,5 @@
 #ifndef GESTIONINTERACTION_H
 #define GESTIONINTERACTION_H
-#include "interface.h"
 #include "interaction.h"
 /**
  *@class Contact
