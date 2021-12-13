@@ -59,7 +59,7 @@ void GestionContact::removeContact(Contact *Inter)
 }
 
 /**
- * @brief   implementation de la methode getContactByID
+ * @brief  implementation des methode getContactByID
  * @author  TRAORE MOUSSA
  * @date decembre 2021
  */
@@ -74,7 +74,7 @@ void GestionContact::removeContact(Contact *Inter)
 
 }
  /**
-  * @brief    implementation de la methode gettInterractionByID
+  * @brief  implementation de la  methode getInterractionByID
   * @author  TRAORE MOUSSA
   * @date decembre 2021
   */
@@ -94,7 +94,7 @@ Interaction* GestionContact::getInterractionByID(int id)
 }
 
 /**
- * @brief implementation de la methode gettoDoByID
+ * @brief  implementation de la  methode gettDOByID
  * @author  TRAORE MOUSSA
  * @date decembre 2021
  */
