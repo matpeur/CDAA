@@ -68,7 +68,7 @@ void Basededonnee::Connexion()
 
     b = QSqlDatabase::addDatabase("QSQLITE");
     setIDContact(0);
-    b.setDatabaseName("/home1/mb398063/Downloads/CDAA-main/ContactClient/base1");
+    b.setDatabaseName("/tmp/base1");
 
       if(!b.open())
       {

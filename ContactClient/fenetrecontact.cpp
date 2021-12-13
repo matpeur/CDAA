@@ -172,7 +172,7 @@ void FenetreContact::ParcourirImage()
     } catch (const char* s) {Erreur->setText(s);}
 }
 /**
- * @brief FenetreContact::sauvegarde
+ * @brief Vérifie avant de sauvegarde que les champs sont rempli avec des valeurs correctes
  */
 void FenetreContact::sauvegarde()
 {
