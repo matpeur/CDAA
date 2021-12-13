@@ -31,7 +31,11 @@ FenetreAjoutInter::~FenetreAjoutInter()
 {
 
 }
-
+/**
+ * @brief Ajoute à l'UI le nécessaire pour créer le contenue de l'interaction pour un contact choisi
+ * @param i identifiant du contact choisi
+ * @author BELLEGUEULLE Mathieu
+ */
 void FenetreAjoutInter::selection(int i)
 {
 
@@ -61,7 +65,10 @@ void FenetreAjoutInter::selection(int i)
     connect(this, SIGNAL(fini()), this, SLOT(accept()));
     }
 }
-
+/**
+ * @brief Ajoute à l'UI de qui créer un todo
+ * @author BELLEGUEULLE Mathieu
+ */
 void FenetreAjoutInter::ajoutTache()
 {
     QHBoxLayout * HLa = new QHBoxLayout();
@@ -86,7 +93,10 @@ void FenetreAjoutInter::ajoutTache()
 
     nbTD++;
 }
-
+/**
+ * @brief La fonction sauvegarde l'interaction créée dans le contact attribué en créant les todo si besoin
+ * @author BELLEGUEULLE Mathieu
+ */
 void FenetreAjoutInter::sauvegarde()
 {
     std::string interaction = Contenu->document()->toRawText().toStdString();
@@ -104,7 +114,5 @@ void FenetreAjoutInter::sauvegarde()
         }
     }
     cont->createInteraction(interaction);
-    for (auto & it2 : cont->getGestionInteraction().getInteractionList() )
-        std::cout<<it2<<std::endl;
     emit fini();
 }

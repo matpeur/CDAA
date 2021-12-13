@@ -7,7 +7,10 @@
 #include <QPixmap>
 #include <QPaintEvent>
 #include <QPainter>
-
+/**
+ * @brief Widget spécialisé dans l'affichage d'images
+ * @author BELLEGUEULLE Mathieu
+ */
 class ImageWidget : public QWidget
 {
     Q_OBJECT

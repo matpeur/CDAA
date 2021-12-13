@@ -157,7 +157,10 @@ void FenetreContact::setTel(const QString &value)
     if(!test){throw "Numéro de téléphone invalide";}
     tel = value;
 }
-
+/**
+ * @brief Ouvre une boîte de dialogue pour choisir une photo à attribué au contact
+ * @author BELLEGUEULLE Mathieu
+ */
 void FenetreContact::ParcourirImage()
 {
     QString fileName = QFileDialog::getOpenFileName (this ,"Ouvrir une image", ".");
@@ -168,7 +171,9 @@ void FenetreContact::ParcourirImage()
         Erreur->setText("");
     } catch (const char* s) {Erreur->setText(s);}
 }
-
+/**
+ * @brief FenetreContact::sauvegarde
+ */
 void FenetreContact::sauvegarde()
 {
     try

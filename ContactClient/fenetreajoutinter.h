@@ -12,7 +12,10 @@
 #include <QDateEdit>
 #include "gestioncontact.h"
 #include "contact.h"
-
+/**
+ * @brief Hérite de la classe QDialog. La classe est une boîte de dialogue qui permet de créer une interaction à ajouter à un contact.
+ * @author BELLEGUEULLE Mathieu
+ */
 class FenetreAjoutInter : public QDialog
 {
     Q_OBJECT

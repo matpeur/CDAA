@@ -5,6 +5,11 @@ ImageWidget::ImageWidget(QWidget *parent, QString chemin) : QWidget(parent)
 {
     setImage(chemin);
 }
+/**
+ * @brief Modifie l'affichage du widget pour qu'il affiche l'image placé au chemin en paramètre
+ * @param e
+ * @author BELLEGUEULLE Mathieu
+ */
 void ImageWidget::paintEvent ( QPaintEvent* e )
 {
 
@@ -18,7 +23,12 @@ void ImageWidget::paintEvent ( QPaintEvent* e )
 
 
 };
-
+/**
+ * @brief Essaie de lire l'image placé à l'URI donné en paramètre
+ * @param chemin Adresse de l'image à ouvrir
+ * @throw Chaine indiquant l'impossibilité de lire l'image
+ * @author BELLEGUEULLE Mathieu
+ */
 void ImageWidget::setImage(QString chemin)
 {
 
