@@ -1,33 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@matpeur
-sonarsource-cfamily-examples /
-linux-autotools-gh-actions-sc
-Public
-
-Code
-Issues
-Pull requests 1
-Actions
-Projects
-Security
-
-    Insights
-
-linux-autotools-gh-actions-sc/.github/workflows/build.yml
-@amelie-renard-sonarsource
-amelie-renard-sonarsource Replace mention of "SONAR_TOKEN" with "SONARCLOUD_TOKEN"
-Latest commit c7a7692 Sep 27, 2022
-History
-3 contributors
-@arseniy-sonar
-@amelie-renard-sonarsource
-@tomasz-kaminski-sonarsource
-57 lines (56 sloc) 2.47 KB
 name: Build
 on:
   push:
@@ -75,29 +45,12 @@ jobs:
           echo "$HOME/.sonar/build-wrapper-linux-x86" >> $GITHUB_PATH
       - name: Run build-wrapper
         run: |
-          autoreconf --install
-          ./configure
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} make clean all
+          mkdir build
+          cmake -S . -B build
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }} # Put the name of your token here
+          SONAR_TOKEN: ${{ 360f27120ef57ff4b06ab2f3c275e3386d33ae82 }} # Put the name of your token here
         run: |
           sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
-linux-autotools-gh-actions-sc/build.yml at main · sonarsource-cfamily-examples/linux-autotools-gh-actions-sc
